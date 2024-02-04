@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.cmdIntake_Run;
+import frc.robot.commands.cmdShooter_Shoot;
 import frc.robot.commands.cmdShotAngle_TeleOp;
 import frc.robot.commands.cmdSwerve_TeleOp;
 import frc.robot.commands.cmdTurret_TeleOp;
@@ -51,12 +52,9 @@ public class RobotContainer {
   }
 
   private void configureDriverTwo(){
-    turret.setDefaultCommand(
-      new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX(), 0.01))
-    );
-    shotAngle.setDefaultCommand(
-      new cmdShotAngle_TeleOp(shotAngle, () -> MathUtil.applyDeadband(driverTwo.getRightY(), 0.01))
-    );
+    turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX(), 0.01)));
+    shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)));
+    driverTwo.leftBumper().whileTrue(new cmdShooter_Shoot(feeder, shooter));
   }
 
   private void addAutoOptions(){
