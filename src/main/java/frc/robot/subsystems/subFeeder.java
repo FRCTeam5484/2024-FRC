@@ -14,7 +14,7 @@ public class subFeeder extends SubsystemBase {
     feederMotor = new CANSparkMax(kFeederMotor, MotorType.kBrushless);
     feederMotor.restoreFactoryDefaults();
     feederMotor.setIdleMode(IdleMode.kBrake);
-    feederMotor.setInverted(false);
+    feederMotor.setInverted(true);
     feederMotor.burnFlash();
   }
 

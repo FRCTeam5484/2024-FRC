@@ -19,7 +19,7 @@ public class subShooter extends SubsystemBase {
     shooterMotor = new CANSparkMax(kShooterMotorId, MotorType.kBrushless);
     shooterMotor.restoreFactoryDefaults();
     shooterMotor.setIdleMode(IdleMode.kCoast);
-    shooterMotor.setInverted(false);
+    shooterMotor.setInverted(true);
     shooterEncoder = shooterMotor.getEncoder();
     shooterPID = shooterMotor.getPIDController();
     shooterPID.setFeedbackDevice(shooterEncoder);

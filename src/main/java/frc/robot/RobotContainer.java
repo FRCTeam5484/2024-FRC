@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.cmdIntake_Run;
+import frc.robot.commands.cmdIntake_Stop;
 import frc.robot.commands.cmdShooter_Shoot;
+import frc.robot.commands.cmdShooter_Stop;
 import frc.robot.commands.cmdShotAngle_TeleOp;
 import frc.robot.commands.cmdSwerve_TeleOp;
 import frc.robot.commands.cmdTurret_TeleOp;
@@ -47,18 +49,22 @@ public class RobotContainer {
           () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.01),
           () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.01)));
     
-    driverOne.leftBumper().whileTrue(new RunCommand(() -> intake.forward()));
-    driverOne.leftBumper().whileFalse(new RunCommand(() -> intake.stop()));
+    driverOne.leftBumper().onTrue(new cmdIntake_Run(intake));
+    driverOne.leftBumper().onFalse(new cmdIntake_Stop(intake));
+    //driverOne.leftBumper().onFalse(new InstantCommand(() -> intake.stop()));
   }
 
   private void configureDriverTwo(){
     turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX(), 0.01)));
     shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)));
-    driverTwo.leftBumper().whileTrue(new cmdShooter_Shoot(feeder, shooter));
+    driverTwo.leftBumper().onTrue(new cmdShooter_Shoot(feeder, shooter));
+    driverTwo.leftBumper().onFalse(new cmdShooter_Stop(feeder, shooter));
+    //driverTwo.leftBumper().whileFalse(new InstantCommand(() -> shooter.stop()));
   }
 
   private void addAutoOptions(){
     chooser.setDefaultOption("Do Nothing", new InstantCommand());
+
     SmartDashboard.putData("Auto Options", chooser);
   }
 
