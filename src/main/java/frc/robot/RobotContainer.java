@@ -51,7 +51,7 @@ public class RobotContainer {
     
     driverOne.leftBumper().onTrue(new cmdIntake_Run(intake));
     driverOne.leftBumper().onFalse(new cmdIntake_Stop(intake));
-    //driverOne.leftBumper().onFalse(new InstantCommand(() -> intake.stop()));
+    driverOne.a().onTrue(new InstantCommand(() -> swerve.zeroHeading()));
   }
 
   private void configureDriverTwo(){
@@ -59,7 +59,6 @@ public class RobotContainer {
     shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)));
     driverTwo.leftBumper().onTrue(new cmdShooter_Shoot(feeder, shooter));
     driverTwo.leftBumper().onFalse(new cmdShooter_Stop(feeder, shooter));
-    //driverTwo.leftBumper().whileFalse(new InstantCommand(() -> shooter.stop()));
   }
 
   private void addAutoOptions(){

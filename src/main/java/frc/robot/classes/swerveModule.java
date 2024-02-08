@@ -3,6 +3,7 @@ package frc.robot.classes;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -20,12 +21,9 @@ public class swerveModule {
     private final CANSparkMax turningSparkMax;
 
     private final RelativeEncoder drivingEncoder;
-    private final RelativeEncoder turningEncoder;
 
     private final SparkPIDController drivingPIDController;
     private final PIDController turningPIDController;
-
-    private SwerveModuleState desiredState = new SwerveModuleState(0.0, new Rotation2d());
 
     public swerveModule(int drivingCANId, int turningCANId, int canCoderId, double angularOffset) {
         rotationEncoder = new CANcoder(canCoderId);
@@ -43,7 +41,6 @@ public class swerveModule {
         turningSparkMax.restoreFactoryDefaults();
 
         drivingEncoder = drivingSparkMax.getEncoder();
-        turningEncoder = turningSparkMax.getEncoder();
 
         drivingPIDController = drivingSparkMax.getPIDController();
         drivingPIDController.setFeedbackDevice(drivingEncoder);
@@ -60,46 +57,30 @@ public class swerveModule {
         drivingPIDController.setFF(SwerveConstants.kDrivingFF);
         drivingPIDController.setOutputRange(SwerveConstants.kDrivingMinOutput, SwerveConstants.kDrivingMaxOutput);
 
-        drivingSparkMax.setIdleMode(SwerveConstants.kDrivingMotorIdleMode);
-        turningSparkMax.setIdleMode(SwerveConstants.kTurningMotorIdleMode);
+        drivingSparkMax.setIdleMode(IdleMode.kBrake);
+        turningSparkMax.setIdleMode(IdleMode.kBrake);
         drivingSparkMax.setSmartCurrentLimit(SwerveConstants.kDrivingMotorCurrentLimit);
         turningSparkMax.setSmartCurrentLimit(SwerveConstants.kTurningMotorCurrentLimit);
 
         drivingSparkMax.burnFlash();
         turningSparkMax.burnFlash();
 
-        desiredState.angle = new Rotation2d(turningEncoder.getPosition());
         drivingEncoder.setPosition(0);
     }
     
-    public SwerveModuleState getState() {return new SwerveModuleState(drivingEncoder.getVelocity(), getRotation2d()); }
-    public SwerveModulePosition getPosition() {return new SwerveModulePosition(drivingEncoder.getPosition(), getRotation2d());}
-    public double GetModuleAngle() { return rotationEncoder.getAbsolutePosition().getValueAsDouble(); }
+    public SwerveModuleState getState() {return new SwerveModuleState(drivingEncoder.getVelocity(), Rotation2d.fromDegrees(getAngle())); }
+    public SwerveModulePosition getPosition() {return new SwerveModulePosition(drivingEncoder.getPosition(), Rotation2d.fromDegrees(getAngle()));}
     public void setDesiredState(SwerveModuleState desiredState) {
-        SwerveModuleState optimizedDesiredState = SwerveModuleState.optimize(desiredState, getRotation2d());
+        SwerveModuleState optimizedDesiredState = SwerveModuleState.optimize(desiredState, Rotation2d.fromDegrees(getAngle()));
         if(Math.abs(optimizedDesiredState.speedMetersPerSecond) < 0.01){
             stopModule();
             return;
         }
         drivingPIDController.setReference(optimizedDesiredState.speedMetersPerSecond, CANSparkMax.ControlType.kVelocity);
         turningSparkMax.set(turningPIDController.calculate(getAngle(), optimizedDesiredState.angle.getDegrees()));
-        this.desiredState = desiredState;
     }
-
-    public void resetEncoders() {
-        drivingEncoder.setPosition(0); turningEncoder.setPosition(0);
-    }
-    public double getAngle() { 
-        return rotationEncoder.getAbsolutePosition().getValueAsDouble() * 360; 
-    }
-    public double getRawAngle(){
-        return rotationEncoder.getAbsolutePosition().getValueAsDouble();
-    }
-    public Rotation2d getRotation2d() { 
-        return Rotation2d.fromDegrees(getAngle()); 
-    }
-    public void stopModule(){ 
-        drivingSparkMax.stopMotor(); turningSparkMax.stopMotor();
-    }
+    public double getRawAngle() { return rotationEncoder.getAbsolutePosition().getValueAsDouble(); }
+    public double getAngle() { return getRawAngle() * 360; }    
+    public void stopModule() { drivingSparkMax.stopMotor(); turningSparkMax.stopMotor(); }
+    public void resetEncoders() { drivingEncoder.setPosition(0); }
 }
-
