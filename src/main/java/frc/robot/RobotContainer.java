@@ -2,12 +2,16 @@ package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.cmdIntake_Run;
 import frc.robot.commands.cmdIntake_Stop;
@@ -25,8 +29,11 @@ import frc.robot.subsystems.subSwerve;
 import frc.robot.subsystems.subTurret;
 
 public class RobotContainer {
+  // Driver Controllers
   private final CommandXboxController driverOne = new CommandXboxController(OperatorConstants.DriverOne);
   private final CommandXboxController driverTwo = new CommandXboxController(OperatorConstants.DriverTwo);
+
+  // Subsystems
   private final subSwerve swerve = new subSwerve();
   //private final subFeeder feeder = new subFeeder();
   private final subIntake intake = new subIntake();
@@ -51,6 +58,10 @@ public class RobotContainer {
           () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.01),
           () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.01)));
     
+    driverOne.leftTrigger().whileTrue(new RunCommand(() -> intake.teleOp(-driverOne.getLeftTriggerAxis())));
+    driverOne.leftTrigger().onFalse(new RunCommand(() -> intake.stop()));
+    driverOne.rightTrigger().whileTrue(new RunCommand(() -> intake.teleOp(driverOne.getRightTriggerAxis())));
+    driverOne.rightTrigger().onFalse(new RunCommand(() -> intake.stop()));
     driverOne.leftBumper().onTrue(new cmdIntake_Run(intake));
     driverOne.leftBumper().onFalse(new cmdIntake_Stop(intake));
     driverOne.a().onTrue(new InstantCommand(() -> swerve.zeroHeading()));

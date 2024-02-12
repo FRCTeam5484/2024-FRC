@@ -29,6 +29,10 @@ public class subIntake extends SubsystemBase {
     intakeMotor.set(-1);
   }
 
+  public void teleOp(double speed){
+    intakeMotor.set(speed);
+  }
+
   @Override
   public void periodic() {
     
