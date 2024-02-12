@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.cmdIntake_Run;
@@ -17,6 +18,7 @@ import frc.robot.commands.cmdSwerve_TeleOp;
 import frc.robot.commands.cmdTurret_TeleOp;
 import frc.robot.subsystems.subFeeder;
 import frc.robot.subsystems.subIntake;
+import frc.robot.subsystems.subLimeLight;
 import frc.robot.subsystems.subShooter;
 import frc.robot.subsystems.subShotAngle;
 import frc.robot.subsystems.subSwerve;
@@ -26,10 +28,11 @@ public class RobotContainer {
   private final CommandXboxController driverOne = new CommandXboxController(OperatorConstants.DriverOne);
   private final CommandXboxController driverTwo = new CommandXboxController(OperatorConstants.DriverTwo);
   private final subSwerve swerve = new subSwerve();
-  private final subFeeder feeder = new subFeeder();
+  //private final subFeeder feeder = new subFeeder();
   private final subIntake intake = new subIntake();
-  private final subShooter shooter = new subShooter();
-  private final subShotAngle shotAngle = new subShotAngle();
+  //private final subShooter shooter = new subShooter();
+  //private final subShotAngle shotAngle = new subShotAngle();
+  private final subLimeLight limeLight = new subLimeLight();
   private final subTurret turret = new subTurret();
 
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -55,9 +58,11 @@ public class RobotContainer {
 
   private void configureDriverTwo(){
     turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX(), 0.01)));
-    shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)));
-    driverTwo.leftBumper().onTrue(new cmdShooter_Shoot(feeder, shooter));
-    driverTwo.leftBumper().onFalse(new cmdShooter_Stop(feeder, shooter));
+    //shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)));
+    //driverTwo.leftBumper().onTrue(new InstantCommand(() -> shooter.set(0.5)));
+    //driverTwo.leftBumper().onFalse(new InstantCommand(() -> shooter.stop()));
+    //driverTwo.leftBumper().onTrue(new cmdShooter_Shoot(feeder, shooter));
+    //driverTwo.leftBumper().onFalse(new cmdShooter_Stop(feeder, shooter));
   }
 
   private void addAutoOptions(){

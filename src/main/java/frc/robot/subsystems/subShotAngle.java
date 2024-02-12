@@ -11,19 +11,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subShotAngle extends SubsystemBase {
   private final int kShotAngleId = 13;
-  private final CANSparkMax shotAngleMotor;
-  private final RelativeEncoder shotAngleEncoder;
-  private final SparkPIDController shotAnglePID;
-  private final int kMinimumPosition = 0;
-  private final int kMaximumPosition = 100;
+  private final CANSparkMax shotAngleMotor = new CANSparkMax(kShotAngleId, MotorType.kBrushless);
+  private final RelativeEncoder shotAngleEncoder = shotAngleMotor.getEncoder();
+  private final SparkPIDController shotAnglePID = shotAngleMotor.getPIDController();
+  //private final int kMinimumPosition = 0;
+  //private final int kMaximumPosition = 100;
 
   public subShotAngle() {
-    shotAngleMotor = new CANSparkMax(kShotAngleId, MotorType.kBrushless);
     shotAngleMotor.restoreFactoryDefaults();
     shotAngleMotor.setIdleMode(IdleMode.kBrake);
     shotAngleMotor.setInverted(false);
-    shotAngleEncoder = shotAngleMotor.getEncoder();
-    shotAnglePID = shotAngleMotor.getPIDController();
     shotAnglePID.setFeedbackDevice(shotAngleEncoder);
     shotAnglePID.setP(0.1);
     shotAnglePID.setI(1e-4);

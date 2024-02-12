@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subIntake extends SubsystemBase {
   private final int kIntakeMotorId = 10;
-  private final CANSparkMax intakeMotor;
+  private final CANSparkMax intakeMotor = new CANSparkMax(kIntakeMotorId, MotorType.kBrushless);;
     
   public subIntake() {
-    intakeMotor = new CANSparkMax(kIntakeMotorId, MotorType.kBrushless);
     intakeMotor.restoreFactoryDefaults();
     intakeMotor.setIdleMode(IdleMode.kCoast);
     intakeMotor.setInverted(true);

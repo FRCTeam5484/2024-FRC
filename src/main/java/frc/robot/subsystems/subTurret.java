@@ -11,20 +11,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subTurret extends SubsystemBase {
   private final int kTurretMotorId = 9;
-  private final int kMinimumPosition = 0;
-  private final int kMaximumPosition = 100;
+  //private final int kMinimumPosition = 0;
+  //private final int kMaximumPosition = 100;
 
-  private final CANSparkMax turretMotor;
-  private final RelativeEncoder turretEncoder;
-  private final SparkPIDController turretPID;
+  private final CANSparkMax turretMotor = new CANSparkMax(kTurretMotorId, MotorType.kBrushless);
+  private final RelativeEncoder turretEncoder = turretMotor.getEncoder();
+  private final SparkPIDController turretPID = turretMotor.getPIDController();
 
   public subTurret() {
-    turretMotor = new CANSparkMax(kTurretMotorId, MotorType.kBrushless);
     turretMotor.restoreFactoryDefaults();
     turretMotor.setIdleMode(IdleMode.kBrake);
     turretMotor.setInverted(false);
-    turretEncoder = turretMotor.getEncoder();
-    turretPID = turretMotor.getPIDController();
     turretPID.setFeedbackDevice(turretEncoder);
     turretPID.setP(0.1);
     turretPID.setI(1e-4);

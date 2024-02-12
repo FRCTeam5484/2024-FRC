@@ -11,17 +11,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subShooter extends SubsystemBase {
   private final int kShooterMotorId = 12;
-  private final CANSparkMax shooterMotor;
-  private final RelativeEncoder shooterEncoder;
-  private final SparkPIDController shooterPID;
+  private final int kShooter2ndMotorId = 11;
+  private final CANSparkMax shooterMotor = new CANSparkMax(kShooterMotorId, MotorType.kBrushless);  ;
+  private final CANSparkMax shooterMotor2 = new CANSparkMax(kShooter2ndMotorId, MotorType.kBrushless);;
+  private final RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
+  private final SparkPIDController shooterPID = shooterMotor.getPIDController();
   
   public subShooter() {
-    shooterMotor = new CANSparkMax(kShooterMotorId, MotorType.kBrushless);
     shooterMotor.restoreFactoryDefaults();
     shooterMotor.setIdleMode(IdleMode.kCoast);
     shooterMotor.setInverted(true);
-    shooterEncoder = shooterMotor.getEncoder();
-    shooterPID = shooterMotor.getPIDController();
     shooterPID.setFeedbackDevice(shooterEncoder);
     shooterPID.setP(0.1);
     shooterPID.setI(1e-4);
@@ -30,6 +29,11 @@ public class subShooter extends SubsystemBase {
     shooterPID.setFF(0);
     shooterPID.setOutputRange(-1, 1);
     shooterMotor.burnFlash();
+
+    shooterMotor2.restoreFactoryDefaults();
+    shooterMotor2.setIdleMode(IdleMode.kCoast);
+    shooterMotor2.setInverted(false);
+    shooterMotor2.burnFlash();
   }
 
   public void setVelocity(double velocity){
@@ -38,10 +42,12 @@ public class subShooter extends SubsystemBase {
 
   public void stop(){
     shooterMotor.set(0);
+    shooterMotor2.set(0);
   }
 
   public void set(double speed){
     shooterMotor.set(speed);
+    shooterMotor2.set(speed);
   }
 
   @Override

@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subFeeder extends SubsystemBase {
   private final int kFeederMotor = 11;
-  private final CANSparkMax feederMotor;
+  private final CANSparkMax feederMotor = new CANSparkMax(kFeederMotor, MotorType.kBrushless);;
   
   public subFeeder() {
-    feederMotor = new CANSparkMax(kFeederMotor, MotorType.kBrushless);
     feederMotor.restoreFactoryDefaults();
     feederMotor.setIdleMode(IdleMode.kBrake);
     feederMotor.setInverted(true);
