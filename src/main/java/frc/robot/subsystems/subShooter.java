@@ -20,7 +20,7 @@ public class subShooter extends SubsystemBase {
   public subShooter() {
     shooterMotor.restoreFactoryDefaults();
     shooterMotor.setIdleMode(IdleMode.kCoast);
-    shooterMotor.setInverted(true);
+    shooterMotor.setInverted(false);
     shooterPID.setFeedbackDevice(shooterEncoder);
     shooterPID.setP(0.1);
     shooterPID.setI(1e-4);
@@ -32,7 +32,7 @@ public class subShooter extends SubsystemBase {
 
     shooterMotor2.restoreFactoryDefaults();
     shooterMotor2.setIdleMode(IdleMode.kCoast);
-    shooterMotor2.setInverted(false);
+    shooterMotor2.setInverted(true);
     shooterMotor2.burnFlash();
   }
 

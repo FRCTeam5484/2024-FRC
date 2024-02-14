@@ -40,7 +40,7 @@ public class RobotContainer {
   private final subSwerve swerve = new subSwerve();
   //private final subFeeder feeder = new subFeeder();
   private final subIntake intake = new subIntake();
-  //private final subShooter shooter = new subShooter();
+  private final subShooter shooter = new subShooter();
   private final subShotAngle shotAngle = new subShotAngle();
   private final subLimeLight limeLight = new subLimeLight();
   private final subTurret turret = new subTurret();
@@ -54,12 +54,12 @@ public class RobotContainer {
   }
 
   private void configureDriverOne() {
-    swerve.setDefaultCommand(
-      new cmdSwerve_TeleOp(
-          swerve,
-          () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.01),
-          () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.01),
-          () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.01)));
+    //swerve.setDefaultCommand(
+    //  new cmdSwerve_TeleOp(
+    //      swerve,
+    //      () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.01),
+    //      () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.01),
+    //\      () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.01)));
     
     // Shot Angle
     driverOne.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));
@@ -69,10 +69,10 @@ public class RobotContainer {
     driverOne.povDown().onFalse(new cmdShotAngle_Stop(shotAngle));
 
     // Turret
-    driverOne.povLeft().whileTrue(new cmdTurret_TeleOp(turret, () -> .5));
+    driverOne.povLeft().whileTrue(new cmdTurret_TeleOp(turret, () -> .2));
     driverOne.povLeft().onFalse(new cmdTurret_TeleOp(turret, () -> 0));
 
-    driverOne.povRight().whileTrue(new cmdTurret_TeleOp(turret, () -> -.5));
+    driverOne.povRight().whileTrue(new cmdTurret_TeleOp(turret, () -> -.2));
     driverOne.povRight().onFalse(new cmdTurret_TeleOp(turret, () -> 0));
 
     // Intake
@@ -81,6 +81,9 @@ public class RobotContainer {
 
     driverOne.rightTrigger().whileTrue(new RunCommand(() -> intake.teleOp(driverOne.getRightTriggerAxis())));
     driverOne.rightTrigger().onFalse(new RunCommand(() -> intake.stop()));
+
+    driverOne.rightBumper().onTrue(new cmdShooter_Shoot(shooter));
+    driverOne.rightBumper().onFalse(new cmdShooter_Stop(shooter));
 
     driverOne.leftBumper().onTrue(new cmdIntake_Run(intake));
     driverOne.leftBumper().onFalse(new cmdIntake_Stop(intake));
