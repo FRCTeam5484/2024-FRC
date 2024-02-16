@@ -4,6 +4,7 @@ import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -61,9 +62,36 @@ public class subSwerve extends SubsystemBase {
   }
 
   public Pose2d getPose() { return odometry.getPoseMeters(); }
+  public void resetPose(Pose2d pose) {
+    odometry.resetPosition(
+      getRotation2d(),
+      new SwerveModulePosition[] {
+        frontLeftModule.getPosition(),
+        frontRightModule.getPosition(),
+        rearLeftModule.getPosition(),
+        rearRightModule.getPosition()
+      },
+      pose);
+  }
+  public void updateOdometry(){
+    odometry.update(
+    getRotation2d(),
+      new SwerveModulePosition[] {
+        frontLeftModule.getPosition(),
+        frontRightModule.getPosition(),
+        rearLeftModule.getPosition(),
+        rearRightModule.getPosition()
+      });
+  }
+
   
   public void drive(double xSpeed, double ySpeed, double rot) {
-    setModuleStates(SwerveConstants.kDriveKinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())));
+    var swerveModuleStates = SwerveConstants.kDriveKinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, getRotation2d()));
+    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.DriveConstants.kMaxSpeedMetersPerSecond);
+    frontLeftModule.setDesiredState(swerveModuleStates[0]);
+    frontRightModule.setDesiredState(swerveModuleStates[1]);
+    rearLeftModule.setDesiredState(swerveModuleStates[2]);
+    rearRightModule.setDesiredState(swerveModuleStates[3]);
   }
 
   public void setModuleStates(SwerveModuleState[] desiredStates) {
@@ -75,21 +103,21 @@ public class subSwerve extends SubsystemBase {
   }
 
   public SwerveModuleState[] getModuleStates() {
-    return new SwerveModuleState[] {
-      frontLeftModule.getState(),
-      frontRightModule.getState(),
-      rearLeftModule.getState(),
-      rearRightModule.getState()
-    };
+    SwerveModuleState[] states = new SwerveModuleState[4];
+    states[0] = frontLeftModule.getState();
+    states[1] = frontRightModule.getState();
+    states[2] = rearLeftModule.getState();
+    states[3] = rearRightModule.getState();
+    return states;
   }
 
   public SwerveModulePosition[] getModulePosition(){
-    return new SwerveModulePosition[] {
-      frontLeftModule.getPosition(),
-      frontRightModule.getPosition(),
-      rearLeftModule.getPosition(),
-      rearRightModule.getPosition()
-    };
+    SwerveModulePosition[] positions = new SwerveModulePosition[4];
+    positions[0] = frontLeftModule.getPosition();
+    positions[1] = frontRightModule.getPosition();
+    positions[2] = rearLeftModule.getPosition();
+    positions[3] = rearRightModule.getPosition();
+    return positions;
   }
 
   public void resetEncoders() {
@@ -107,6 +135,9 @@ public class subSwerve extends SubsystemBase {
   }
 
   public void zeroHeading() { gyro.reset(); }
+  public Rotation2d getRotation2d() { return gyro.getRotation2d();}
+  public ChassisSpeeds getChassisSpeeds(){ return SwerveConstants.kDriveKinematics.toChassisSpeeds(frontLeftModule.getState(), frontRightModule.getState(), rearLeftModule.getState(), rearRightModule.getState());}
+
 
   @Override
   public void periodic() {

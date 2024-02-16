@@ -26,7 +26,7 @@ public class Constants {
         public static final int kDrivingMotorCurrentLimit = 60;
         public static final int kTurningMotorCurrentLimit = 40;
 
-        public static final double kDrivingMotorFreeSpeedRps = 5820 / 60;
+        public static final double kDrivingMotorFreeSpeedRps = 5600 / 60;
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
         public static final double kDrivingMotorReduction = 6.75;
