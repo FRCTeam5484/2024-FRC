@@ -54,12 +54,12 @@ public class RobotContainer {
   }
 
   private void configureDriverOne() {
-    //swerve.setDefaultCommand(
-    //  new cmdSwerve_TeleOp(
-    //      swerve,
-    //      () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.01),
-    //      () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.01),
-    //\      () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.01)));
+    swerve.setDefaultCommand(
+      new cmdSwerve_TeleOp(
+          swerve,
+          () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.01),
+          () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.01),
+          () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.01)));
     
     // Shot Angle
     driverOne.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));

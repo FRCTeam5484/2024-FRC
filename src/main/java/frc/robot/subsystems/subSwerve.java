@@ -16,25 +16,25 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.classes.swerveModule;
 
 public class subSwerve extends SubsystemBase {
-  public static final double kFrontLeftOffset = 0;
-  public static final double kFrontRightOffset = 0;
-  public static final double kRearLeftOffset = 0;
-  public static final double kRearRightOffset = 0;
+  public static final double kFrontLeftOffset = 0.1880;
+  public static final double kFrontRightOffset = 0.9524;
+  public static final double kRearLeftOffset = 0.3767;
+  public static final double kRearRightOffset = 0.8359;
 
   public static final int kFrontLeftDrivingCanId = 1;
   public static final int kFrontRightDrivingCanId = 3;
-  public static final int kRearLeftDrivingCanId = 7;
-  public static final int kRearRightDrivingCanId = 5;
+  public static final int kRearLeftDrivingCanId = 5;
+  public static final int kRearRightDrivingCanId = 7;
 
   public static final int kFrontLeftTurningCanId = 2;
   public static final int kFrontRightTurningCanId = 4;
-  public static final int kRearLeftTurningCanId = 8;
-  public static final int kRearRightTurningCanId = 6;
+  public static final int kRearLeftTurningCanId = 6;
+  public static final int kRearRightTurningCanId = 8;
 
   public static final int kFrontLeftCANcoder = 2;
   public static final int kFrontRightCANcoder = 4;
-  public static final int kRearLeftCANcoder = 8;
-  public static final int kRearRightCANcoder = 6;
+  public static final int kRearLeftCANcoder = 6;
+  public static final int kRearRightCANcoder = 8;
 
   private final swerveModule frontLeftModule = new swerveModule(kFrontLeftDrivingCanId,kFrontLeftTurningCanId,kFrontLeftCANcoder,kFrontLeftOffset);
   private final swerveModule frontRightModule = new swerveModule(kFrontRightDrivingCanId,kFrontRightTurningCanId,kFrontRightCANcoder,kFrontRightOffset);
@@ -122,9 +122,9 @@ public class subSwerve extends SubsystemBase {
 
     SmartDashboard.putNumber("Heading", gyro.getRotation2d().getDegrees() );
     SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
-    //SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
-    //SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
-    //SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
-    //SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());    
+    SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
+    SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
+    SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
+    SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());    
   }
 }
