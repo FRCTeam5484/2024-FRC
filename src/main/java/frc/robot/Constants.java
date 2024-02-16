@@ -29,7 +29,7 @@ public class Constants {
         public static final double kDrivingMotorFreeSpeedRps = 5600 / 60;
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
-        public static final double kDrivingMotorReduction = 6.75;
+        public static final double kDrivingMotorReduction = 6.75; //4.714285714;
         public static final double kDriveWheelFreeSpeedRps = kDrivingMotorFreeSpeedRps / kDrivingMotorReduction;
 
         public static final double kDrivingEncoderPositionFactor = (kWheelDiameterMeters * Math.PI) / kDrivingMotorReduction; // meters
