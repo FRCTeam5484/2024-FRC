@@ -2,12 +2,20 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrain.SwerveDriveState;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
+
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -47,7 +55,37 @@ public class subSwerve extends SubsystemBase {
     gyro = new Pigeon2(1);
     gyro.getConfigurator().apply(new Pigeon2Configuration());
     gyro.setYaw(0);
-    updateOdometry();
+    odometry = new SwerveDriveOdometry(
+      SwerveConstants.kDriveKinematics,
+      gyro.getRotation2d(),
+      new SwerveModulePosition[] {
+        frontLeftModule.getPosition(),
+        frontRightModule.getPosition(),
+        rearLeftModule.getPosition(),
+        rearRightModule.getPosition()
+      });
+
+    AutoBuilder.configureHolonomic(
+      this::getPose,
+      this::resetPose,
+      this::getChassisSpeeds,
+      this::driveRobotRelative,
+      new HolonomicPathFollowerConfig( 
+              new PIDConstants(5.0, 0.0, 0.0),
+              new PIDConstants(5.0, 0.0, 0.0),
+              4.5,
+              0.4,
+              new ReplanningConfig()
+      ),
+      () -> {
+        var alliance = DriverStation.getAlliance();
+        if (alliance.isPresent()) {
+          return alliance.get() == DriverStation.Alliance.Red;
+        }
+        return false;
+      },
+      this
+    );
   }
 
   public void updateOdometry(){
@@ -85,5 +123,21 @@ public class subSwerve extends SubsystemBase {
     SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
     SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
     SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());    
+  }  
+
+  // Methods for PathPlanner
+  public Pose2d getPose() { return odometry.getPoseMeters(); }
+  public void resetPose(Pose2d pose) {
+    odometry.resetPosition(
+      getRotation2d(),
+      new SwerveModulePosition[] {
+        frontLeftModule.getPosition(),
+        frontRightModule.getPosition(),
+        rearLeftModule.getPosition(),
+        rearRightModule.getPosition()
+      },
+      pose);
   }
+  public ChassisSpeeds getChassisSpeeds(){ return SwerveConstants.kDriveKinematics.toChassisSpeeds(frontLeftModule.getState(), frontRightModule.getState(), rearLeftModule.getState(), rearRightModule.getState());}
+  public void driveRobotRelative(ChassisSpeeds chassisSpeeds) { this.drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond); }
 }

@@ -15,7 +15,7 @@ public class cmdShotAngle_Lower extends Command {
 
   @Override
   public void execute() {
-    shotAngle.teleOp(-.5);
+    shotAngle.teleOp(-.1);
   }
 
   @Override

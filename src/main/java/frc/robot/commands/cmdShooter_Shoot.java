@@ -17,7 +17,7 @@ public class cmdShooter_Shoot extends Command {
 
   @Override
   public void execute() {
-    shoot.set(.5);
+    shoot.set(.8);
   }
 
   @Override

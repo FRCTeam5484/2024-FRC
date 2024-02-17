@@ -71,7 +71,7 @@ public class swerveModule {
         drivingEncoder.setPosition(0);
     }
     
-    //public SwerveModuleState getState() {return new SwerveModuleState(drivingEncoder.getVelocity(), getRotation2d()); }
+    public SwerveModuleState getState() {return new SwerveModuleState(drivingEncoder.getVelocity(), getRotation2d()); }
     public SwerveModulePosition getPosition() {return new SwerveModulePosition(drivingEncoder.getPosition(), getRotation2d());}
     //public double GetModuleAngle() { return rotationEncoder.getAbsolutePosition().getValueAsDouble(); }
     public void setDesiredState(SwerveModuleState desiredState) {
@@ -85,19 +85,9 @@ public class swerveModule {
         this.desiredState = desiredState;
     }
 
-    public void resetEncoders() {
-        drivingEncoder.setPosition(0);
-    }
-    public double getAngle() { 
-        return rotationEncoder.getAbsolutePosition().getValueAsDouble() * 360; 
-    }
-    public double getRawAngle(){
-        return rotationEncoder.getAbsolutePosition().getValueAsDouble();
-    }
-    public Rotation2d getRotation2d() { 
-        return Rotation2d.fromDegrees(getAngle()); 
-    }
-    public void stopModule(){ 
-        drivingSparkMax.stopMotor(); turningSparkMax.stopMotor();
-    }
+    public void resetEncoders() { drivingEncoder.setPosition(0); }
+    public double getAngle() { return rotationEncoder.getAbsolutePosition().getValueAsDouble() * 360; }
+    public double getRawAngle(){ return rotationEncoder.getAbsolutePosition().getValueAsDouble(); }
+    public Rotation2d getRotation2d() { return Rotation2d.fromDegrees(getAngle()); }
+    public void stopModule(){ drivingSparkMax.stopMotor(); turningSparkMax.stopMotor(); }
 }

@@ -1,5 +1,8 @@
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -57,9 +60,9 @@ public class RobotContainer {
     swerve.setDefaultCommand(
       new cmdSwerve_TeleOp(
           swerve,
-          () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.01),
-          () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.01),
-          () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.01)));
+          () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.02),
+          () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.02),
+          () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.02)));
     
     // Shot Angle
     driverOne.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));
@@ -101,16 +104,19 @@ public class RobotContainer {
   }
 
   private void addAutoOptions(){
-    chooser.setDefaultOption("Do Nothing", new InstantCommand());
+    chooser = AutoBuilder.buildAutoChooser();
+    //chooser.setDefaultOption("Do Nothing", new InstantCommand());
 
     SmartDashboard.putData("Auto Options", chooser);
   }
 
   public Command getAutonomousCommand() {
-    try { return chooser.getSelected(); } 
-    catch (NullPointerException ex) { 
-      DriverStation.reportError("auto choose NULL somewhere in getAutonomousCommand in RobotContainer.java", null);
-      return new InstantCommand();
-    }
+    return chooser.getSelected();
+    //return new PathPlannerAuto("Test Auto 1");
+    //try { return chooser.getSelected(); } 
+    //catch (NullPointerException ex) { 
+    //  DriverStation.reportError("auto choose NULL somewhere in getAutonomousCommand in RobotContainer.java", null);
+    //  return new InstantCommand();
+    //}
   }
 }
