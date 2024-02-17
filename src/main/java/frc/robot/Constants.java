@@ -6,14 +6,15 @@ import edu.wpi.first.math.util.Units;
 
 public class Constants {
     public static final class OperatorConstants {
-        public static final int DriverOne = 0;
-        public static final int DriverTwo = 1;
-      }
-      public static final class DriveConstants {
-        public static final double kMaxSpeedMetersPerSecond = 4.8;
-        public static final double kMaxAngularSpeed = 2 * Math.PI;
-      }
-      public static final class SwerveConstants {
+      public static final int DriverOne = 0;
+      public static final int DriverTwo = 1;
+    }
+    public static final class DriveConstants {
+      public static final double kMaxSpeedMetersPerSecond = 4.8;
+      public static final double kMaxAngularSpeed = 2 * Math.PI;
+    }
+    public static final class SwerveConstants {
+
         public static final double kTrackWidth = Units.inchesToMeters(26.5);
         public static final double kWheelBase = Units.inchesToMeters(26.5);
 
@@ -54,5 +55,11 @@ public class Constants {
         public static final double kTurningFF = 0;
         public static final double kTurningMinOutput = -1;
         public static final double kTurningMaxOutput = 1;
+    }
+    public static final class Turret{
+      public static final double Rear = 0;
+      public static final double Right = 40;
+      public static final double Front = 80;
+      public static final double Left = 120;
     }
 }

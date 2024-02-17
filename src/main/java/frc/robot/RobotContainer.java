@@ -22,11 +22,11 @@ import frc.robot.commands.cmdShooter_Shoot;
 import frc.robot.commands.cmdShooter_Stop;
 import frc.robot.commands.cmdShotAngle_Lower;
 import frc.robot.commands.cmdShotAngle_Raise;
+import frc.robot.commands.cmdShotAngle_SetPoint;
 import frc.robot.commands.cmdShotAngle_Stop;
-import frc.robot.commands.cmdShotAngle_TeleOp;
 import frc.robot.commands.cmdSwerve_TeleOp;
+import frc.robot.commands.cmdTurret_SetPosition;
 import frc.robot.commands.cmdTurret_TeleOp;
-import frc.robot.subsystems.subFeeder;
 import frc.robot.subsystems.subIntake;
 import frc.robot.subsystems.subLimeLight;
 import frc.robot.subsystems.subShooter;
@@ -37,11 +37,10 @@ import frc.robot.subsystems.subTurret;
 public class RobotContainer {
   // Driver Controllers
   private final CommandXboxController driverOne = new CommandXboxController(OperatorConstants.DriverOne);
-  //private final CommandXboxController driverTwo = new CommandXboxController(OperatorConstants.DriverTwo);
+  private final CommandXboxController driverTwo = new CommandXboxController(OperatorConstants.DriverTwo);
 
   // Subsystems
   private final subSwerve swerve = new subSwerve();
-  //private final subFeeder feeder = new subFeeder();
   private final subIntake intake = new subIntake();
   private final subShooter shooter = new subShooter();
   private final subShotAngle shotAngle = new subShotAngle();
@@ -52,7 +51,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureDriverOne();
-    //configureDriverTwo();
+    configureDriverTwo();
     addAutoOptions();
   }
 
@@ -60,9 +59,9 @@ public class RobotContainer {
     swerve.setDefaultCommand(
       new cmdSwerve_TeleOp(
           swerve,
-          () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.02),
-          () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.02),
-          () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.02)));
+          () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.005),
+          () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.005),
+          () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.005)));
     
     // Shot Angle
     driverOne.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));
@@ -92,10 +91,17 @@ public class RobotContainer {
     driverOne.leftBumper().onFalse(new cmdIntake_Stop(intake));
     
     driverOne.a().onTrue(new InstantCommand(() -> swerve.zeroHeading()));
+    driverOne.b().onTrue(new cmdShotAngle_SetPoint(shotAngle, 0.65));
+    driverOne.y().onTrue(new cmdShotAngle_SetPoint(shotAngle, 0.61));
+    driverOne.x().onTrue(new InstantCommand(() -> turret.resetEncoder()));
   }
 
   private void configureDriverTwo(){
     //turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX(), 0.01)));
+    driverTwo.y().onTrue(new cmdTurret_SetPosition(turret, Constants.Turret.Front));
+    driverTwo.a().onTrue(new cmdTurret_SetPosition(turret, Constants.Turret.Rear));
+    driverTwo.x().onTrue(new cmdTurret_SetPosition(turret, Constants.Turret.Left));
+    driverTwo.b().onTrue(new cmdTurret_SetPosition(turret, Constants.Turret.Right));
     //shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)));
     //driverTwo.leftBumper().onTrue(new InstantCommand(() -> shooter.set(0.5)));
     //driverTwo.leftBumper().onFalse(new InstantCommand(() -> shooter.stop()));
