@@ -2,16 +2,22 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
+import frc.robot.subsystems.subShotAngle;
 import frc.robot.subsystems.subTurret;
 
 public class cmdTurret_SetPosition extends Command {
   subTurret turret;
+  subShotAngle angle;
   double goal;
   PIDController turretPID = new PIDController(0.05, 0, 0);
-  public cmdTurret_SetPosition(subTurret turret, double goal) {
+  PIDController anglePID = new PIDController(1, 0, 0);
+  public cmdTurret_SetPosition(subTurret turret, subShotAngle angle, double goal) {
     this.turret = turret;
+    this.angle = angle;
     this.goal = goal;
     addRequirements(turret);
+    anglePID.setTolerance(0.01);
   }
 
   @Override
@@ -19,7 +25,10 @@ public class cmdTurret_SetPosition extends Command {
 
   @Override
   public void execute() {
-    turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
+    angle.teleOp(-anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
+    if(anglePID.atSetpoint()) {
+      turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
+    }
   }
 
   @Override

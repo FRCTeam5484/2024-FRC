@@ -62,51 +62,57 @@ public class RobotContainer {
           () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.005),
           () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.005),
           () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.005)));
-    
-    // Shot Angle
-    driverOne.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));
-    driverOne.povUp().onFalse(new cmdIntake_Stop(intake));
-
-    driverOne.povDown().whileTrue(new cmdShotAngle_Lower(shotAngle));
-    driverOne.povDown().onFalse(new cmdShotAngle_Stop(shotAngle));
-
-    // Turret
-    driverOne.povLeft().whileTrue(new cmdTurret_TeleOp(turret, () -> .2));
-    driverOne.povLeft().onFalse(new cmdTurret_TeleOp(turret, () -> 0));
-
-    driverOne.povRight().whileTrue(new cmdTurret_TeleOp(turret, () -> -.2));
-    driverOne.povRight().onFalse(new cmdTurret_TeleOp(turret, () -> 0));
 
     // Intake
-    driverOne.leftTrigger().whileTrue(new RunCommand(() -> intake.teleOp(-driverOne.getLeftTriggerAxis())));
+    driverOne.leftTrigger().whileTrue(new RunCommand(() -> intake.teleOp(-1)));
     driverOne.leftTrigger().onFalse(new RunCommand(() -> intake.stop()));
 
-    driverOne.rightTrigger().whileTrue(new RunCommand(() -> intake.teleOp(driverOne.getRightTriggerAxis())));
+    driverOne.rightTrigger().whileTrue(new RunCommand(() -> intake.teleOp(1)));
     driverOne.rightTrigger().onFalse(new RunCommand(() -> intake.stop()));
+    
+    // Reset Sensors
+    driverOne.start().onTrue(new InstantCommand(() -> swerve.zeroHeading()));
+    driverOne.back().onTrue(new InstantCommand(() -> turret.resetEncoder()));
 
-    driverOne.rightBumper().onTrue(new cmdShooter_Shoot(shooter));
+    // Turret
+    driverOne.y().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Front));
+    driverOne.a().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Rear));
+    driverOne.x().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Left));
+    driverOne.b().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Right));
+
+    // Shot Angle
+    driverOne.povUp().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.HigherLimit));
+    driverOne.povLeft().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
+
+    // Shooter
+    driverOne.rightBumper().onTrue(new cmdShooter_Shoot(shooter, 0.8));
     driverOne.rightBumper().onFalse(new cmdShooter_Stop(shooter));
 
-    driverOne.leftBumper().onTrue(new cmdIntake_Run(intake));
-    driverOne.leftBumper().onFalse(new cmdIntake_Stop(intake));
-    
-    driverOne.a().onTrue(new InstantCommand(() -> swerve.zeroHeading()));
-    driverOne.b().onTrue(new cmdShotAngle_SetPoint(shotAngle, 0.65));
-    driverOne.y().onTrue(new cmdShotAngle_SetPoint(shotAngle, 0.61));
-    driverOne.x().onTrue(new InstantCommand(() -> turret.resetEncoder()));
+    driverOne.leftBumper().onTrue(new cmdShooter_Shoot(shooter, 0.5));
+    driverOne.leftBumper().onFalse(new cmdShooter_Stop(shooter));
   }
 
   private void configureDriverTwo(){
-    //turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX(), 0.01)));
-    driverTwo.y().onTrue(new cmdTurret_SetPosition(turret, Constants.Turret.Front));
-    driverTwo.a().onTrue(new cmdTurret_SetPosition(turret, Constants.Turret.Rear));
-    driverTwo.x().onTrue(new cmdTurret_SetPosition(turret, Constants.Turret.Left));
-    driverTwo.b().onTrue(new cmdTurret_SetPosition(turret, Constants.Turret.Right));
-    //shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)));
-    //driverTwo.leftBumper().onTrue(new InstantCommand(() -> shooter.set(0.5)));
-    //driverTwo.leftBumper().onFalse(new InstantCommand(() -> shooter.stop()));
-    //driverTwo.leftBumper().onTrue(new cmdShooter_Shoot(feeder, shooter));
-    //driverTwo.leftBumper().onFalse(new cmdShooter_Stop(feeder, shooter));
+    // Shot Angle
+    driverTwo.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));
+    driverTwo.povUp().onFalse(new cmdIntake_Stop(intake));
+
+    driverTwo.povDown().whileTrue(new cmdShotAngle_Lower(shotAngle));
+    driverTwo.povDown().onFalse(new cmdShotAngle_Stop(shotAngle));
+
+    // Turret
+    driverTwo.povLeft().whileTrue(new cmdTurret_TeleOp(turret, () -> .2));
+    driverTwo.povLeft().onFalse(new cmdTurret_TeleOp(turret, () -> 0));
+
+    driverTwo.povRight().whileTrue(new cmdTurret_TeleOp(turret, () -> -.2));
+    driverTwo.povRight().onFalse(new cmdTurret_TeleOp(turret, () -> 0));
+
+    // Shooter
+    driverTwo.rightBumper().onTrue(new cmdShooter_Shoot(shooter, 0.8));
+    driverTwo.rightBumper().onFalse(new cmdShooter_Stop(shooter));
+
+    driverTwo.leftBumper().onTrue(new cmdShooter_Shoot(shooter, 0.5));
+    driverTwo.leftBumper().onFalse(new cmdShooter_Stop(shooter));
   }
 
   private void addAutoOptions(){
