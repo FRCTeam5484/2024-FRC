@@ -1,28 +1,21 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.cmdIntake_Run;
 import frc.robot.commands.cmdIntake_Stop;
 import frc.robot.commands.cmdShooter_Shoot;
 import frc.robot.commands.cmdShooter_Stop;
 import frc.robot.commands.cmdShotAngle_Lower;
 import frc.robot.commands.cmdShotAngle_Raise;
 import frc.robot.commands.cmdShotAngle_SetPoint;
+import frc.robot.commands.cmdShotAngle_HoldPosition;
 import frc.robot.commands.cmdShotAngle_Stop;
 import frc.robot.commands.cmdSwerve_TeleOp;
 import frc.robot.commands.cmdTurret_SetPosition;
@@ -95,17 +88,22 @@ public class RobotContainer {
   private void configureDriverTwo(){
     // Shot Angle
     driverTwo.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));
-    driverTwo.povUp().onFalse(new cmdIntake_Stop(intake));
+    driverTwo.povUp().onFalse(new cmdShotAngle_HoldPosition(shotAngle));
 
     driverTwo.povDown().whileTrue(new cmdShotAngle_Lower(shotAngle));
-    driverTwo.povDown().onFalse(new cmdShotAngle_Stop(shotAngle));
+    driverTwo.povDown().onFalse(new cmdShotAngle_HoldPosition(shotAngle));
 
     // Turret
-    driverTwo.povLeft().whileTrue(new cmdTurret_TeleOp(turret, () -> .2));
-    driverTwo.povLeft().onFalse(new cmdTurret_TeleOp(turret, () -> 0));
+    driverTwo.y().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Front));
+    driverTwo.a().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Rear));
+    driverTwo.x().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Left));
+    driverTwo.b().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Right));
 
-    driverTwo.povRight().whileTrue(new cmdTurret_TeleOp(turret, () -> -.2));
-    driverTwo.povRight().onFalse(new cmdTurret_TeleOp(turret, () -> 0));
+    driverTwo.povLeft().whileTrue(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> .2));
+    driverTwo.povLeft().onFalse(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> 0));
+
+    driverTwo.povRight().whileTrue(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> -.2));
+    driverTwo.povRight().onFalse(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> 0));
 
     // Shooter
     driverTwo.rightBumper().onTrue(new cmdShooter_Shoot(shooter, 0.8));
