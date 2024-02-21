@@ -25,9 +25,10 @@ public class cmdTurret_SetPosition extends Command {
 
   @Override
   public void execute() {
-    angle.teleOp(-anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
+    angle.teleOp(anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
+    System.out.println(anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
     if(anglePID.atSetpoint()) {
-      turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
+      //turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
     }
   }
 

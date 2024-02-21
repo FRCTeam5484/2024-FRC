@@ -74,8 +74,9 @@ public class RobotContainer {
     driverOne.b().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Right));
 
     // Shot Angle
-    driverOne.povUp().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.HigherLimit));
-    driverOne.povLeft().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
+    driverOne.povUp().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.LowerLimit));
+    driverOne.povRight().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
+    driverOne.povDown().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.HigherLimit));
 
     // Shooter
     driverOne.rightBumper().onTrue(new cmdShooter_Shoot(shooter, 0.8));
@@ -87,23 +88,26 @@ public class RobotContainer {
 
   private void configureDriverTwo(){
     // Shot Angle
-    driverTwo.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));
-    driverTwo.povUp().onFalse(new cmdShotAngle_HoldPosition(shotAngle));
+    driverTwo.povUp().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.LowerLimit));
+    driverTwo.povRight().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
+    driverTwo.povDown().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.HigherLimit));
+    //driverTwo.povUp().whileTrue(new cmdShotAngle_Raise(shotAngle));
+    //driverTwo.povUp().onFalse(new cmdShotAngle_HoldPosition(shotAngle));
 
-    driverTwo.povDown().whileTrue(new cmdShotAngle_Lower(shotAngle));
-    driverTwo.povDown().onFalse(new cmdShotAngle_HoldPosition(shotAngle));
+    //driverTwo.povDown().whileTrue(new cmdShotAngle_Lower(shotAngle));
+    //driverTwo.povDown().onFalse(new cmdShotAngle_HoldPosition(shotAngle));
 
     // Turret
-    driverTwo.y().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Front));
-    driverTwo.a().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Rear));
-    driverTwo.x().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Left));
-    driverTwo.b().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Right));
+    //driverTwo.y().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Front));
+    //driverTwo.a().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Rear));
+    //driverTwo.x().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Left));
+    //driverTwo.b().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Right));
 
-    driverTwo.povLeft().whileTrue(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> .2));
-    driverTwo.povLeft().onFalse(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> 0));
+    driverTwo.b().whileTrue(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> .2));
+    driverTwo.b().onFalse(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> 0));
 
-    driverTwo.povRight().whileTrue(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> -.2));
-    driverTwo.povRight().onFalse(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> 0));
+    driverTwo.x().whileTrue(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> -.2));
+    driverTwo.x().onFalse(new cmdTurret_TeleOp(turret, () -> shotAngle.getPosition(), () -> 0));
 
     // Shooter
     driverTwo.rightBumper().onTrue(new cmdShooter_Shoot(shooter, 0.8));

@@ -68,6 +68,6 @@ public class Constants {
       public static final double LowestTurretLimit = 0.65;
 
       public static final double SpeakerBaseShot = 0.61;
-      public static final double SafeZoneShot = 0.67;
+      public static final double SafeZoneShot = 0.68;
     }
 }
