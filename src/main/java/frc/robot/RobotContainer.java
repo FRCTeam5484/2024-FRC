@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -40,7 +41,11 @@ public class RobotContainer {
   private final subLimeLight limeLight = new subLimeLight();
   private final subTurret turret = new subTurret();
 
-  SendableChooser<Command> chooser = new SendableChooser<>();
+  private SendableChooser<Command> chooser = new SendableChooser<>();
+
+  private final SlewRateLimiter xspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter yspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter rotLimiter = new SlewRateLimiter(3);
 
   public RobotContainer() {
     configureDriverOne();
@@ -52,9 +57,9 @@ public class RobotContainer {
     swerve.setDefaultCommand(
       new cmdSwerve_TeleOp(
           swerve,
-          () -> MathUtil.applyDeadband(driverOne.getLeftY(), 0.005),
-          () -> MathUtil.applyDeadband(driverOne.getLeftX(), 0.005),
-          () -> MathUtil.applyDeadband(driverOne.getRightX(), 0.005)));
+          () -> xspeedLimiter.calculate(MathUtil.applyDeadband(driverOne.getLeftY(), 0.005))*Constants.DriveConstants.kMaxSpeedMetersPerSecond,
+          () -> yspeedLimiter.calculate(MathUtil.applyDeadband(driverOne.getLeftX(), 0.005))*Constants.DriveConstants.kMaxSpeedMetersPerSecond,
+          () -> rotLimiter.calculate(MathUtil.applyDeadband(driverOne.getRightX(), 0.005))*Constants.DriveConstants.kMaxSpeedMetersPerSecond));
 
     // Intake
     driverOne.leftTrigger().whileTrue(new RunCommand(() -> intake.teleOp(-1)));

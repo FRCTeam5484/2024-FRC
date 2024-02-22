@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkLimitSwitch;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -17,11 +18,17 @@ public class subTurret extends SubsystemBase {
   private final CANSparkMax turretMotor = new CANSparkMax(kTurretMotorId, MotorType.kBrushless);
   private final RelativeEncoder turretEncoder = turretMotor.getEncoder();
   private final SparkPIDController turretPID = turretMotor.getPIDController();
+  private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
+  private final SparkLimitSwitch reverseLimit = turretMotor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
 
   public subTurret() {
     turretMotor.restoreFactoryDefaults();
     turretMotor.setIdleMode(IdleMode.kBrake);
     turretMotor.setInverted(false);
+    forwardLimit.enableLimitSwitch(true);
+    reverseLimit.enableLimitSwitch(true);
+    turretMotor.burnFlash();
+
     turretPID.setFeedbackDevice(turretEncoder);
     turretPID.setP(0.1);
     turretPID.setI(1e-4);
@@ -29,7 +36,6 @@ public class subTurret extends SubsystemBase {
     turretPID.setIZone(0);
     turretPID.setFF(0);
     turretPID.setOutputRange(-1, 1);
-    turretMotor.burnFlash();
   }
 
   public void resetEncoder(){
@@ -55,5 +61,8 @@ public class subTurret extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Turret Position", getPosition());
+    if(reverseLimit.isPressed()){
+      resetEncoder();
+    }
   }
 }
