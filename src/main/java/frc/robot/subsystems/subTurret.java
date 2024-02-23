@@ -6,7 +6,6 @@ import com.revrobotics.SparkLimitSwitch;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -18,15 +17,15 @@ public class subTurret extends SubsystemBase {
   private final CANSparkMax turretMotor = new CANSparkMax(kTurretMotorId, MotorType.kBrushless);
   private final RelativeEncoder turretEncoder = turretMotor.getEncoder();
   private final SparkPIDController turretPID = turretMotor.getPIDController();
-  //private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
-  //private final SparkLimitSwitch reverseLimit = turretMotor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
+  private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
+  private final SparkLimitSwitch reverseLimit = turretMotor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
 
   public subTurret() {
     turretMotor.restoreFactoryDefaults();
     turretMotor.setIdleMode(IdleMode.kBrake);
     turretMotor.setInverted(false);
-    //forwardLimit.enableLimitSwitch(true);
-    //reverseLimit.enableLimitSwitch(true);
+    forwardLimit.enableLimitSwitch(true);
+    reverseLimit.enableLimitSwitch(true);
     turretMotor.burnFlash();
 
     turretPID.setFeedbackDevice(turretEncoder);
@@ -61,8 +60,8 @@ public class subTurret extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Turret Position", getPosition());
-    //if(reverseLimit.isPressed()){
-    //  resetEncoder();
-    //}
+    if(reverseLimit.isPressed()){
+      resetEncoder();
+    }
   }
 }
