@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkLimitSwitch;
-import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,7 +15,6 @@ public class subTurret extends SubsystemBase {
 
   private final CANSparkMax turretMotor = new CANSparkMax(kTurretMotorId, MotorType.kBrushless);
   private final RelativeEncoder turretEncoder = turretMotor.getEncoder();
-  private final SparkPIDController turretPID = turretMotor.getPIDController();
   private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
   private final SparkLimitSwitch reverseLimit = turretMotor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
 
@@ -27,22 +25,10 @@ public class subTurret extends SubsystemBase {
     forwardLimit.enableLimitSwitch(true);
     reverseLimit.enableLimitSwitch(true);
     turretMotor.burnFlash();
-
-    turretPID.setFeedbackDevice(turretEncoder);
-    turretPID.setP(0.1);
-    turretPID.setI(1e-4);
-    turretPID.setD(1);
-    turretPID.setIZone(0);
-    turretPID.setFF(0);
-    turretPID.setOutputRange(-0.3, 0.3);
   }
 
   public void resetEncoder(){
     turretEncoder.setPosition(0);
-  }
-
-  public void setPosition(double position){
-    turretPID.setReference(position, CANSparkMax.ControlType.kPosition);
   }
 
   public double getPosition(){

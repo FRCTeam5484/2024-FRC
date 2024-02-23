@@ -10,14 +10,14 @@ public class cmdTurret_SetPosition extends Command {
   subTurret turret;
   subShotAngle angle;
   double goal;
-  PIDController turretPID = new PIDController(0.05, 0, 0);
-  PIDController anglePID = new PIDController(1, 0, 0);
+  PIDController turretPID = new PIDController(0.015, 0, 0);
+  PIDController anglePID = new PIDController(0.005, 0, 0);
   public cmdTurret_SetPosition(subTurret turret, subShotAngle angle, double goal) {
     this.turret = turret;
     this.angle = angle;
     this.goal = goal;
-    addRequirements(turret);
-    anglePID.setTolerance(0.01);
+    addRequirements(turret, angle);
+    anglePID.setTolerance(5);
   }
 
   @Override
@@ -25,10 +25,9 @@ public class cmdTurret_SetPosition extends Command {
 
   @Override
   public void execute() {
-    angle.teleOp(anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
-    System.out.println(anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
+    angle.teleOp(-anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
     if(anglePID.atSetpoint()) {
-      //turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
+      turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
     }
   }
 

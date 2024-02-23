@@ -11,6 +11,7 @@ public class cmdShotAngle_HoldPosition extends Command {
 
   public cmdShotAngle_HoldPosition(subShotAngle angle) {
     this.angle = angle;
+    anglePID.setIntegratorRange(-0.5, 0.5);
     addRequirements(angle);
   }
 

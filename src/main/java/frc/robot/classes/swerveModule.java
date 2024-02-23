@@ -42,6 +42,8 @@ public class swerveModule {
         drivingSparkMax.restoreFactoryDefaults();
         turningSparkMax.restoreFactoryDefaults();
 
+        drivingSparkMax.setInverted(true);
+
         drivingEncoder = drivingSparkMax.getEncoder();
 
         drivingPIDController = drivingSparkMax.getPIDController();

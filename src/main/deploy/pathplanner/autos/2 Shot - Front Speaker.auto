@@ -1,0 +1,164 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.35,
+      "y": 5.51
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter Speaker"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter 50%"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter 50%"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Feed Shooter"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Stop Shooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Run Intake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "CrossLine"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Stop Intake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "GetBackToSpeaker"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter 50%"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter Speaker"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter 50%"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Feed Shooter"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Stop Shooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Stop Intake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "CrossLine"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
