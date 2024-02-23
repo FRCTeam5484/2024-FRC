@@ -10,8 +10,8 @@ public class Constants {
       public static final int DriverTwo = 1;
     }
     public static final class DriveConstants {
-      public static final double kMaxSpeedMetersPerSecond = 8;
-      public static final double kMaxAngularSpeed = 5 * Math.PI;
+      public static final double kMaxSpeedMetersPerSecond = 7;
+      public static final double kMaxAngularSpeed = 3 * Math.PI;
     }
     public static final class SwerveConstants {
 
@@ -49,7 +49,7 @@ public class Constants {
         public static final double kDrivingMinOutput = -1;
         public static final double kDrivingMaxOutput = 1;
 
-        public static final double kTurningP = 0.01;
+        public static final double kTurningP = 0.012;
         public static final double kTurningI = 0;
         public static final double kTurningD = 0;
         public static final double kTurningFF = 0;
@@ -68,7 +68,7 @@ public class Constants {
       public static final double LowerLimit = 252;
       
 
-      public static final double SpeakerBaseShot = 219.6;
+      public static final double SpeakerBaseShot = 222;
       public static final double SafeZoneShot = 244.8;
     }
 }

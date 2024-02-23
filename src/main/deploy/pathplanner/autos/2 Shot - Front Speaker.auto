@@ -45,8 +45,20 @@
                 "data": {
                   "name": "Feed Shooter"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter Speaker"
+                }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooter Reversed"
           }
         },
         {
@@ -126,6 +138,12 @@
                 "type": "named",
                 "data": {
                   "name": "Feed Shooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter Speaker"
                 }
               }
             ]

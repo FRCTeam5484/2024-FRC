@@ -12,6 +12,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.SwerveConstants;
 
 public class swerveModule {
@@ -78,7 +79,7 @@ public class swerveModule {
     //public double GetModuleAngle() { return rotationEncoder.getAbsolutePosition().getValueAsDouble(); }
     public void setDesiredState(SwerveModuleState desiredState) {
         SwerveModuleState optimizedDesiredState = SwerveModuleState.optimize(desiredState, getRotation2d());
-        if(Math.abs(optimizedDesiredState.speedMetersPerSecond) < 0.01){
+        if(Math.abs(optimizedDesiredState.speedMetersPerSecond) < 0.2){
             stopModule();
             return;
         }
@@ -91,5 +92,5 @@ public class swerveModule {
     public double getAngle() { return rotationEncoder.getAbsolutePosition().getValueAsDouble() * 360; }
     public double getRawAngle(){ return rotationEncoder.getAbsolutePosition().getValueAsDouble(); }
     public Rotation2d getRotation2d() { return Rotation2d.fromDegrees(getAngle()); }
-    public void stopModule(){ drivingSparkMax.stopMotor(); turningSparkMax.stopMotor(); }
+    public void stopModule(){ drivingSparkMax.set(0); turningSparkMax.set(0); }
 }
