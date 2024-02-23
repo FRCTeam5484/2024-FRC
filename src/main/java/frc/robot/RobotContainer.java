@@ -38,7 +38,7 @@ public class RobotContainer {
   private final subIntake intake = new subIntake();
   private final subShooter shooter = new subShooter();
   private final subShotAngle shotAngle = new subShotAngle();
-  private final subLimeLight limeLight = new subLimeLight();
+  //private final subLimeLight limeLight = new subLimeLight();
   private final subTurret turret = new subTurret();
 
   private SendableChooser<Command> chooser = new SendableChooser<>();
@@ -57,9 +57,9 @@ public class RobotContainer {
     swerve.setDefaultCommand(
       new cmdSwerve_TeleOp(
           swerve,
-          () -> xspeedLimiter.calculate(MathUtil.applyDeadband(driverOne.getLeftY(), 0.005))*Constants.DriveConstants.kMaxSpeedMetersPerSecond,
-          () -> yspeedLimiter.calculate(MathUtil.applyDeadband(driverOne.getLeftX(), 0.005))*Constants.DriveConstants.kMaxSpeedMetersPerSecond,
-          () -> rotLimiter.calculate(MathUtil.applyDeadband(driverOne.getRightX(), 0.005))*Constants.DriveConstants.kMaxSpeedMetersPerSecond));
+          () -> xspeedLimiter.calculate(MathUtil.applyDeadband(driverOne.getLeftY(), 0.005)),
+          () -> yspeedLimiter.calculate(MathUtil.applyDeadband(driverOne.getLeftX(), 0.005)),
+          () -> rotLimiter.calculate(MathUtil.applyDeadband(driverOne.getRightX(), 0.005))));
 
     // Intake
     driverOne.leftTrigger().whileTrue(new RunCommand(() -> intake.teleOp(-1)));
@@ -73,10 +73,10 @@ public class RobotContainer {
     driverOne.back().onTrue(new InstantCommand(() -> turret.resetEncoder()));
 
     // Turret
-    driverOne.y().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Front));
-    driverOne.a().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Rear));
-    driverOne.x().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Left));
-    driverOne.b().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Right));
+    //driverOne.y().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Front));
+    //driverOne.a().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Rear));
+    //driverOne.x().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Left));
+    //driverOne.b().onTrue(new cmdTurret_SetPosition(turret, shotAngle, Constants.Turret.Right));
 
     // Shot Angle
     driverOne.povUp().onTrue(new cmdShotAngle_SetPoint(shotAngle, Constants.ShotAngleConstants.LowerLimit));

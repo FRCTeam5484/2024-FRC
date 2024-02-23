@@ -4,17 +4,29 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subIntake extends SubsystemBase {
   private final int kIntakeMotorId = 10;
-  private final CANSparkMax intakeMotor = new CANSparkMax(kIntakeMotorId, MotorType.kBrushless);;
+  private final CANSparkMax intakeMotor = new CANSparkMax(kIntakeMotorId, MotorType.kBrushless);
+  private final AnalogInput noteSensor = new AnalogInput(0);
     
   public subIntake() {
     intakeMotor.restoreFactoryDefaults();
     intakeMotor.setIdleMode(IdleMode.kCoast);
     intakeMotor.setInverted(true);
     intakeMotor.burnFlash();
+  }
+
+  public boolean hasNote(){
+    if(noteSensor.getVoltage() < 4.0){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   public void stop(){
@@ -35,6 +47,6 @@ public class subIntake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
+    SmartDashboard.putNumber("Note Sensor", noteSensor.getVoltage());
   }
 }

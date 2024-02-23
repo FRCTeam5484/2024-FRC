@@ -23,21 +23,7 @@ public class cmdTurret_TeleOp extends Command {
 
   @Override
   public void execute() {
-    if(shotAngleSupplier.getAsDouble() > Constants.ShotAngleConstants.LowestTurretLimit){
-      turret.stop();
-      System.out.println("Shooter too low to move Turret");
-    }
-    else if(turret.getPosition() >= Constants.Turret.Left && XSupplier.getAsDouble() > 0){
-      turret.stop();
-      System.out.println("Turret at highest limit");
-    }
-    else if (turret.getPosition() <= Constants.Turret.Rear && XSupplier.getAsDouble() < 0){
-      turret.stop();
-      System.out.println("Turret at lowest limit");
-    }
-    else {
-      turret.teleOp(XSupplier.getAsDouble());
-    }
+    turret.teleOp(XSupplier.getAsDouble());
   }
 
   @Override

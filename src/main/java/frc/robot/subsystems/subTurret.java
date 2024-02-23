@@ -18,15 +18,15 @@ public class subTurret extends SubsystemBase {
   private final CANSparkMax turretMotor = new CANSparkMax(kTurretMotorId, MotorType.kBrushless);
   private final RelativeEncoder turretEncoder = turretMotor.getEncoder();
   private final SparkPIDController turretPID = turretMotor.getPIDController();
-  private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
-  private final SparkLimitSwitch reverseLimit = turretMotor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
+  //private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
+  //private final SparkLimitSwitch reverseLimit = turretMotor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
 
   public subTurret() {
     turretMotor.restoreFactoryDefaults();
     turretMotor.setIdleMode(IdleMode.kBrake);
     turretMotor.setInverted(false);
-    forwardLimit.enableLimitSwitch(true);
-    reverseLimit.enableLimitSwitch(true);
+    //forwardLimit.enableLimitSwitch(true);
+    //reverseLimit.enableLimitSwitch(true);
     turretMotor.burnFlash();
 
     turretPID.setFeedbackDevice(turretEncoder);
@@ -35,7 +35,7 @@ public class subTurret extends SubsystemBase {
     turretPID.setD(1);
     turretPID.setIZone(0);
     turretPID.setFF(0);
-    turretPID.setOutputRange(-1, 1);
+    turretPID.setOutputRange(-0.3, 0.3);
   }
 
   public void resetEncoder(){
@@ -61,8 +61,8 @@ public class subTurret extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Turret Position", getPosition());
-    if(reverseLimit.isPressed()){
-      resetEncoder();
-    }
+    //if(reverseLimit.isPressed()){
+    //  resetEncoder();
+    //}
   }
 }
