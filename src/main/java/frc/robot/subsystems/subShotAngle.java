@@ -46,7 +46,7 @@ public class subShotAngle extends SubsystemBase {
   }
 
   public double getPosition(){
-    return shotAngleEncoder.getPosition();
+    return shotAngleEncoder.getPosition() * 360;
   }
 
   @Override
