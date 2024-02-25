@@ -48,6 +48,7 @@ public class subTurret extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Turret Position", getPosition());
+    SmartDashboard.putNumber("Turret Power", turretMotor.get());
     if(reverseLimit.isPressed()){
       resetEncoder();
     }

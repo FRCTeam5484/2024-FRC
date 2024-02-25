@@ -119,10 +119,10 @@ public class subSwerve extends SubsystemBase {
 
     SmartDashboard.putNumber("Heading", gyro.getRotation2d().getDegrees() );
     SmartDashboard.putString("Robot Location", odometry.getPoseMeters().getTranslation().toString());
-    SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
-    SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
-    SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
-    SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
+    //SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
+    //SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
+    //SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
+    //SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
     
     if(SmartDashboard.getBoolean("Drive Brake Mode", false) && frontLeftModule.getDriveIdleMode() == IdleMode.kBrake){
       frontLeftModule.setIdleModes(IdleMode.kCoast);

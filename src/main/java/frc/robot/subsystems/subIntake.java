@@ -42,5 +42,6 @@ public class subIntake extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Note Sensor", noteSensor.get());
+    SmartDashboard.putNumber("Intake Power", intakeMotor.get());
   }
 }

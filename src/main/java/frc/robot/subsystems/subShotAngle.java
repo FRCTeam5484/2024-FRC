@@ -28,7 +28,7 @@ public class subShotAngle extends SubsystemBase {
   }
 
   public void teleOp(double speed){
-    if(speed > 0 && getPosition() < Constants.ShotAngleConstants.HigherLimit || speed < 0 && getPosition() > Constants.ShotAngleConstants.LowerLimit){
+    if(speed > 0 && getPosition() <= Constants.ShotAngleConstants.HigherLimit || speed < 0 && getPosition() > Constants.ShotAngleConstants.LowerLimit){
       shotAngleMotor.set(0);
     }
     else{
