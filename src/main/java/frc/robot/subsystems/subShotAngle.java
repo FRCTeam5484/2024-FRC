@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkBase.SoftLimitDirection;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 
@@ -15,8 +16,6 @@ public class subShotAngle extends SubsystemBase {
   private final int kShotAngleId = 13;
   private final CANSparkMax shotAngleMotor = new CANSparkMax(kShotAngleId, MotorType.kBrushless);
   private final AbsoluteEncoder shotAngleEncoder = shotAngleMotor.getAbsoluteEncoder(Type.kDutyCycle);
-  //private final int kMinimumPosition = 0;
-  //private final int kMaximumPosition = 100;
 
   public subShotAngle() {
     shotAngleMotor.restoreFactoryDefaults();
