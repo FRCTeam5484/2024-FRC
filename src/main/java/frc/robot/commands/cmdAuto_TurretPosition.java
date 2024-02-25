@@ -6,18 +6,21 @@ import frc.robot.Constants;
 import frc.robot.subsystems.subShotAngle;
 import frc.robot.subsystems.subTurret;
 
-public class cmdTurret_SetPosition extends Command {
+public class cmdAuto_TurretPosition extends Command {
   subTurret turret;
   subShotAngle angle;
   double goal;
   PIDController turretPID = new PIDController(0.015, 0, 0);
   PIDController anglePID = new PIDController(0.005, 0, 0);
-  public cmdTurret_SetPosition(subTurret turret, subShotAngle angle, double goal) {
+  public cmdAuto_TurretPosition(subTurret turret, subShotAngle angle, double goal) {
     this.turret = turret;
     this.angle = angle;
     this.goal = goal;
     addRequirements(turret, angle);
-    anglePID.setTolerance(5);
+    anglePID.setTolerance(2);
+    anglePID.setIntegratorRange(-0.3, 0.3);
+    turretPID.setTolerance(5);
+    turretPID.setIntegratorRange(-0.3, 0.3);
   }
 
   @Override
@@ -26,16 +29,21 @@ public class cmdTurret_SetPosition extends Command {
   @Override
   public void execute() {
     angle.teleOp(-anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
-    if(anglePID.atSetpoint()) {
+    if(angle.safeToTurret()){
       turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
+    } else {
+      turret.stop();
     }
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    turret.stop();
+    angle.stop();
+  }
 
   @Override
   public boolean isFinished() {
-    return false;
+    return turretPID.atSetpoint();
   }
 }

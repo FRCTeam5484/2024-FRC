@@ -18,17 +18,9 @@ public class cmdIntake_TeleOp extends Command {
   public void initialize() {}
 
   @Override
-  public void execute() {
-    intake.teleOp(speed.getAsDouble());
-  }
-
+  public void execute() { intake.teleOp(speed.getAsDouble()); }
   @Override
-  public void end(boolean interrupted) {
-    intake.stop();
-  }
-
+  public void end(boolean interrupted) { intake.stop(); }
   @Override
-  public boolean isFinished() {
-    return false;
-  }
+  public boolean isFinished() { return false; }
 }

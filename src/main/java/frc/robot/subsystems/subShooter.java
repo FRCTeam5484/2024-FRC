@@ -5,6 +5,8 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subShooter extends SubsystemBase {
@@ -17,8 +19,16 @@ public class subShooter extends SubsystemBase {
   
   public subShooter() {
     shooterMotor.restoreFactoryDefaults();
+    shooterMotor2.restoreFactoryDefaults();
+
     shooterMotor.setIdleMode(IdleMode.kCoast);
+    shooterMotor2.setIdleMode(IdleMode.kCoast);
+
     shooterMotor.setInverted(false);
+    shooterMotor2.setInverted(true);
+
+    shooterMotor2.follow(shooterMotor);
+
     shooterPID.setFeedbackDevice(shooterEncoder);
     shooterPID.setP(0.1);
     shooterPID.setI(1e-4);
@@ -26,11 +36,8 @@ public class subShooter extends SubsystemBase {
     shooterPID.setIZone(0);
     shooterPID.setFF(0);
     shooterPID.setOutputRange(-1, 1);
+    
     shooterMotor.burnFlash();
-
-    shooterMotor2.restoreFactoryDefaults();
-    shooterMotor2.setIdleMode(IdleMode.kCoast);
-    shooterMotor2.setInverted(true);
     shooterMotor2.burnFlash();
   }
 
@@ -40,16 +47,14 @@ public class subShooter extends SubsystemBase {
 
   public void stop(){
     shooterMotor.stopMotor();
-    shooterMotor2.stopMotor();
   }
 
-  public void set(double speed){
+  public void teleOp(double speed){
     shooterMotor.set(speed);
-    shooterMotor2.set(speed);
   }
 
   @Override
   public void periodic() {
-    //SmartDashboard.putNumber("Shooter Velocity", shooterEncoder.getVelocity());
+    SmartDashboard.putNumber("Shooter Velocity", shooterEncoder.getVelocity());
   }
 }

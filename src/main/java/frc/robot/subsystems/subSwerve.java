@@ -6,6 +6,8 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
+import com.revrobotics.CANSparkBase.IdleMode;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -120,7 +122,20 @@ public class subSwerve extends SubsystemBase {
     SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
     SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
     SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
-    SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());    
+    SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
+    
+    if(SmartDashboard.getBoolean("Drive Brake Mode", false) && frontLeftModule.getDriveIdleMode() == IdleMode.kBrake){
+      frontLeftModule.setIdleModes(IdleMode.kCoast);
+      frontRightModule.setIdleModes(IdleMode.kCoast);
+      rearLeftModule.setIdleModes(IdleMode.kCoast);
+      rearRightModule.setIdleModes(IdleMode.kCoast);
+    }
+    else if(SmartDashboard.getBoolean("Drive Brake Mode", true) && frontLeftModule.getDriveIdleMode() == IdleMode.kCoast){
+      frontLeftModule.setIdleModes(IdleMode.kBrake);
+      frontRightModule.setIdleModes(IdleMode.kBrake);
+      rearLeftModule.setIdleModes(IdleMode.kBrake);
+      rearRightModule.setIdleModes(IdleMode.kBrake);
+    }
   }  
 
   // Methods for PathPlanner

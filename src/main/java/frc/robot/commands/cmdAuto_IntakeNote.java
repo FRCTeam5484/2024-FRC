@@ -3,9 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.subIntake;
 
-public class cmdIntake_Run extends Command {
-  private subIntake intake;
-  public cmdIntake_Run(subIntake intake) {
+public class cmdAuto_Intake extends Command {
+  subIntake intake;
+  public cmdAuto_Intake(subIntake intake) {
     this.intake = intake;
     addRequirements(intake);
   }
@@ -25,6 +25,6 @@ public class cmdIntake_Run extends Command {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return intake.hasNote();
   }
 }

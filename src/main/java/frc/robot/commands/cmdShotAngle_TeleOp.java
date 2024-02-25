@@ -14,19 +14,11 @@ public class cmdShotAngle_TeleOp extends Command {
   }
 
   @Override
-  public void initialize() {
-  }
-
+  public void initialize() { }
   @Override
-  public void execute() {
-    angle.teleOp(speed.getAsDouble());
-  }
-
+  public void execute() { angle.teleOp(speed.getAsDouble()); }
   @Override
-  public void end(boolean interrupted) {}
-
+  public void end(boolean interrupted) { angle.stop(); }
   @Override
-  public boolean isFinished() {
-    return false;
-  }
+  public boolean isFinished() { return speed.getAsDouble() == 0; }
 }

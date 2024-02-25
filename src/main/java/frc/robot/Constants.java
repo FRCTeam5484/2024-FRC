@@ -10,8 +10,9 @@ public class Constants {
       public static final int DriverTwo = 1;
     }
     public static final class DriveConstants {
-      public static final double kMaxSpeedMetersPerSecond = 7;
-      public static final double kMaxAngularSpeed = 3 * Math.PI;
+      public static final double kMaxSpeedMetersPerSecond = 4.8;
+      public static final double kMaxAngularSpeed = 2 * Math.PI;
+      public static final double kBoostMultiplier = 2;
     }
     public static final class SwerveConstants {
 

@@ -87,7 +87,8 @@ public class swerveModule {
         turningSparkMax.set(turningPIDController.calculate(getAngle(), optimizedDesiredState.angle.getDegrees()));
         this.desiredState = desiredState;
     }
-
+    public void setIdleModes(IdleMode mode){ drivingSparkMax.setIdleMode(mode); turningSparkMax.setIdleMode(mode); }
+    public IdleMode getDriveIdleMode() { return drivingSparkMax.getIdleMode(); }
     public void resetEncoders() { drivingEncoder.setPosition(0); }
     public double getAngle() { return rotationEncoder.getAbsolutePosition().getValueAsDouble() * 360; }
     public double getRawAngle(){ return rotationEncoder.getAbsolutePosition().getValueAsDouble(); }

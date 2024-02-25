@@ -4,15 +4,13 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkLimitSwitch;
 import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkBase.SoftLimitDirection;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subTurret extends SubsystemBase {
   private final int kTurretMotorId = 9;
-  //private final int kMinimumPosition = 0;
-  //private final int kMaximumPosition = 100;
-
   private final CANSparkMax turretMotor = new CANSparkMax(kTurretMotorId, MotorType.kBrushless);
   private final RelativeEncoder turretEncoder = turretMotor.getEncoder();
   private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
@@ -24,6 +22,10 @@ public class subTurret extends SubsystemBase {
     turretMotor.setInverted(false);
     forwardLimit.enableLimitSwitch(true);
     reverseLimit.enableLimitSwitch(true);
+    turretMotor.setSoftLimit(SoftLimitDirection.kForward, 130);
+    turretMotor.setSoftLimit(SoftLimitDirection.kReverse, -10);
+    turretMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
+    turretMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
     turretMotor.burnFlash();
   }
 
@@ -48,6 +50,12 @@ public class subTurret extends SubsystemBase {
     SmartDashboard.putNumber("Turret Position", getPosition());
     if(reverseLimit.isPressed()){
       resetEncoder();
+    }
+    if(SmartDashboard.getBoolean("Turret Brake Mode", false) && turretMotor.getIdleMode() == IdleMode.kBrake){
+      turretMotor.setIdleMode(IdleMode.kCoast);
+    }
+    else if(SmartDashboard.getBoolean("Turret Brake Mode", true) && turretMotor.getIdleMode() == IdleMode.kCoast){
+      turretMotor.setIdleMode(IdleMode.kBrake);
     }
   }
 }

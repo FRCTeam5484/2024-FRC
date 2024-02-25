@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkBase.SoftLimitDirection;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 
@@ -41,10 +40,20 @@ public class subShotAngle extends SubsystemBase {
     return shotAngleEncoder.getPosition() * 360;
   }
 
+  public boolean safeToTurret(){
+    return getPosition() < Constants.ShotAngleConstants.MinimumForTurret;
+  }
+
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Turret Safe", getPosition() <= Constants.ShotAngleConstants.MinimumForTurret);
     SmartDashboard.putNumber("Shot Angle Power", shotAngleMotor.get());
     SmartDashboard.putNumber("Shot Angle Position", getPosition());
+    if(SmartDashboard.getBoolean("Shot Angle Brake Mode", false) && shotAngleMotor.getIdleMode() == IdleMode.kBrake){
+      shotAngleMotor.setIdleMode(IdleMode.kCoast);
+    }
+    else if(SmartDashboard.getBoolean("Shot Angle Brake Mode", true) && shotAngleMotor.getIdleMode() == IdleMode.kCoast){
+      shotAngleMotor.setIdleMode(IdleMode.kBrake);
+    }
   }
 }
