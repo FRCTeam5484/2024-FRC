@@ -17,9 +17,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-    SmartDashboard.putBoolean("Drive Brake Mode", true);
-    SmartDashboard.putBoolean("Turret Brake Mode", true);
-    SmartDashboard.putBoolean("Shot Angle Brake Mode", true);
+    //SmartDashboard.putBoolean("Drive Brake Mode", true);
+    //SmartDashboard.putBoolean("Turret Brake Mode", true);
+    //SmartDashboard.putBoolean("Shot Angle Brake Mode", true);
   }
 
   @Override
@@ -60,10 +60,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putString("Intake Command", m_robotContainer.intake.getCurrentCommand().getName());
-    SmartDashboard.putString("Shooter Command", m_robotContainer.shooter.getCurrentCommand().getName());
-    SmartDashboard.putString("Shot ANgle Command", m_robotContainer.shotAngle.getCurrentCommand().getName());
-    SmartDashboard.putString("Turret Command", m_robotContainer.turret.getCurrentCommand().getName());
+    //SmartDashboard.putString("Intake Command", m_robotContainer.intake.getCurrentCommand().getName());
+    //SmartDashboard.putString("Shooter Command", m_robotContainer.shooter.getCurrentCommand().getName());
+    //SmartDashboard.putString("Shot ANgle Command", m_robotContainer.shotAngle.getCurrentCommand().getName());
+    //SmartDashboard.putString("Turret Command", m_robotContainer.turret.getCurrentCommand().getName());
   }
 
   @Override

@@ -25,18 +25,11 @@ public class cmdSwerve_TeleOp extends Command {
 
   @Override
   public void execute() {
-    double xSpeed = XSupplier.getAsDouble()*Constants.DriveConstants.kMaxSpeedMetersPerSecond;
-    double ySpeed = YSupplier.getAsDouble()*Constants.DriveConstants.kMaxSpeedMetersPerSecond;
-    double rotationSpeed = rotationSupplier.getAsDouble()*Constants.DriveConstants.kMaxAngularSpeed;
-    if(boost.getAsBoolean()){
-      xSpeed = xSpeed*Constants.DriveConstants.kBoostMultiplier;
-      ySpeed = ySpeed*Constants.DriveConstants.kBoostMultiplier;
-    }
-    swerve.drive(xSpeed, ySpeed, rotationSpeed);
+    swerve.drive(XSupplier.getAsDouble()*Constants.DriveConstants.kMaxSpeedMetersPerSecond, YSupplier.getAsDouble()*Constants.DriveConstants.kMaxSpeedMetersPerSecond, rotationSupplier.getAsDouble()*Constants.DriveConstants.kMaxAngularSpeed, boost.getAsBoolean());
   }
 
   @Override
-  public void end(boolean interrupted) { swerve.drive(0, 0, 0); }
+  public void end(boolean interrupted) { swerve.drive(0, 0, 0, false); }
 
   @Override
   public boolean isFinished() { return false; }

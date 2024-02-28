@@ -41,12 +41,12 @@ public class subShotAngle extends SubsystemBase {
   }
 
   public boolean safeToTurret(){
-    return getPosition() < Constants.ShotAngleConstants.MinimumForTurret;
+    return getPosition() <= Constants.ShotAngleConstants.TurretSafe;
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Turret Safe", getPosition() <= Constants.ShotAngleConstants.MinimumForTurret);
+    SmartDashboard.putBoolean("Turret Safe", getPosition() <= Constants.ShotAngleConstants.TurretSafe);
     SmartDashboard.putNumber("Shot Angle Power", shotAngleMotor.get());
     SmartDashboard.putNumber("Shot Angle Position", getPosition());
     if(SmartDashboard.getBoolean("Shot Angle Brake Mode", false) && shotAngleMotor.getIdleMode() == IdleMode.kBrake){

@@ -82,9 +82,10 @@ public class swerveModule {
             stopModule();
             return;
         }
+        //System.out.println(optimizedDesiredState.speedMetersPerSecond);
         drivingPIDController.setReference(optimizedDesiredState.speedMetersPerSecond, CANSparkMax.ControlType.kVelocity);
         turningSparkMax.set(turningPIDController.calculate(getAngle(), optimizedDesiredState.angle.getDegrees()));
-        this.desiredState = desiredState;
+        //this.desiredState = desiredState;
     }
     public void setIdleModes(IdleMode mode){ drivingSparkMax.setIdleMode(mode); turningSparkMax.setIdleMode(mode); }
     public IdleMode getDriveIdleMode() { return drivingSparkMax.getIdleMode(); }

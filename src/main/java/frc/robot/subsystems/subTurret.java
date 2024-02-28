@@ -19,11 +19,11 @@ public class subTurret extends SubsystemBase {
   public subTurret() {
     turretMotor.restoreFactoryDefaults();
     turretMotor.setIdleMode(IdleMode.kBrake);
-    turretMotor.setInverted(false);
+    turretMotor.setInverted(true);
     forwardLimit.enableLimitSwitch(true);
     reverseLimit.enableLimitSwitch(true);
-    turretMotor.setSoftLimit(SoftLimitDirection.kForward, 130);
-    turretMotor.setSoftLimit(SoftLimitDirection.kReverse, -10);
+    turretMotor.setSoftLimit(SoftLimitDirection.kForward, 120);
+    turretMotor.setSoftLimit(SoftLimitDirection.kReverse, 0);
     turretMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     turretMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
     turretMotor.burnFlash();
@@ -47,8 +47,12 @@ public class subTurret extends SubsystemBase {
 
   @Override
   public void periodic() {
+    /*
     SmartDashboard.putNumber("Turret Position", getPosition());
     SmartDashboard.putNumber("Turret Power", turretMotor.get());
+    
+    SmartDashboard.putBoolean("Turret Forward Limit", forwardLimit.isPressed());
+    SmartDashboard.putBoolean("Turret Reverse Limit", reverseLimit.isPressed());
     if(reverseLimit.isPressed()){
       resetEncoder();
     }
@@ -58,5 +62,6 @@ public class subTurret extends SubsystemBase {
     else if(SmartDashboard.getBoolean("Turret Brake Mode", true) && turretMotor.getIdleMode() == IdleMode.kCoast){
       turretMotor.setIdleMode(IdleMode.kBrake);
     }
+    */
   }
 }

@@ -23,10 +23,10 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.classes.swerveModule;
 
 public class subSwerve extends SubsystemBase {
-  public static final double kFrontLeftOffset = 0.1880;
-  public static final double kFrontRightOffset = 0.9524;
-  public static final double kRearLeftOffset = 0.3767;
-  public static final double kRearRightOffset = 0.8359;
+  public static final double kFrontLeftOffset = 0.777099;
+  public static final double kFrontRightOffset = 0.18676;
+  public static final double kRearLeftOffset = 0.85815;
+  public static final double kRearRightOffset = 0.80761;
 
   public static final int kFrontLeftDrivingCanId = 1;
   public static final int kFrontRightDrivingCanId = 3;
@@ -99,16 +99,21 @@ public class subSwerve extends SubsystemBase {
       });
   }
   
-  public void setModuleStates(SwerveModuleState[] desiredStates) {
-    SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.DriveConstants.kMaxSpeedMetersPerSecond);
+  public void setModuleStates(SwerveModuleState[] desiredStates, boolean boost) {
+    double mps = boost ? Constants.DriveConstants.kMaxSpeedMetersPerSecond*Constants.DriveConstants.kBoostMultiplier : Constants.DriveConstants.kMaxSpeedMetersPerSecond;
+    SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, mps);
     frontLeftModule.setDesiredState(desiredStates[0]);
     frontRightModule.setDesiredState(desiredStates[1]);
     rearLeftModule.setDesiredState(desiredStates[2]);
     rearRightModule.setDesiredState(desiredStates[3]);
   }
 
-  public void drive(double xSpeed, double ySpeed, double rot) { setModuleStates(SwerveConstants.kDriveKinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, getRotation2d()))); }
-  public void stopModules(){ frontLeftModule.stopModule(); frontRightModule.stopModule(); rearLeftModule.stopModule(); rearRightModule.stopModule(); }
+  public void drive(double xSpeed, double ySpeed, double rot, boolean boost) { 
+    setModuleStates(SwerveConstants.kDriveKinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, getRotation2d())), boost); 
+  }
+  public void stopModules(){ 
+    frontLeftModule.stopModule(); frontRightModule.stopModule(); rearLeftModule.stopModule(); rearRightModule.stopModule(); 
+  }
   public void zeroHeading() { gyro.setYaw(0); }
   public Rotation2d getRotation2d() { return gyro.getRotation2d(); }
 
@@ -119,10 +124,10 @@ public class subSwerve extends SubsystemBase {
 
     SmartDashboard.putNumber("Heading", gyro.getRotation2d().getDegrees() );
     SmartDashboard.putString("Robot Location", odometry.getPoseMeters().getTranslation().toString());
-    //SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
-    //SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
-    //SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
-    //SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
+    SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
+    SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
+    SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
+    SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
     
     if(SmartDashboard.getBoolean("Drive Brake Mode", false) && frontLeftModule.getDriveIdleMode() == IdleMode.kBrake){
       frontLeftModule.setIdleModes(IdleMode.kCoast);
@@ -152,5 +157,5 @@ public class subSwerve extends SubsystemBase {
       pose);
   }
   public ChassisSpeeds getChassisSpeeds(){ return SwerveConstants.kDriveKinematics.toChassisSpeeds(frontLeftModule.getState(), frontRightModule.getState(), rearLeftModule.getState(), rearRightModule.getState());}
-  public void driveRobotRelative(ChassisSpeeds chassisSpeeds) { this.drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond); }
+  public void driveRobotRelative(ChassisSpeeds chassisSpeeds) { this.drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond, false); }
 }

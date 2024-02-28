@@ -27,7 +27,6 @@ public class subShooter extends SubsystemBase {
     shooterMotor.setInverted(false);
     shooterMotor2.setInverted(true);
 
-    shooterMotor2.follow(shooterMotor);
 
     shooterPID.setFeedbackDevice(shooterEncoder);
     shooterPID.setP(0.1);
@@ -47,15 +46,17 @@ public class subShooter extends SubsystemBase {
 
   public void stop(){
     shooterMotor.stopMotor();
+    shooterMotor2.stopMotor();
   }
 
   public void teleOp(double speed){
     shooterMotor.set(speed);
+    shooterMotor2.set(speed);
   }
 
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Shooter Velocity", shooterEncoder.getVelocity());
-    SmartDashboard.putNumber("Shooter Power", shooterMotor.get());
+    SmartDashboard.putNumber("Shooter Power", shooterMotor2.get());
   }
 }

@@ -20,7 +20,7 @@ public class subIntake extends SubsystemBase {
   }
 
   public boolean hasNote(){
-    return noteSensor.get();
+    return !noteSensor.get();
   }
 
   public void stop(){
@@ -41,7 +41,7 @@ public class subIntake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Note Sensor", noteSensor.get());
+    //SmartDashboard.putBoolean("Note Sensor", noteSensor.get());
     SmartDashboard.putNumber("Intake Power", intakeMotor.get());
   }
 }
