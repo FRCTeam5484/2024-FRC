@@ -47,9 +47,9 @@ public class subTurret extends SubsystemBase {
 
   @Override
   public void periodic() {
-    /*
+    
     SmartDashboard.putNumber("Turret Position", getPosition());
-    SmartDashboard.putNumber("Turret Power", turretMotor.get());
+    /*SmartDashboard.putNumber("Turret Power", turretMotor.get());
     
     SmartDashboard.putBoolean("Turret Forward Limit", forwardLimit.isPressed());
     SmartDashboard.putBoolean("Turret Reverse Limit", reverseLimit.isPressed());

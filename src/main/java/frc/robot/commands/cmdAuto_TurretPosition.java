@@ -28,7 +28,7 @@ public class cmdAuto_TurretPosition extends Command {
 
   @Override
   public void execute() {
-    angle.teleOp(-anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.HigherLimit));
+    angle.teleOp(-anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.MaxPostition));
     if(angle.safeToTurret()){
       turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
     } else {

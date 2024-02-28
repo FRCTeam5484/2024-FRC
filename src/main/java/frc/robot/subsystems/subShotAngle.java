@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkLimitSwitch;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
@@ -28,11 +29,11 @@ public class subShotAngle extends SubsystemBase {
   }
 
   public void teleOp(double speed){
-    if(speed > 0 && getPosition() <= Constants.ShotAngleConstants.HigherLimit || speed < 0 && getPosition() > Constants.ShotAngleConstants.LowerLimit){
-      shotAngleMotor.set(0);
+    if(speed > 0 && getPosition() <= Constants.ShotAngleConstants.MaxPostition || speed < 0 && getPosition() > Constants.ShotAngleConstants.LowestPosition){
+      shotAngleMotor.stopMotor();
     }
     else{
-      shotAngleMotor.set(MathUtil.clamp(speed, -0.2, 0.2));
+      shotAngleMotor.set(MathUtil.clamp(speed, -0.1, 0.2));
     }
   }
 
@@ -46,14 +47,14 @@ public class subShotAngle extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Turret Safe", getPosition() <= Constants.ShotAngleConstants.TurretSafe);
-    SmartDashboard.putNumber("Shot Angle Power", shotAngleMotor.get());
-    SmartDashboard.putNumber("Shot Angle Position", getPosition());
-    if(SmartDashboard.getBoolean("Shot Angle Brake Mode", false) && shotAngleMotor.getIdleMode() == IdleMode.kBrake){
-      shotAngleMotor.setIdleMode(IdleMode.kCoast);
-    }
-    else if(SmartDashboard.getBoolean("Shot Angle Brake Mode", true) && shotAngleMotor.getIdleMode() == IdleMode.kCoast){
-      shotAngleMotor.setIdleMode(IdleMode.kBrake);
-    }
+    SmartDashboard.putBoolean("Turret Safe", safeToTurret());
+    //SmartDashboard.putNumber("Shot Angle Power", shotAngleMotor.get());
+    //SmartDashboard.putNumber("Shot Angle Position", getPosition());
+    //if(SmartDashboard.getBoolean("Shot Angle Brake Mode", false) && shotAngleMotor.getIdleMode() == IdleMode.kBrake){
+    //  shotAngleMotor.setIdleMode(IdleMode.kCoast);
+    //}
+    //else if(SmartDashboard.getBoolean("Shot Angle Brake Mode", true) && shotAngleMotor.getIdleMode() == IdleMode.kCoast){
+    //  shotAngleMotor.setIdleMode(IdleMode.kBrake);
+    //}
   }
 }

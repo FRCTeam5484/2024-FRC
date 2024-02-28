@@ -117,32 +117,6 @@ public class subSwerve extends SubsystemBase {
   public void zeroHeading() { gyro.setYaw(0); }
   public Rotation2d getRotation2d() { return gyro.getRotation2d(); }
 
-
-  @Override
-  public void periodic() {
-    updateOdometry();
-
-    SmartDashboard.putNumber("Heading", gyro.getRotation2d().getDegrees() );
-    SmartDashboard.putString("Robot Location", odometry.getPoseMeters().getTranslation().toString());
-    SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
-    SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
-    SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
-    SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
-    
-    if(SmartDashboard.getBoolean("Drive Brake Mode", false) && frontLeftModule.getDriveIdleMode() == IdleMode.kBrake){
-      frontLeftModule.setIdleModes(IdleMode.kCoast);
-      frontRightModule.setIdleModes(IdleMode.kCoast);
-      rearLeftModule.setIdleModes(IdleMode.kCoast);
-      rearRightModule.setIdleModes(IdleMode.kCoast);
-    }
-    else if(SmartDashboard.getBoolean("Drive Brake Mode", true) && frontLeftModule.getDriveIdleMode() == IdleMode.kCoast){
-      frontLeftModule.setIdleModes(IdleMode.kBrake);
-      frontRightModule.setIdleModes(IdleMode.kBrake);
-      rearLeftModule.setIdleModes(IdleMode.kBrake);
-      rearRightModule.setIdleModes(IdleMode.kBrake);
-    }
-  }  
-
   // Methods for PathPlanner
   public Pose2d getPose() { return odometry.getPoseMeters(); }
   public void resetPose(Pose2d pose) {
@@ -158,4 +132,31 @@ public class subSwerve extends SubsystemBase {
   }
   public ChassisSpeeds getChassisSpeeds(){ return SwerveConstants.kDriveKinematics.toChassisSpeeds(frontLeftModule.getState(), frontRightModule.getState(), rearLeftModule.getState(), rearRightModule.getState());}
   public void driveRobotRelative(ChassisSpeeds chassisSpeeds) { this.drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond, false); }
+
+  @Override
+  public void periodic() {
+    updateOdometry();
+
+    SmartDashboard.putNumber("Heading", gyro.getRotation2d().getDegrees() );
+    SmartDashboard.putString("Robot Location", odometry.getPoseMeters().getTranslation().toString());
+    //SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
+    //SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
+    //SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
+    //SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
+    
+    /*
+    if(SmartDashboard.getBoolean("Drive Brake Mode", false) && frontLeftModule.getDriveIdleMode() == IdleMode.kBrake){
+      frontLeftModule.setIdleModes(IdleMode.kCoast);
+      frontRightModule.setIdleModes(IdleMode.kCoast);
+      rearLeftModule.setIdleModes(IdleMode.kCoast);
+      rearRightModule.setIdleModes(IdleMode.kCoast);
+    }
+    else if(SmartDashboard.getBoolean("Drive Brake Mode", true) && frontLeftModule.getDriveIdleMode() == IdleMode.kCoast){
+      frontLeftModule.setIdleModes(IdleMode.kBrake);
+      frontRightModule.setIdleModes(IdleMode.kBrake);
+      rearLeftModule.setIdleModes(IdleMode.kBrake);
+      rearRightModule.setIdleModes(IdleMode.kBrake);
+    }
+    */
+  }  
 }

@@ -64,9 +64,9 @@ public class Constants {
       public static final double Left = 120;
     }
     public static final class ShotAngleConstants {
-      public static final double HigherLimit = 270;
+      public static final double MaxPostition = 270;
       public static final double TurretSafe = 280;
-      public static final double LowerLimit = 300;
+      public static final double LowestPosition = 300;
       
 
       public static final double SpeakerBaseShot = 280;
