@@ -9,10 +9,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.cmdAuto_HoldShotAngle;
 import frc.robot.commands.cmdAuto_IntakeNote;
+import frc.robot.commands.cmdAuto_StaticShotAngle;
 import frc.robot.commands.cmdAuto_TurretPosition;
+import frc.robot.commands.cmdCancelCommands;
 import frc.robot.commands.cmdIntake_Stop;
 import frc.robot.commands.cmdIntake_TeleOp;
 import frc.robot.commands.cmdShooter_Stop;
@@ -87,18 +90,27 @@ public class RobotContainer {
   private void configureDriverTwo(){
     // Shot Angle
     //shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> -MathUtil.applyDeadband(driverTwo.getRightY(), 0.02)*0.1));
-    driverTwo.leftTrigger().onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-0.5));
-    driverTwo.leftTrigger().onFalse(new cmdAuto_HoldShotAngle(shotAngle));
 
-    driverTwo.rightTrigger().onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.5));
-    driverTwo.rightTrigger().onFalse(new cmdAuto_HoldShotAngle(shotAngle));
+    //new Trigger(() -> MathUtil.applyDeadband(driverTwo.getLeftY(), 0.02) < 0)
+    //    .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.5))
+    //    .onFalse(new cmdAuto_HoldShotAngle(shotAngle));
 
-    //driverTwo.povUp().onTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.LowerLimit));
-    //driverTwo.povUp().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
-    //driverTwo.povRight().onTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
-    //driverTwo.povRight().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
-    //driverTwo.povDown().onTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
-    //driverTwo.povDown().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    //new Trigger(() -> MathUtil.applyDeadband(driverTwo.getLeftY(), 0.02) > 0)
+    //    .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-0.5))
+    //    .onFalse(new cmdAuto_HoldShotAngle(shotAngle));
+    
+    //driverTwo.leftTrigger().onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-0.5));
+    //driverTwo.leftTrigger().onFalse(new cmdAuto_HoldShotAngle(shotAngle));
+
+    //driverTwo.rightTrigger().onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.5));
+    //driverTwo.rightTrigger().onFalse(new cmdAuto_HoldShotAngle(shotAngle));
+
+    driverTwo.povUp().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.TurretSafe));
+    driverTwo.povUp().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.MaxPostition));
+    driverTwo.povRight().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
+    driverTwo.povRight().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.MaxPostition));
+    driverTwo.povDown().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    driverTwo.povDown().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.MaxPostition));
 
     // Turret
     turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX()*.3, 0.02), ()->shotAngle.safeToTurret()));
@@ -123,9 +135,16 @@ public class RobotContainer {
     driverTwo.rightBumper().onFalse(new cmdShooter_Stop(shooter));
     //driverTwo.rightBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.HigherLimit));
 
-    driverTwo.leftBumper().onTrue(new cmdShooter_TeleOp(shooter, ()->0.5));
+    driverTwo.leftBumper().onTrue(new cmdShooter_TeleOp(shooter, ()->0.6));
     driverTwo.leftBumper().onFalse(new cmdShooter_Stop(shooter));
     //driverTwo.leftBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.HigherLimit));
+
+    driverTwo.start().onTrue(new cmdShooter_TeleOp(shooter, ()->0.3));
+    driverTwo.start().onFalse(new cmdShooter_Stop(shooter));
+
+
+
+    driverTwo.back().onTrue(new cmdCancelCommands(intake, shooter, shotAngle, turret));
   }
 
   private void addAutoOptions(){

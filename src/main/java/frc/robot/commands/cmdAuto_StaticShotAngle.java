@@ -11,7 +11,7 @@ public class cmdAuto_StaticShotAngle extends Command {
   public cmdAuto_StaticShotAngle(subShotAngle angle, double goal) {
     this.angle = angle;
     this.goal = goal;
-    anglePID.setIntegratorRange(-0.3, 0.3);
+    anglePID.setIntegratorRange(-0.2, 0.2);
     anglePID.setTolerance(2);
     addRequirements(angle);
   }
@@ -20,7 +20,8 @@ public class cmdAuto_StaticShotAngle extends Command {
   public void initialize() {}
   @Override
   public void execute() {
-    angle.teleOp(anglePID.calculate(angle.getPosition(), goal));
+    angle.teleOp(-anglePID.calculate(angle.getPosition(), goal));
+    //System.out.println("ShotAngle: " + -anglePID.calculate(angle.getPosition(), goal));
   }
   @Override
   public void end(boolean interrupted) {  }
