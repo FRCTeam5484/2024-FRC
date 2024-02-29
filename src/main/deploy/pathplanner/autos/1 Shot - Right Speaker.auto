@@ -1,0 +1,88 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.8246156027195783,
+      "y": 6.5938713630557855
+    },
+    "rotation": 58.495733280795825
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter Speaker"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter 50%"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter 50%"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Feed Shooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter Speaker"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Stop Shooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Auto Intake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right Speaker CrossLine"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
