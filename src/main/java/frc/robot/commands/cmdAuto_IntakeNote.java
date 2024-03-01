@@ -15,7 +15,7 @@ public class cmdAuto_IntakeNote extends Command {
 
   @Override
   public void execute() {
-    intake.forward();
+    intake.floorIntake();
   }
 
   @Override

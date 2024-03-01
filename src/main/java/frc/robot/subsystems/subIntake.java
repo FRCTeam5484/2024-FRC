@@ -31,6 +31,10 @@ public class subIntake extends SubsystemBase {
     intakeMotor.set(1);
   }
 
+  public void floorIntake(){
+    intakeMotor.set(0.7);
+  }
+
   public void reverse(){
     intakeMotor.set(-1);
   }
