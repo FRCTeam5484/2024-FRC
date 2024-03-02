@@ -10,7 +10,7 @@ public class Constants {
       public static final int DriverTwo = 1;
     }
     public static final class DriveConstants {
-      public static final double kMaxSpeedMetersPerSecond = 8.5;
+      public static final double kMaxSpeedMetersPerSecond = 7;
       public static final double kMaxAngularSpeed = 2 * Math.PI;
       public static final double kBoostMultiplier = 2;
     }
@@ -70,7 +70,7 @@ public class Constants {
       public static final double LowestPosition = 300;
       
 
-      public static final double SpeakerBaseShot = 275;
+      public static final double SpeakerBaseShot = 277;
       public static final double SafeZoneShot = 290;
     }
 }
