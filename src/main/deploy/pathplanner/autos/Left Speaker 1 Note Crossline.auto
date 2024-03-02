@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8246156027195783,
-      "y": 6.5938713630557855
+      "x": 0.7952442380734501,
+      "y": 4.4057046969192335
     },
-    "rotation": 58.495733280795825
+    "rotation": -58.43818815835066
   },
   "command": {
     "type": "sequential",
@@ -18,13 +18,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Shooter Speaker"
+                  "name": "Shooter 60%"
                 }
               },
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "Shooter 50%"
+                  "waitTime": 1.0
                 }
               }
             ]
@@ -37,7 +37,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Shooter 50%"
+                  "name": "Shooter 60%"
                 }
               },
               {
@@ -47,9 +47,9 @@
                 }
               },
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "Shooter Speaker"
+                  "waitTime": 1.0
                 }
               }
             ]
@@ -66,15 +66,15 @@
                 }
               },
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "Auto Intake"
+                  "pathName": "Left Speaker CrossLine"
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Right Speaker CrossLine"
+                  "name": "Auto Intake"
                 }
               }
             ]
