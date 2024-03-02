@@ -42,7 +42,7 @@ public class subTurret extends SubsystemBase {
   }
 
   public void teleOp(double speed){
-    turretMotor.set(speed);
+    //turretMotor.set(speed);
   }
 
   @Override

@@ -94,11 +94,11 @@ public class RobotContainer {
     //shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> -MathUtil.applyDeadband(driverTwo.getRightY(), 0.02)*0.1));
 
     new Trigger(() -> MathUtil.applyDeadband(driverTwo.getLeftY(), 0.02) < 0)
-      .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.5))
+      .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.3))
       .onFalse(new cmdAuto_HoldShotAngle(shotAngle));
 
     new Trigger(() -> MathUtil.applyDeadband(driverTwo.getLeftY(), 0.02) > 0)
-      .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-0.5))
+      .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-0.3))
       .onFalse(new cmdAuto_HoldShotAngle(shotAngle));
 
     new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getRightX(), 0.02)) > 0.5)
@@ -117,6 +117,8 @@ public class RobotContainer {
     driverTwo.povRight().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
     driverTwo.povDown().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.MaxPostition));
     driverTwo.povDown().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    driverTwo.povLeft().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    driverTwo.povLeft().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
     // Turret
     //turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX()*.3, 0.02), ()->shotAngle.safeToTurret()));
