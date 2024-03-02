@@ -68,13 +68,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left Speaker CrossLine"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Auto Intake"
+                  "pathName": "Left CrossLine"
                 }
               }
             ]
