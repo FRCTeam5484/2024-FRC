@@ -68,11 +68,20 @@ public class RobotContainer {
   }
 
   private void configureDriverOne() {
+    /*
     swerve.setDefaultCommand(
       new cmdSwerve_TeleOp(
           swerve,
           () -> xspeedLimiter.calculate(MathUtil.applyDeadband(-driverOne.getLeftY(), 0.05)),
           () -> yspeedLimiter.calculate(MathUtil.applyDeadband(-driverOne.getLeftX(), 0.05)),
+          () -> rotLimiter.calculate(MathUtil.applyDeadband(-driverOne.getRightX(), 0.05)),
+          () -> driverOne.leftBumper().getAsBoolean()));
+    */
+    swerve.setDefaultCommand(
+      new cmdSwerve_TeleOp(
+          swerve,
+          () -> MathUtil.applyDeadband(-driverOne.getLeftY(), 0.05),
+          () -> MathUtil.applyDeadband(-driverOne.getLeftX(), 0.05),
           () -> rotLimiter.calculate(MathUtil.applyDeadband(-driverOne.getRightX(), 0.05)),
           () -> driverOne.leftBumper().getAsBoolean()));
     
