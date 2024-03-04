@@ -99,17 +99,16 @@ public class subSwerve extends SubsystemBase {
       });
   }
   
-  public void setModuleStates(SwerveModuleState[] desiredStates, boolean boost) {
-    double mps = boost ? Constants.DriveConstants.kMaxSpeedMetersPerSecond*Constants.DriveConstants.kBoostMultiplier : Constants.DriveConstants.kMaxSpeedMetersPerSecond;
-    SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, mps);
+  public void setModuleStates(SwerveModuleState[] desiredStates) {
+    SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.DriveConstants.kMaxSpeedMetersPerSecond);
     frontLeftModule.setDesiredState(desiredStates[0]);
     frontRightModule.setDesiredState(desiredStates[1]);
     rearLeftModule.setDesiredState(desiredStates[2]);
     rearRightModule.setDesiredState(desiredStates[3]);
   }
 
-  public void drive(double xSpeed, double ySpeed, double rot, boolean boost) { 
-    setModuleStates(SwerveConstants.kDriveKinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, getRotation2d())), boost); 
+  public void drive(double xSpeed, double ySpeed, double rot) { 
+    setModuleStates(SwerveConstants.kDriveKinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, getRotation2d()))); 
   }
   public void stopModules(){ 
     frontLeftModule.stopModule(); frontRightModule.stopModule(); rearLeftModule.stopModule(); rearRightModule.stopModule(); 
@@ -131,7 +130,7 @@ public class subSwerve extends SubsystemBase {
       pose);
   }
   public ChassisSpeeds getChassisSpeeds(){ return SwerveConstants.kDriveKinematics.toChassisSpeeds(frontLeftModule.getState(), frontRightModule.getState(), rearLeftModule.getState(), rearRightModule.getState());}
-  public void driveRobotRelative(ChassisSpeeds chassisSpeeds) { this.drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond, false); }
+  public void driveRobotRelative(ChassisSpeeds chassisSpeeds) { this.drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond); }
 
   @Override
   public void periodic() {

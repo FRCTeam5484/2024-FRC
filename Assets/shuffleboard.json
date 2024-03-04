@@ -233,81 +233,6 @@
               "_glyph": 148,
               "_showGlyph": false
             }
-          },
-          "16,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Drive Brake Mode",
-              "_title": "Drive Brake Mode",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "18,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Turret Brake Mode",
-              "_title": "Turret Brake Mode",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "20,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Shot Angle Brake Mode",
-              "_title": "Shot Angle Brake Mode",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "22,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Turret Forward Limit",
-              "_title": "Turret Forward Limit",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "24,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Turret Reverse Limit",
-              "_title": "Turret Reverse Limit",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
           }
         }
       }
@@ -327,9 +252,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 86.0,
-    "y": 356.0,
-    "width": 1910.0,
-    "height": 804.0
+    "x": 780.0,
+    "y": 5.0,
+    "width": 1225.0,
+    "height": 962.0
   }
 }

@@ -10,53 +10,65 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subShooter extends SubsystemBase {
-  private final int kShooterMotorId = 12;
-  private final int kShooter2ndMotorId = 11;
-  private final CANSparkMax shooterMotor = new CANSparkMax(kShooterMotorId, MotorType.kBrushless);  ;
-  private final CANSparkMax shooterMotor2 = new CANSparkMax(kShooter2ndMotorId, MotorType.kBrushless);;
-  private final RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
-  private final SparkPIDController shooterPID = shooterMotor.getPIDController();
+  private final int kShooterMotorTopId = 12;
+  private final int kShooterMotorBottomId = 11;
+  private final CANSparkMax shooterMotorTop = new CANSparkMax(kShooterMotorTopId, MotorType.kBrushless);  ;
+  private final CANSparkMax shooterMotorBottom = new CANSparkMax(kShooterMotorBottomId, MotorType.kBrushless);;
+  private final RelativeEncoder shooterEncoderTop = shooterMotorTop.getEncoder();
+  private final RelativeEncoder shooterEncoderBottom = shooterMotorBottom.getEncoder();
+  private final SparkPIDController shooterTopPID = shooterMotorTop.getPIDController();
+  private final SparkPIDController shooterBottomPID = shooterMotorBottom.getPIDController();
   
   public subShooter() {
-    shooterMotor.restoreFactoryDefaults();
-    shooterMotor2.restoreFactoryDefaults();
+    shooterMotorTop.restoreFactoryDefaults();
+    shooterMotorBottom.restoreFactoryDefaults();
 
-    shooterMotor.setIdleMode(IdleMode.kCoast);
-    shooterMotor2.setIdleMode(IdleMode.kCoast);
+    shooterMotorTop.setIdleMode(IdleMode.kCoast);
+    shooterMotorBottom.setIdleMode(IdleMode.kCoast);
 
-    shooterMotor.setInverted(false);
-    shooterMotor2.setInverted(true);
+    shooterMotorTop.setInverted(false);
+    shooterMotorBottom.setInverted(true);
 
+    shooterTopPID.setFeedbackDevice(shooterEncoderTop);
+    shooterTopPID.setP(0.1);
+    shooterTopPID.setI(1e-4);
+    shooterTopPID.setD(1);
+    shooterTopPID.setIZone(0);
+    shooterTopPID.setFF(0);
+    shooterTopPID.setOutputRange(0, 1);
 
-    shooterPID.setFeedbackDevice(shooterEncoder);
-    shooterPID.setP(0.1);
-    shooterPID.setI(1e-4);
-    shooterPID.setD(1);
-    shooterPID.setIZone(0);
-    shooterPID.setFF(0);
-    shooterPID.setOutputRange(-1, 1);
+    shooterBottomPID.setFeedbackDevice(shooterEncoderBottom);
+    shooterBottomPID.setP(0.1);
+    shooterBottomPID.setI(1e-4);
+    shooterBottomPID.setD(1);
+    shooterBottomPID.setIZone(0);
+    shooterBottomPID.setFF(0);
+    shooterBottomPID.setOutputRange(0, 1);
     
-    shooterMotor.burnFlash();
-    shooterMotor2.burnFlash();
+    shooterMotorTop.burnFlash();
+    shooterMotorBottom.burnFlash();
   }
 
   public void setVelocity(double velocity){
-    shooterPID.setReference(velocity, CANSparkMax.ControlType.kVelocity);
+    shooterTopPID.setReference(velocity, CANSparkMax.ControlType.kVelocity);
+    shooterBottomPID.setReference(velocity, CANSparkMax.ControlType.kVelocity);
   }
 
   public void stop(){
-    shooterMotor.stopMotor();
-    shooterMotor2.stopMotor();
+    shooterMotorTop.set(0);
+    shooterMotorBottom.set(0);
+    shooterMotorTop.stopMotor();
+    shooterMotorBottom.stopMotor();
   }
 
   public void teleOp(double speed){
-    shooterMotor.set(speed);
-    shooterMotor2.set(speed);
+    shooterMotorTop.set(speed);
+    shooterMotorBottom.set(speed);
   }
 
   @Override
   public void periodic() {
-    //SmartDashboard.putNumber("Shooter Velocity", shooterEncoder.getVelocity());
-    //SmartDashboard.putNumber("Shooter Power", shooterMotor2.get());
+    SmartDashboard.putNumber("Shooter Velocity", shooterEncoderTop.getVelocity());
+    //SmartDashboard.putNumber("Shooter Power", shooterMotorBottom.get());
   }
 }

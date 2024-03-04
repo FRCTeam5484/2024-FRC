@@ -11,8 +11,7 @@ public class Constants {
     }
     public static final class DriveConstants {
       public static final double kMaxSpeedMetersPerSecond = 8;
-      public static final double kMaxAngularSpeed = 2 * Math.PI;
-      public static final double kBoostMultiplier = 2;
+      public static final double kMaxAngularSpeed = 3 * Math.PI;
     }
     public static final class SwerveConstants {
 
@@ -28,7 +27,7 @@ public class Constants {
         public static final int kDrivingMotorCurrentLimit = 60;
         public static final int kTurningMotorCurrentLimit = 40;
 
-        public static final double kDrivingMotorFreeSpeedRps = 5600 / 60;
+        public static final double kDrivingMotorFreeSpeedRps = 5676 / 60;
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
         public static final double kDrivingMotorReduction = 6.75; //4.714285714;

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.cmdAuto_AlignToShoot;
 import frc.robot.commands.cmdAuto_HoldShotAngle;
 import frc.robot.commands.cmdAuto_IntakeNote;
 import frc.robot.commands.cmdAuto_StaticShotAngle;
@@ -56,13 +57,12 @@ public class RobotContainer {
 
     // Named Commands
     NamedCommands.registerCommand("Shooter Speaker", new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot).withTimeout(1));
-    NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(1));
-    NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(1));
-    NamedCommands.registerCommand("Stop Shooter", new InstantCommand(()->shooter.stop()).withTimeout(1));
-    NamedCommands.registerCommand("Run Intake", new cmdAuto_IntakeNote(intake));
+    NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(3));
+    NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(3));
+    NamedCommands.registerCommand("Stop Shooter", new cmdShooter_Stop(shooter));
     NamedCommands.registerCommand("Auto Intake", new cmdAuto_IntakeNote(intake));
     NamedCommands.registerCommand("Feed Shooter", new RunCommand(() -> intake.forward()).withTimeout(2));
-    NamedCommands.registerCommand("Stop Intake", new RunCommand(() -> intake.stop()).withTimeout(1));
+    NamedCommands.registerCommand("Stop Intake", new cmdIntake_Stop(intake));
    
     addAutoOptions();
   }
@@ -82,8 +82,7 @@ public class RobotContainer {
           swerve,
           () -> MathUtil.applyDeadband(-driverOne.getLeftY(), 0.05),
           () -> MathUtil.applyDeadband(-driverOne.getLeftX(), 0.05),
-          () -> rotLimiter.calculate(MathUtil.applyDeadband(-driverOne.getRightX(), 0.05)),
-          () -> driverOne.leftBumper().getAsBoolean()));
+          () -> rotLimiter.calculate(MathUtil.applyDeadband(-driverOne.getRightX(), 0.05))));
     
     // Intake
     driverOne.rightBumper().onTrue(new cmdAuto_IntakeNote(intake));
@@ -156,8 +155,8 @@ public class RobotContainer {
     driverTwo.leftBumper().onFalse(new cmdShooter_Stop(shooter));
     driverTwo.leftBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
-    driverTwo.start().onTrue(new cmdShooter_TeleOp(shooter, ()->0.29));
-    driverTwo.start().onFalse(new cmdShooter_Stop(shooter));
+    driverTwo.start().whileTrue(new cmdAuto_AlignToShoot(shotAngle, turret, shooter));
+    driverTwo.start().onFalse(new cmdCancelCommands(intake, shooter, shotAngle, turret));
 
     driverTwo.back().onTrue(new cmdCancelCommands(intake, shooter, shotAngle, turret));
   }
