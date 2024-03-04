@@ -70,7 +70,7 @@ public class Constants {
       public static final double LowestPosition = 300;
       
 
-      public static final double SpeakerBaseShot = 277;
+      public static final double SpeakerBaseShot = 275;
       public static final double SafeZoneShot = 290;
     }
 }

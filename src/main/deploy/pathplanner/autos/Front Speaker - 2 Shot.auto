@@ -22,6 +22,32 @@
                 }
               },
               {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Shooter 60%"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter Speaker"
+                }
+              },
+              {
                 "type": "named",
                 "data": {
                   "name": "Shooter 60%"
