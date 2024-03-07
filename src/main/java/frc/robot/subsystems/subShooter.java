@@ -27,7 +27,7 @@ public class subShooter extends SubsystemBase {
     shooterMotorBottom.setIdleMode(IdleMode.kCoast);
 
     shooterMotorTop.setInverted(false);
-    shooterMotorBottom.setInverted(true);
+    shooterMotorBottom.setInverted(false);
 
     shooterTopPID.setFeedbackDevice(shooterEncoderTop);
     shooterTopPID.setP(0.1);

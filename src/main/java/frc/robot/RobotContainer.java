@@ -57,11 +57,11 @@ public class RobotContainer {
 
     // Named Commands
     NamedCommands.registerCommand("Shooter Speaker", new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot).withTimeout(1));
-    NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(3));
-    NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(3));
+    NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(2));
+    NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(2));
     NamedCommands.registerCommand("Stop Shooter", new cmdShooter_Stop(shooter));
     NamedCommands.registerCommand("Auto Intake", new cmdAuto_IntakeNote(intake));
-    NamedCommands.registerCommand("Feed Shooter", new RunCommand(() -> intake.forward()).withTimeout(2));
+    NamedCommands.registerCommand("Feed Shooter", new RunCommand(() -> intake.forward()).withTimeout(1));
     NamedCommands.registerCommand("Stop Intake", new cmdIntake_Stop(intake));
    
     addAutoOptions();
@@ -155,8 +155,11 @@ public class RobotContainer {
     driverTwo.leftBumper().onFalse(new cmdShooter_Stop(shooter));
     driverTwo.leftBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
-    driverTwo.start().whileTrue(new cmdAuto_AlignToShoot(shotAngle, turret, shooter));
-    driverTwo.start().onFalse(new cmdCancelCommands(intake, shooter, shotAngle, turret));
+    driverTwo.start().whileTrue(new cmdShooter_TeleOp(shooter, ()->0.35));
+    driverTwo.leftBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    
+    //driverTwo.start().whileTrue(new cmdAuto_AlignToShoot(shotAngle, turret, shooter));
+    //driverTwo.start().onFalse(new cmdCancelCommands(intake, shooter, shotAngle, turret));
 
     driverTwo.back().onTrue(new cmdCancelCommands(intake, shooter, shotAngle, turret));
   }
