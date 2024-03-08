@@ -56,9 +56,10 @@ public class RobotContainer {
     configureDriverTwo();
 
     // Named Commands
-    NamedCommands.registerCommand("Shooter Speaker", new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot).withTimeout(1));
+    NamedCommands.registerCommand("Shooter Speaker", new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
     NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(2));
     NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(2));
+    NamedCommands.registerCommand("Shooter Reverse", new cmdShooter_TeleOp(shooter, ()->-0.1).withTimeout(0.5));
     NamedCommands.registerCommand("Stop Shooter", new cmdShooter_Stop(shooter));
     NamedCommands.registerCommand("Auto Intake", new cmdAuto_IntakeNote(intake));
     NamedCommands.registerCommand("Feed Shooter", new RunCommand(() -> intake.forward()).withTimeout(1));
@@ -119,14 +120,14 @@ public class RobotContainer {
     //driverTwo.rightTrigger().onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.5));
     //driverTwo.rightTrigger().onFalse(new cmdAuto_HoldShotAngle(shotAngle));
 
-    driverTwo.povUp().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.Amp));
-    driverTwo.povUp().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
-    driverTwo.povRight().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
-    driverTwo.povRight().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
-    driverTwo.povDown().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.MaxPostition));
-    driverTwo.povDown().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
-    driverTwo.povLeft().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    driverTwo.povLeft().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.Amp));
     driverTwo.povLeft().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    driverTwo.povDown().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
+    driverTwo.povDown().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    driverTwo.povUp().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.MaxPostition));
+    driverTwo.povUp().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    driverTwo.povRight().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    driverTwo.povRight().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
     // Turret
     //turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX()*.3, 0.02), ()->shotAngle.safeToTurret()));

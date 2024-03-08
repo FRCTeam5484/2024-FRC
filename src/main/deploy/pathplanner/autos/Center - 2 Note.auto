@@ -56,6 +56,12 @@
                                   "data": {
                                     "name": "Stop Intake"
                                   }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "Shooter Reverse"
+                                  }
                                 }
                               ]
                             }
@@ -74,9 +80,28 @@
                             }
                           },
                           {
-                            "type": "named",
+                            "type": "sequential",
                             "data": {
-                              "name": "Auto Intake"
+                              "commands": [
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "Stop Intake"
+                                  }
+                                },
+                                {
+                                  "type": "wait",
+                                  "data": {
+                                    "waitTime": 1.0
+                                  }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "Auto Intake"
+                                  }
+                                }
+                              ]
                             }
                           }
                         ]

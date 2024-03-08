@@ -25,7 +25,7 @@ import frc.robot.classes.swerveModule;
 public class subSwerve extends SubsystemBase {
   public static final double kFrontLeftOffset = 0.777099;
   public static final double kFrontRightOffset = 0.18676;
-  public static final double kRearLeftOffset = 0.85815;
+  public static final double kRearLeftOffset = 0.9313;
   public static final double kRearRightOffset = 0.80761;
 
   public static final int kFrontLeftDrivingCanId = 1;
@@ -140,7 +140,7 @@ public class subSwerve extends SubsystemBase {
     SmartDashboard.putString("Robot Location", odometry.getPoseMeters().getTranslation().toString());
     //SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
     //SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
-    //SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
+    SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
     //SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
     
     /*
