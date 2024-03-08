@@ -4,6 +4,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -52,6 +53,7 @@ public class RobotContainer {
   private final SlewRateLimiter rotLimiter = new SlewRateLimiter(2);
 
   public RobotContainer() {
+    configureRobotAuto();
     configureDriverOne();
     configureDriverTwo();
 
@@ -67,7 +69,10 @@ public class RobotContainer {
    
     addAutoOptions();
   }
-
+  private void configureRobotAuto() {
+    Trigger teleopTrigger = new Trigger(() -> RobotState.isEnabled() && RobotState.isTeleop());
+    teleopTrigger.onTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+  }
   private void configureDriverOne() {
     /*
     swerve.setDefaultCommand(
@@ -100,7 +105,7 @@ public class RobotContainer {
 
   private void configureDriverTwo(){
     // Shot Angle
-    //shotAngle.setDefaultCommand(new cmdShotAngle_TeleOp(shotAngle, () -> -MathUtil.applyDeadband(driverTwo.getRightY(), 0.02)*0.1));
+    //shotAngle.setDefaultCommand(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
     new Trigger(() -> MathUtil.applyDeadband(driverTwo.getLeftY(), 0.02) < 0)
       .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.3))
