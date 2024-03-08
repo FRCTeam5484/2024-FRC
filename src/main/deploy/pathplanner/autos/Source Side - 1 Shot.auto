@@ -66,6 +66,12 @@
                 }
               },
               {
+                "type": "named",
+                "data": {
+                  "name": "Stop Intake"
+                }
+              },
+              {
                 "type": "path",
                 "data": {
                   "pathName": "Left CrossLine"
