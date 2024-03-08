@@ -62,9 +62,11 @@ public class RobotContainer {
     NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(2));
     NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(2));
     NamedCommands.registerCommand("Shooter Reverse", new cmdShooter_TeleOp(shooter, ()->-0.1).withTimeout(0.5));
+    NamedCommands.registerCommand("Shooter Reversed", new cmdShooter_TeleOp(shooter, ()->-0.1).withTimeout(0.5));
     NamedCommands.registerCommand("Stop Shooter", new cmdShooter_Stop(shooter));
     NamedCommands.registerCommand("Auto Intake", new cmdAuto_IntakeNote(intake));
     NamedCommands.registerCommand("Feed Shooter", new RunCommand(() -> intake.forward()).withTimeout(1));
+    NamedCommands.registerCommand("Run Intake", new RunCommand(() -> intake.forward()).withTimeout(1));
     NamedCommands.registerCommand("Stop Intake", new cmdIntake_Stop(intake));
    
     addAutoOptions();

@@ -12,7 +12,7 @@ public class cmdAuto_StaticShotAngle extends Command {
     this.angle = angle;
     this.goal = goal;
     anglePID.setIntegratorRange(-0.8, 0.8);
-    anglePID.setTolerance(2);
+    anglePID.setTolerance(0.5);
     addRequirements(angle);
   }
 

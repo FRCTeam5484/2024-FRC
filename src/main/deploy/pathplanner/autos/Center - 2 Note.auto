@@ -56,17 +56,17 @@
                                   "data": {
                                     "name": "Stop Intake"
                                   }
-                                },
-                                {
-                                  "type": "named",
-                                  "data": {
-                                    "name": "Shooter Reverse"
-                                  }
                                 }
                               ]
                             }
                           }
                         ]
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Shooter Reverse"
                       }
                     },
                     {
@@ -83,12 +83,6 @@
                             "type": "sequential",
                             "data": {
                               "commands": [
-                                {
-                                  "type": "named",
-                                  "data": {
-                                    "name": "Stop Intake"
-                                  }
-                                },
                                 {
                                   "type": "wait",
                                   "data": {
