@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkLimitSwitch;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkBase.SoftLimitDirection;
@@ -19,15 +18,15 @@ public class subTurret extends SubsystemBase {
   private final CANSparkMax turretMotor = new CANSparkMax(kTurretMotorId, MotorType.kBrushless);
   private final RelativeEncoder turretEncoder = turretMotor.getEncoder();
   private final SparkPIDController turretPID = turretMotor.getPIDController();
-  private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
-  private final SparkLimitSwitch reverseLimit = turretMotor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
+  //private final SparkLimitSwitch forwardLimit = turretMotor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
+  //private final SparkLimitSwitch reverseLimit = turretMotor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
 
   public subTurret() {
     turretMotor.restoreFactoryDefaults();
     turretMotor.setIdleMode(IdleMode.kBrake);
     turretMotor.setInverted(true);
-    forwardLimit.enableLimitSwitch(true);
-    reverseLimit.enableLimitSwitch(true);
+    //forwardLimit.enableLimitSwitch(true);
+    //reverseLimit.enableLimitSwitch(true);
     turretMotor.setSoftLimit(SoftLimitDirection.kForward, 120);
     turretMotor.setSoftLimit(SoftLimitDirection.kReverse, 0);
     turretMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
