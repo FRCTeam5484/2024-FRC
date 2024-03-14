@@ -19,7 +19,7 @@ public class subShotAngle extends SubsystemBase {
   public subShotAngle() {
     shotAngleMotor.restoreFactoryDefaults();
     shotAngleMotor.setIdleMode(IdleMode.kBrake);
-    shotAngleMotor.setInverted(true);
+    shotAngleMotor.setInverted(false);
     shotAngleMotor.burnFlash();
   }
 
@@ -28,16 +28,16 @@ public class subShotAngle extends SubsystemBase {
   }
 
   public void teleOp(double speed){
-    if(speed > 0 && getPosition() <= Constants.ShotAngleConstants.MaxPostition || speed < 0 && getPosition() > Constants.ShotAngleConstants.LowestPosition){
+    if(speed > 0 && getPosition() <= Constants.ShotAngleConstants.MaxPostition || speed < 0 && getPosition() >= Constants.ShotAngleConstants.LowestPosition){
       shotAngleMotor.stopMotor();
     }
     else{
-      shotAngleMotor.set(MathUtil.clamp(speed, -0.1, 0.2));
+      shotAngleMotor.set(MathUtil.clamp(speed, -0.1, 0.3));
     }
   }
 
   public double getPosition(){
-    return shotAngleEncoder.getPosition() * 360;
+    return shotAngleEncoder.getPosition() * 1000;
   }
 
   public boolean safeToTurret(){

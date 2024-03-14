@@ -7,12 +7,12 @@ import frc.robot.subsystems.subShotAngle;
 public class cmdAuto_StaticShotAngle extends Command {
   subShotAngle angle;
   double goal;
-  PIDController anglePID = new PIDController(0.007, 0, 0);
+  PIDController anglePID = new PIDController(0.004, 0, 0);
   public cmdAuto_StaticShotAngle(subShotAngle angle, double goal) {
     this.angle = angle;
     this.goal = goal;
-    anglePID.setIntegratorRange(-0.8, 0.8);
-    anglePID.setTolerance(0.5);
+    anglePID.setIntegratorRange(-0.08, 0.3);
+    anglePID.setTolerance(1);
     addRequirements(angle);
   }
 

@@ -63,13 +63,17 @@ public class Constants {
       public static final double Left = 120;
     }
     public static final class ShotAngleConstants {
-      public static final double MaxPostition = 143;
-      public static final double Amp = 150;
-      public static final double TurretSafe = 165;      
-      public static final double LowestPosition = 183;
+      public static final double MaxPostition = 480;
+      public static final double TurretSafe = 541;      
+      public static final double LowestPosition = 600;
       
-
-      public static final double SpeakerBaseShot = 152;
-      public static final double SafeZoneShot = 165;
+      public static final double Amp = 500;
+      public static final double SpeakerBaseShot = 480;
+      public static final double SafeZoneShot = 580;
+    }
+    public static final class Shoot{
+      public static final double Amp = 1600;
+      public static final double SafeZoneShot = 5000;
+      public static final double SpeakerBase = 4000;
     }
 }

@@ -21,25 +21,25 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.classes.swerveModule;
 
 public class subSwerve extends SubsystemBase {
-  public static final double kFrontLeftOffset = 0.777099;
-  public static final double kFrontRightOffset = 0.18676;
-  public static final double kRearLeftOffset = 0.9313;
-  public static final double kRearRightOffset = 0.80761;
+  public static final double kFrontLeftOffset = 0.93627;
+  public static final double kFrontRightOffset = 0.87109;
+  public static final double kRearLeftOffset = 0.51684;
+  public static final double kRearRightOffset = 0.68676;
 
-  public static final int kFrontLeftDrivingCanId = 1;
-  public static final int kFrontRightDrivingCanId = 3;
-  public static final int kRearLeftDrivingCanId = 5;
-  public static final int kRearRightDrivingCanId = 7;
+  public static final int kFrontLeftDrivingCanId = 3;//1;
+  public static final int kFrontRightDrivingCanId = 7;//3;
+  public static final int kRearLeftDrivingCanId = 1;//5;
+  public static final int kRearRightDrivingCanId = 5;//7;
 
-  public static final int kFrontLeftTurningCanId = 2;
-  public static final int kFrontRightTurningCanId = 4;
-  public static final int kRearLeftTurningCanId = 6;
-  public static final int kRearRightTurningCanId = 8;
+  public static final int kFrontLeftTurningCanId = 4;//2;
+  public static final int kFrontRightTurningCanId = 8;//4;
+  public static final int kRearLeftTurningCanId = 2;//6;
+  public static final int kRearRightTurningCanId = 6;//8;
 
-  public static final int kFrontLeftCANcoder = 2;
-  public static final int kFrontRightCANcoder = 4;
-  public static final int kRearLeftCANcoder = 6;
-  public static final int kRearRightCANcoder = 8;
+  public static final int kFrontLeftCANcoder = 4;
+  public static final int kFrontRightCANcoder = 8;
+  public static final int kRearLeftCANcoder = 2;
+  public static final int kRearRightCANcoder = 6;
 
   private final swerveModule frontLeftModule = new swerveModule(kFrontLeftDrivingCanId,kFrontLeftTurningCanId,kFrontLeftCANcoder,kFrontLeftOffset);
   private final swerveModule frontRightModule = new swerveModule(kFrontRightDrivingCanId,kFrontRightTurningCanId,kFrontRightCANcoder,kFrontRightOffset);
@@ -136,10 +136,10 @@ public class subSwerve extends SubsystemBase {
 
     SmartDashboard.putNumber("Heading", gyro.getRotation2d().getDegrees() );
     SmartDashboard.putString("Robot Location", odometry.getPoseMeters().getTranslation().toString());
-    //SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
-    //SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
+    SmartDashboard.putNumber("Front Left Angle Raw", frontLeftModule.getRawAngle());    
+    SmartDashboard.putNumber("Front Right Angle Raw", frontRightModule.getRawAngle());    
     SmartDashboard.putNumber("Back Left Angle Raw", rearLeftModule.getRawAngle());    
-    //SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
+    SmartDashboard.putNumber("Back Right Angle Raw", rearRightModule.getRawAngle());  
     
     /*
     if(SmartDashboard.getBoolean("Drive Brake Mode", false) && frontLeftModule.getDriveIdleMode() == IdleMode.kBrake){

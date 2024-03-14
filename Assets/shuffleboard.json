@@ -272,6 +272,32 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "9,2": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter Velocity Top",
+              "_title": "Shooter Velocity Top",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,3": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter Velocity Bottom",
+              "_title": "Shooter Velocity Bottom",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -291,9 +317,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 780.0,
-    "y": 5.0,
-    "width": 1225.0,
-    "height": 962.0
+    "x": 163.0,
+    "y": 313.0,
+    "width": 1635.0,
+    "height": 679.0
   }
 }

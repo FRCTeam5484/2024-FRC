@@ -30,20 +30,20 @@ public class subShooter extends SubsystemBase {
     shooterMotorBottom.setInverted(false);
 
     shooterTopPID.setFeedbackDevice(shooterEncoderTop);
-    shooterTopPID.setP(0.1);
-    shooterTopPID.setI(1e-4);
-    shooterTopPID.setD(1);
+    shooterTopPID.setP(6e-4);
+    shooterTopPID.setI(0);
+    shooterTopPID.setD(0);
     shooterTopPID.setIZone(0);
-    shooterTopPID.setFF(0);
-    shooterTopPID.setOutputRange(0, 1);
+    shooterTopPID.setFF(0.000015);
+    shooterTopPID.setOutputRange(0.1, 1);
 
     shooterBottomPID.setFeedbackDevice(shooterEncoderBottom);
-    shooterBottomPID.setP(0.1);
-    shooterBottomPID.setI(1e-4);
-    shooterBottomPID.setD(1);
+    shooterBottomPID.setP(6e-4);
+    shooterBottomPID.setI(0);
+    shooterBottomPID.setD(0);
     shooterBottomPID.setIZone(0);
-    shooterBottomPID.setFF(0);
-    shooterBottomPID.setOutputRange(0, 1);
+    shooterBottomPID.setFF(0.000015);
+    shooterBottomPID.setOutputRange(0.1, 1);
     
     shooterMotorTop.burnFlash();
     shooterMotorBottom.burnFlash();
@@ -68,7 +68,7 @@ public class subShooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Shooter Velocity", shooterEncoderTop.getVelocity());
-    //SmartDashboard.putNumber("Shooter Power", shooterMotorBottom.get());
+    SmartDashboard.putNumber("Shooter Velocity Top", shooterEncoderTop.getVelocity());
+    SmartDashboard.putNumber("Shooter Velocity Bottom", shooterEncoderBottom.getVelocity());
   }
 }
