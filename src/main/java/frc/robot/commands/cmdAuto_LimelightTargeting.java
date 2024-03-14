@@ -29,11 +29,15 @@ public class cmdAuto_LimelightTargeting extends Command {
 
   @Override
   public void execute() {
-    angle.teleOp(-anglePID.calculate(angle.getPosition(), 500));
-    if(angle.safeToTurret()){
-      turret.teleOp(-turretPID.calculate(lime.getX(), 0));
-    } else {
-      turret.stop();
+    if(lime.hasTarget())
+    {
+      angle.teleOp(-anglePID.calculate(angle.getPosition(), 500));
+      if(angle.safeToTurret())
+      {
+        turret.teleOp(-turretPID.calculate(lime.getX(), 0));
+      } else {
+        turret.stop();
+      }
     }
   }
 
