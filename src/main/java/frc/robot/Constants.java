@@ -58,17 +58,17 @@ public class Constants {
     }
     public static final class Turret{
       public static final double Rear = 0;
-      public static final double Right = 40;
+      public static final double Right = -40;
       public static final double Front = 80;
-      public static final double Left = 120;
+      public static final double Left = 40;
     }
     public static final class ShotAngleConstants {
-      public static final double MaxPostition = 480;
-      public static final double TurretSafe = 541;      
+      public static final double MaxPostition = 461;
+      public static final double TurretSafe = 550;      
       public static final double LowestPosition = 600;
       
       public static final double Amp = 500;
-      public static final double SpeakerBaseShot = 480;
+      public static final double SpeakerBaseShot = 490;
       public static final double SafeZoneShot = 580;
     }
     public static final class Shoot{

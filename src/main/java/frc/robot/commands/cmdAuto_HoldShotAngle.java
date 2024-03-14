@@ -10,18 +10,20 @@ public class cmdAuto_HoldShotAngle extends Command {
   PIDController anglePID = new PIDController(0.005, 0, 0);
   public cmdAuto_HoldShotAngle(subShotAngle angle) {
     this.angle = angle;
-    goal = angle.getPosition();
-    anglePID.setIntegratorRange(-0.3, 0.3);
-    anglePID.setTolerance(2);
+    anglePID.setIntegratorRange(-0.1, 0.6);
+    anglePID.setTolerance(1);
     addRequirements(angle);
   }
 
   @Override
-  public void initialize() { }
+  public void initialize() {
+    goal = angle.getPosition();
+   }
 
   @Override
   public void execute() {
-    angle.teleOp(anglePID.calculate(angle.getPosition(), goal));
+    angle.teleOp(-anglePID.calculate(angle.getPosition(), goal));
+    //System.out.println("Position: " + angle.getPosition() + " Goal: " + goal + " Correction: " + -anglePID.calculate(angle.getPosition(), goal));
   }
 
   @Override

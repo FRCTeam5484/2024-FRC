@@ -27,8 +27,8 @@ public class subTurret extends SubsystemBase {
     turretMotor.setInverted(true);
     //forwardLimit.enableLimitSwitch(true);
     //reverseLimit.enableLimitSwitch(true);
-    turretMotor.setSoftLimit(SoftLimitDirection.kForward, 120);
-    turretMotor.setSoftLimit(SoftLimitDirection.kReverse, 0);
+    turretMotor.setSoftLimit(SoftLimitDirection.kForward, 80);
+    turretMotor.setSoftLimit(SoftLimitDirection.kReverse, -40);
     turretMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     turretMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
     

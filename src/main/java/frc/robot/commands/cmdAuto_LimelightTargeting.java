@@ -3,24 +3,25 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.subsystems.subLimeLight;
 import frc.robot.subsystems.subShotAngle;
 import frc.robot.subsystems.subTurret;
 
-public class cmdAuto_TurretPosition extends Command {
+public class cmdAuto_LimelightTargeting extends Command {
   subTurret turret;
+  subLimeLight lime;
   subShotAngle angle;
-  double goal;
   PIDController turretPID = new PIDController(0.02, 0, 0);
   PIDController anglePID = new PIDController(0.004, 0, 0);
-  public cmdAuto_TurretPosition(subTurret turret, subShotAngle angle, double goal) {
+  public cmdAuto_LimelightTargeting(subTurret turret, subLimeLight lime, subShotAngle angle) {
     this.turret = turret;
+    this.lime = lime;
     this.angle = angle;
-    this.goal = goal;
-    addRequirements(turret, angle);
+    addRequirements(turret, lime, angle);
+
+    turretPID.setIntegratorRange(-0.2, 0.2);
     anglePID.setIntegratorRange(-0.08, 0.3);
     anglePID.setTolerance(1);
-    //turretPID.setTolerance(1);
-    turretPID.setIntegratorRange(-0.3, 0.3);
   }
 
   @Override
@@ -28,9 +29,9 @@ public class cmdAuto_TurretPosition extends Command {
 
   @Override
   public void execute() {
-    angle.teleOp(-anglePID.calculate(angle.getPosition(), Constants.ShotAngleConstants.SpeakerBaseShot));
+    angle.teleOp(-anglePID.calculate(angle.getPosition(), 500));
     if(angle.safeToTurret()){
-      turret.teleOp(turretPID.calculate(turret.getPosition(), goal));
+      turret.teleOp(-turretPID.calculate(lime.getX(), 0));
     } else {
       turret.stop();
     }
@@ -44,6 +45,6 @@ public class cmdAuto_TurretPosition extends Command {
 
   @Override
   public boolean isFinished() {
-    return turretPID.atSetpoint() && anglePID.atSetpoint();
+    return false;
   }
 }

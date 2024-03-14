@@ -19,7 +19,7 @@ public class cmdAuto_AlignToShoot extends Command {
     this.turret = turret;
     this.shooter = shooter;
     anglePID.setIntegratorRange(-0.2, 0.2);
-    anglePID.setTolerance(2);
+    anglePID.setTolerance(1);
     addRequirements(angle, turret, shooter);
   }
 

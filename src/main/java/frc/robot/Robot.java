@@ -18,9 +18,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-    //SmartDashboard.putBoolean("Drive Brake Mode", true);
-    //SmartDashboard.putBoolean("Turret Brake Mode", true);
-    //SmartDashboard.putBoolean("Shot Angle Brake Mode", true);
   }
 
   @Override
@@ -57,6 +54,10 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    try 
+    {
+      SmartDashboard.putString("Angle Command", m_robotContainer.shotAngle.getCurrentCommand().getName());
+    } catch (Exception e) {}
   }
 
   @Override

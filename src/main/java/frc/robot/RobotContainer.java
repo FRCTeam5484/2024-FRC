@@ -14,8 +14,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.cmdAuto_AlignToShoot;
+import frc.robot.commands.cmdAuto_CorrectHeading;
 import frc.robot.commands.cmdAuto_HoldShotAngle;
 import frc.robot.commands.cmdAuto_IntakeNote;
+import frc.robot.commands.cmdAuto_LimelightTargeting;
 import frc.robot.commands.cmdAuto_ShootVelocity;
 import frc.robot.commands.cmdAuto_StaticShotAngle;
 import frc.robot.commands.cmdAuto_TurretPosition;
@@ -29,6 +31,7 @@ import frc.robot.commands.cmdSwerve_TeleOp;
 import frc.robot.commands.cmdTurret_Stop;
 import frc.robot.commands.cmdTurret_TeleOp;
 import frc.robot.subsystems.subIntake;
+import frc.robot.subsystems.subLimeLight;
 import frc.robot.subsystems.subShooter;
 import frc.robot.subsystems.subShotAngle;
 import frc.robot.subsystems.subSwerve;
@@ -44,7 +47,7 @@ public class RobotContainer {
   public final subIntake intake = new subIntake();
   public final subShooter shooter = new subShooter();
   public final subShotAngle shotAngle = new subShotAngle();
-  //private final subLimeLight limeLight = new subLimeLight();
+  private final subLimeLight limeLight = new subLimeLight();
   public final subTurret turret = new subTurret();
 
   private SendableChooser<Command> chooser = new SendableChooser<>();
@@ -59,16 +62,16 @@ public class RobotContainer {
     configureDriverTwo();
 
     // Named Commands
-    NamedCommands.registerCommand("Shooter Speaker", new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    NamedCommands.registerCommand("Shooter Speaker", new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot).withTimeout(1));
     NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(2));
     NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(2));
     NamedCommands.registerCommand("Shooter Reverse", new cmdShooter_TeleOp(shooter, ()->-0.1).withTimeout(0.5));
-    NamedCommands.registerCommand("Shooter Reversed", new cmdShooter_TeleOp(shooter, ()->-0.1).withTimeout(0.5));
     NamedCommands.registerCommand("Stop Shooter", new cmdShooter_Stop(shooter));
     NamedCommands.registerCommand("Auto Intake", new cmdAuto_IntakeNote(intake));
     NamedCommands.registerCommand("Feed Shooter", new RunCommand(() -> intake.forward()).withTimeout(1));
-    NamedCommands.registerCommand("Run Intake", new RunCommand(() -> intake.forward()).withTimeout(1));
     NamedCommands.registerCommand("Stop Intake", new cmdIntake_Stop(intake));
+    NamedCommands.registerCommand("Gryo Amp Side", new cmdAuto_CorrectHeading(swerve, 59));
+    NamedCommands.registerCommand("Gryo Amp Source", new cmdAuto_CorrectHeading(swerve, 55));
    
     addAutoOptions();
   }
@@ -77,15 +80,6 @@ public class RobotContainer {
     teleopTrigger.onTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
   }
   private void configureDriverOne() {
-    /*
-    swerve.setDefaultCommand(
-      new cmdSwerve_TeleOp(
-          swerve,
-          () -> xspeedLimiter.calculate(MathUtil.applyDeadband(-driverOne.getLeftY(), 0.05)),
-          () -> yspeedLimiter.calculate(MathUtil.applyDeadband(-driverOne.getLeftX(), 0.05)),
-          () -> rotLimiter.calculate(MathUtil.applyDeadband(-driverOne.getRightX(), 0.05)),
-          () -> driverOne.leftBumper().getAsBoolean()));
-    */
     swerve.setDefaultCommand(
       new cmdSwerve_TeleOp(
           swerve,
@@ -101,6 +95,10 @@ public class RobotContainer {
     driverOne.rightTrigger().onFalse(new cmdIntake_Stop(intake));
     driverOne.leftTrigger().onTrue(new cmdIntake_TeleOp(intake, ()->-1));
     driverOne.leftTrigger().onFalse(new cmdIntake_Stop(intake));
+
+    // LimeLight
+    driverOne.b().whileTrue(new cmdAuto_LimelightTargeting(turret, limeLight, shotAngle));
+    driverOne.b().onFalse(new cmdAuto_HoldShotAngle(shotAngle));
     
     // Reset Sensors
     driverOne.start().onTrue(new InstantCommand(() -> swerve.zeroHeading()));
@@ -108,18 +106,14 @@ public class RobotContainer {
 
   private void configureDriverTwo(){
     // Shot Angle
-    //shotAngle.setDefaultCommand(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    //shotAngle.setDefaultCommand(new cmdAuto_HoldShotAngle(shotAngle));
 
-    new Trigger(() -> MathUtil.applyDeadband(driverTwo.getLeftY(), 0.09) < 0)
-      .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.3))
-      .onFalse(new cmdAuto_HoldShotAngle(shotAngle));
-
-    new Trigger(() -> MathUtil.applyDeadband(driverTwo.getLeftY(), 0.09) > 0)
-      .onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-0.3))
+    new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getLeftY(), 0.5)) > 0)
+      .whileTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-driverTwo.getLeftY()*.1))
       .onFalse(new cmdAuto_HoldShotAngle(shotAngle));
 
     new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getRightX(), 0.02)) > 0.5)
-      .onTrue(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getRightX()*.3, 0.02), ()->shotAngle.safeToTurret()))
+      .whileTrue(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getRightX()*.3, 0.02), ()->shotAngle.safeToTurret()))
       .onFalse(new cmdTurret_Stop(turret));
     
     //driverTwo.leftTrigger().onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-0.5));
@@ -159,13 +153,13 @@ public class RobotContainer {
     driverTwo.b().onFalse(new cmdAuto_HoldShotAngle(shotAngle));
     
     // Shooter
-    driverTwo.rightBumper().onTrue(new cmdAuto_ShootVelocity(shooter, Constants.Shoot.SpeakerBase));
+    /*driverTwo.rightBumper().onTrue(new cmdAuto_ShootVelocity(shooter, Constants.Shoot.SpeakerBase));
     driverTwo.rightBumper().onFalse(new cmdShooter_Stop(shooter));
 
     driverTwo.leftBumper().onTrue(new cmdAuto_ShootVelocity(shooter, Constants.Shoot.SafeZoneShot));
     driverTwo.leftBumper().onFalse(new cmdShooter_Stop(shooter));
 
-    /*
+    */
     driverTwo.rightBumper().onTrue(new cmdShooter_TeleOp(shooter, ()->0.8));
     driverTwo.rightBumper().onFalse(new cmdShooter_Stop(shooter));
     driverTwo.rightBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
@@ -175,30 +169,15 @@ public class RobotContainer {
     driverTwo.leftBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
     driverTwo.start().whileTrue(new cmdShooter_TeleOp(shooter, ()->0.35));
-    driverTwo.leftBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
-
-    */
-    
-    //driverTwo.start().whileTrue(new cmdAuto_AlignToShoot(shotAngle, turret, shooter));
-    //driverTwo.start().onFalse(new cmdCancelCommands(intake, shooter, shotAngle, turret));
-
     driverTwo.back().onTrue(new cmdCancelCommands(intake, shooter, shotAngle, turret));
   }
 
   private void addAutoOptions(){
     chooser = AutoBuilder.buildAutoChooser();
-    //chooser.setDefaultOption("Do Nothing", new InstantCommand());
-
     SmartDashboard.putData("Auto Options", chooser);
   }
 
   public Command getAutonomousCommand() {
     return chooser.getSelected();
-    //return new PathPlannerAuto("Test Auto 1");
-    //try { return chooser.getSelected(); } 
-    //catch (NullPointerException ex) { 
-    //  DriverStation.reportError("auto choose NULL somewhere in getAutonomousCommand in RobotContainer.java", null);
-    //  return new InstantCommand();
-    //}
   }
 }

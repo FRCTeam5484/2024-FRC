@@ -76,7 +76,7 @@
                           {
                             "type": "path",
                             "data": {
-                              "pathName": "Center Note"
+                              "pathName": "Speaker to Center Note"
                             }
                           },
                           {
@@ -108,7 +108,7 @@
                           {
                             "type": "path",
                             "data": {
-                              "pathName": "GetBackToSpeaker"
+                              "pathName": "Center Note to Speaker"
                             }
                           },
                           {
@@ -150,7 +150,7 @@
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "Center Note"
+                                    "pathName": "Speaker to Center Note"
                                   }
                                 },
                                 {

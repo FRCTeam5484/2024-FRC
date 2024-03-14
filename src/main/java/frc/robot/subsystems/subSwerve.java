@@ -113,6 +113,10 @@ public class subSwerve extends SubsystemBase {
   }
   public void zeroHeading() { gyro.setYaw(0); }
   public Rotation2d getRotation2d() { return gyro.getRotation2d(); }
+  public void setGryoOffset(double offset){
+    double correction = gyro.getYaw().getValue();
+    gyro.setYaw(correction+offset);
+  }
 
   // Methods for PathPlanner
   public Pose2d getPose() { return odometry.getPoseMeters(); }
