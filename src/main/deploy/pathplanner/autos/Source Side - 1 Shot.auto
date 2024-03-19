@@ -18,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Shooter Speaker"
+                  "name": "Shooter 60%"
                 }
               },
               {
@@ -26,72 +26,53 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "parallel",
+                      "type": "wait",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shooter 60%"
-                            }
-                          },
-                          {
-                            "type": "wait",
-                            "data": {
-                              "waitTime": 1.0
-                            }
-                          }
-                        ]
+                        "waitTime": 0.25
                       }
                     },
                     {
-                      "type": "parallel",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shooter 60%"
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Feed Shooter"
-                            }
-                          },
-                          {
-                            "type": "wait",
-                            "data": {
-                              "waitTime": 1.0
-                            }
-                          }
-                        ]
+                        "name": "Feed Shooter"
                       }
                     },
                     {
-                      "type": "parallel",
+                      "type": "wait",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Stop Shooter"
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Stop Intake"
-                            }
-                          },
-                          {
-                            "type": "path",
-                            "data": {
-                              "pathName": "Speaker Source To Centerline"
-                            }
-                          }
-                        ]
+                        "waitTime": 0.25
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Speaker Source To Centerline"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Auto Intake"
                       }
                     }
                   ]

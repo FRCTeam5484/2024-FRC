@@ -1,18 +1,15 @@
 package frc.robot.commands;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.subTurret;
 
 public class cmdTurret_TeleOp extends Command {
   subTurret turret;
-  BooleanSupplier shooterSafe;
   DoubleSupplier speed;
-  public cmdTurret_TeleOp(subTurret turret, DoubleSupplier speed, BooleanSupplier shooterSafe) {
+  public cmdTurret_TeleOp(subTurret turret, DoubleSupplier speed) {
     this.turret = turret;
     this.speed = speed;
-    this.shooterSafe = shooterSafe;
     addRequirements(turret);
   }
 
@@ -20,11 +17,7 @@ public class cmdTurret_TeleOp extends Command {
   public void initialize() {}
   @Override
   public void execute() { 
-    if(shooterSafe.getAsBoolean()) {
-      turret.teleOp(speed.getAsDouble()); 
-    } else {
-      turret.stop();
-    }
+    turret.teleOp(speed.getAsDouble()); 
   }
     
   @Override

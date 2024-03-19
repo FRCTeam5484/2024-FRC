@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -11,6 +13,7 @@ public class subIntake extends SubsystemBase {
   private final int kIntakeMotorId = 10;
   private final CANSparkMax intakeMotor = new CANSparkMax(kIntakeMotorId, MotorType.kBrushless);
   private final DigitalInput noteSensor = new DigitalInput(0);
+  private Timer timer = new Timer();
     
   public subIntake() {
     intakeMotor.restoreFactoryDefaults();
@@ -43,9 +46,18 @@ public class subIntake extends SubsystemBase {
     intakeMotor.set(speed);
   }
 
+  public void startFlash(){
+    timer.reset();
+    timer.start();
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(2);
+  }
+
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Note Sensor", !noteSensor.get());
-    //SmartDashboard.putNumber("Intake Power", intakeMotor.get());
+    if(timer.get() > 3){
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+      timer.stop();
+    }
   }
 }

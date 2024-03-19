@@ -12,9 +12,35 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Source to Centerline"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Source to Centerline"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Auto Intake"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       ]

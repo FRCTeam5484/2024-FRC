@@ -18,12 +18,6 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Shooter Speaker"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "Shooter 60%"
                 }
               },
@@ -34,19 +28,13 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.75
+                        "waitTime": 0.25
                       }
                     },
                     {
                       "type": "named",
                       "data": {
                         "name": "Feed Shooter"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Stop Intake"
                       }
                     }
                   ]
@@ -75,34 +63,15 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Amp Note to Speaker"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter Speaker"
-                }
-              }
-            ]
+            "pathName": "Amp Note to Speaker"
           }
         },
         {
           "type": "parallel",
           "data": {
             "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter Speaker"
-                }
-              },
               {
                 "type": "named",
                 "data": {
@@ -116,19 +85,13 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 0.25
                       }
                     },
                     {
                       "type": "named",
                       "data": {
                         "name": "Feed Shooter"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Stop Intake"
                       }
                     }
                   ]

@@ -7,10 +7,12 @@ import frc.robot.subsystems.subClimb;
 
 public class cmdClimb_TeleOp extends Command {
   subClimb climb;
-  DoubleSupplier speed;
-  public cmdClimb_TeleOp(subClimb climb, DoubleSupplier speed) {
+  DoubleSupplier leftSpeed;
+  DoubleSupplier rightSpeed;
+  public cmdClimb_TeleOp(subClimb climb, DoubleSupplier leftSpeed, DoubleSupplier rightSpeed) {
     this.climb = climb;
-    this.speed = speed;
+    this.leftSpeed = leftSpeed;
+    this.rightSpeed = rightSpeed;
     addRequirements(climb);
   }
 
@@ -19,7 +21,7 @@ public class cmdClimb_TeleOp extends Command {
 
   @Override
   public void execute() {
-    climb.teleOp(speed.getAsDouble());
+    climb.teleOp(leftSpeed.getAsDouble(), rightSpeed.getAsDouble());
   }
 
   @Override

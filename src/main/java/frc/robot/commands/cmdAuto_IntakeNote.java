@@ -26,6 +26,10 @@ public class cmdAuto_IntakeNote extends Command {
 
   @Override
   public boolean isFinished() {
-    return intake.hasNote();
+    if(intake.hasNote()){
+      intake.startFlash();
+      return true;
+    }
+    return false;
   }
 }

@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8393012850426425,
-      "y": 6.579185680732721
+      "x": 0.7508169638188018,
+      "y": 6.64849531379735
     },
-    "rotation": 58.13402230639635
+    "rotation": 59.03624346792653
   },
   "command": {
     "type": "sequential",
@@ -60,6 +60,56 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp Note to Speaker"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter 60%"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.25
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feed Shooter"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Stop Intake"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp to Centerline"
           }
         }
       ]

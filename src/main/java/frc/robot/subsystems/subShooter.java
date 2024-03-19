@@ -5,7 +5,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -57,8 +56,6 @@ public class subShooter extends SubsystemBase {
   public void stop(){
     shooterMotorTop.set(0);
     shooterMotorBottom.set(0);
-    shooterMotorTop.stopMotor();
-    shooterMotorBottom.stopMotor();
   }
 
   public void teleOp(double speed){
