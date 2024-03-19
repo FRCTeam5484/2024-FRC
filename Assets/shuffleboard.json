@@ -289,6 +289,32 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "15,1": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climb Left Position",
+              "_title": "Climb Left Position",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "15,0": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climb Right Position",
+              "_title": "Climb Right Position",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -308,9 +334,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -7.0,
-    "y": 499.0,
-    "width": 1038.0,
-    "height": 612.0
+    "x": -1923.0,
+    "y": 211.0,
+    "width": 1872.0,
+    "height": 804.0
   }
 }

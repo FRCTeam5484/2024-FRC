@@ -5,6 +5,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class subClimb extends SubsystemBase {
@@ -48,8 +49,8 @@ public class subClimb extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //SmartDashboard.putNumber("Climb Left Position", leftEncoder.getPosition());
-    //SmartDashboard.putNumber("Climb Right Position", rightEncoder.getPosition());
+    SmartDashboard.putNumber("Climb Left Position", leftEncoder.getPosition());
+    SmartDashboard.putNumber("Climb Right Position", rightEncoder.getPosition());
     //SmartDashboard.putNumber("Climb Left Power", leftMotor.get());
     //SmartDashboard.putNumber("Climb Right Power", rightMotor.get());
   }

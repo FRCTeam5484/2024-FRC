@@ -22,6 +22,8 @@ import frc.robot.commands.cmdAuto_ShootVelocity;
 import frc.robot.commands.cmdAuto_StaticShotAngle;
 import frc.robot.commands.cmdAuto_TurretPosition;
 import frc.robot.commands.cmdCancelCommands;
+import frc.robot.commands.cmdClimb_Stop;
+import frc.robot.commands.cmdClimb_TeleOp;
 import frc.robot.commands.cmdIntake_Stop;
 import frc.robot.commands.cmdIntake_TeleOp;
 import frc.robot.commands.cmdShooter_Stop;
@@ -30,6 +32,7 @@ import frc.robot.commands.cmdShotAngle_TeleOp;
 import frc.robot.commands.cmdSwerve_TeleOp;
 import frc.robot.commands.cmdTurret_Stop;
 import frc.robot.commands.cmdTurret_TeleOp;
+import frc.robot.subsystems.subClimb;
 import frc.robot.subsystems.subIntake;
 import frc.robot.subsystems.subLimeLight;
 import frc.robot.subsystems.subShooter;
@@ -49,6 +52,7 @@ public class RobotContainer {
   public final subShotAngle shotAngle = new subShotAngle();
   private final subLimeLight limeLight = new subLimeLight();
   public final subTurret turret = new subTurret();
+  //public final subClimb climb = new subClimb();
 
   private SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -108,9 +112,13 @@ public class RobotContainer {
     // Shot Angle
     //shotAngle.setDefaultCommand(new cmdAuto_HoldShotAngle(shotAngle));
 
-    new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getLeftY(), 0.5)) > 0)
-      .whileTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-driverTwo.getLeftY()*.1))
-      .onFalse(new cmdAuto_HoldShotAngle(shotAngle));
+    //new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getLeftY(), 0.5)) > 0.3)
+    //  .whileTrue(new cmdClimb_TeleOp(climb, ()->-driverTwo.getLeftY()*0.75))
+    //  .onFalse(new cmdClimb_Stop(climb));
+
+    //new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getLeftY(), 0.5)) > 0)
+    //  .whileTrue(new cmdShotAngle_TeleOp(shotAngle, ()->-driverTwo.getLeftY()*.1))
+    //  .onFalse(new cmdAuto_HoldShotAngle(shotAngle));
 
     new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getRightX(), 0.02)) > 0.5)
       .whileTrue(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getRightX()*.3, 0.02), ()->shotAngle.safeToTurret()))
@@ -122,17 +130,17 @@ public class RobotContainer {
     //driverTwo.rightTrigger().onTrue(new cmdShotAngle_TeleOp(shotAngle, ()->0.5));
     //driverTwo.rightTrigger().onFalse(new cmdAuto_HoldShotAngle(shotAngle));
 
-    driverTwo.povUp().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.MaxPostition));
-    driverTwo.povUp().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    //driverTwo.povUp().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.MaxPostition));
+    //driverTwo.povUp().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
-    driverTwo.povDown().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
-    driverTwo.povDown().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    //driverTwo.povDown().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SafeZoneShot));
+    //driverTwo.povDown().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
-    driverTwo.povLeft().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.Amp));
-    driverTwo.povLeft().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));    
+    //driverTwo.povLeft().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.Amp));
+    //driverTwo.povLeft().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));    
 
-    driverTwo.povRight().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
-    driverTwo.povRight().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    //driverTwo.povRight().whileTrue(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
+    //driverTwo.povRight().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
     // Turret
     //turret.setDefaultCommand(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getLeftX()*.3, 0.02), ()->shotAngle.safeToTurret()));
@@ -168,7 +176,7 @@ public class RobotContainer {
     driverTwo.leftBumper().onFalse(new cmdShooter_Stop(shooter));
     driverTwo.leftBumper().onFalse(new cmdAuto_StaticShotAngle(shotAngle, Constants.ShotAngleConstants.SpeakerBaseShot));
 
-    driverTwo.start().whileTrue(new cmdShooter_TeleOp(shooter, ()->0.35));
+    driverTwo.start().whileTrue(new cmdShooter_TeleOp(shooter, ()->0.45));
     driverTwo.back().onTrue(new cmdCancelCommands(intake, shooter, shotAngle, turret));
   }
 
