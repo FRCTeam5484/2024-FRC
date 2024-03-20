@@ -21,20 +21,20 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.classes.swerveModule;
 
 public class subSwerve extends SubsystemBase {
-  public static final double kFrontLeftOffset = 0.92871;//0.93627;
-  public static final double kFrontRightOffset = 0.55395;//0.87109;
-  public static final double kRearLeftOffset = 0.51171;//0.51684;
-  public static final double kRearRightOffset = 0.67749;//0.68676;
+  public static final double kFrontLeftOffset = 0.93457;
+  public static final double kFrontRightOffset = 0.41943;
+  public static final double kRearLeftOffset = 0.52343;
+  public static final double kRearRightOffset = 0.68310;
 
-  public static final int kFrontLeftDrivingCanId = 3;//1;
-  public static final int kFrontRightDrivingCanId = 7;//3;
-  public static final int kRearLeftDrivingCanId = 1;//5;
-  public static final int kRearRightDrivingCanId = 5;//7;
+  public static final int kFrontLeftDrivingCanId = 3;
+  public static final int kFrontRightDrivingCanId = 7;
+  public static final int kRearLeftDrivingCanId = 1;
+  public static final int kRearRightDrivingCanId = 5;
 
-  public static final int kFrontLeftTurningCanId = 4;//2;
-  public static final int kFrontRightTurningCanId = 8;//4;
-  public static final int kRearLeftTurningCanId = 2;//6;
-  public static final int kRearRightTurningCanId = 6;//8;
+  public static final int kFrontLeftTurningCanId = 4;
+  public static final int kFrontRightTurningCanId = 8;
+  public static final int kRearLeftTurningCanId = 2;
+  public static final int kRearRightTurningCanId = 6;
 
   public static final int kFrontLeftCANcoder = 4;
   public static final int kFrontRightCANcoder = 8;
