@@ -55,7 +55,7 @@ public class subIntake extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Note Sensor", !noteSensor.get());
-    if(timer.get() > 3){
+    if(timer.get() > 1){
       NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
       timer.stop();
     }
