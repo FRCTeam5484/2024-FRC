@@ -1,5 +1,7 @@
 package frc.robot;
 
+import javax.lang.model.util.ElementScanner14;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -12,6 +14,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    m_robotContainer.led.start();
   }
 
   @Override
@@ -23,7 +26,9 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    m_robotContainer.led.setRainbow();
+  }
 
   @Override
   public void disabledExit() {}
@@ -52,6 +57,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    if(m_robotContainer.limeLight.hasTarget()){
+      m_robotContainer.led.green();
+    }
+    else if(m_robotContainer.intake.hasNote()){
+      m_robotContainer.led.blue();
+    }
+    else{
+      m_robotContainer.led.off();
+    }
   }
 
   @Override
