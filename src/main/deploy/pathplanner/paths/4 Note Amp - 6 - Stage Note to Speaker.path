@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.28,
-        "y": 5.51
+        "x": 3.4018348837870125,
+        "y": 4.076366921663985
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.280000000000004,
-        "y": 5.51
+        "x": 2.20594043532982,
+        "y": 4.027884714294099
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.10501716888943703,
-        "y": 5.51
+        "x": 1.3251803347768885,
+        "y": 5.53083314276057
       },
       "prevControl": {
-        "x": -0.8949828311105636,
-        "y": 5.51
+        "x": 2.9574146495630558,
+        "y": 5.627797557500342
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Amp 4 Note Auto Paths",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

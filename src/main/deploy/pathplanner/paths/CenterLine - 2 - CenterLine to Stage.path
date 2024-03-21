@@ -3,57 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.12,
-        "y": 4.37
+        "x": 9.777245152927042,
+        "y": 0.6583713020870102
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.243886669591521,
-        "y": 3.899415798831598
+        "x": 8.35510040341038,
+        "y": 0.6826124057719544
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.314868266100168,
-        "y": 3.190431108134944
+        "x": 7.191527426533114,
+        "y": 3.025919095316451
       },
       "prevControl": {
-        "x": 3.3148682661001683,
-        "y": 3.190431108134944
+        "x": 7.338404264890328,
+        "y": 1.5458524934091336
       },
       "nextControl": {
-        "x": 5.314868266100167,
-        "y": 3.190431108134944
+        "x": 7.0864826438983615,
+        "y": 4.084447289558966
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.712355970166485,
-        "y": 3.7128408802272155
+        "x": 4.896702944358503,
+        "y": 4.108688393243909
       },
       "prevControl": {
-        "x": 5.332231137052424,
-        "y": 3.275801349741097
-      },
-      "nextControl": {
-        "x": 7.831805481792783,
-        "y": 4.067333225575542
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 10.201306948068442,
-        "y": 6.380862216269887
-      },
-      "prevControl": {
-        "x": 9.818828364929457,
-        "y": 5.81180871452652
+        "x": 6.011793713865885,
+        "y": 3.518821536910294
       },
       "nextControl": null,
       "isLocked": false,
@@ -71,11 +55,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 48.71528910542883,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Centerline Note Paths",
+  "folder": "Source 1 Note Centerline Notes Paths",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

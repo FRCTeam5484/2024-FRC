@@ -14,7 +14,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-    m_robotContainer.led.start();
   }
 
   @Override
@@ -27,7 +26,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    m_robotContainer.led.setRainbow();
+    m_robotContainer.blinkin.teamColorsWaves();
   }
 
   @Override
@@ -58,13 +57,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if(m_robotContainer.limeLight.hasTarget()){
-      m_robotContainer.led.green();
+      m_robotContainer.blinkin.green();
     }
     else if(m_robotContainer.intake.hasNote()){
-      m_robotContainer.led.blue();
+      m_robotContainer.blinkin.blue();
     }
     else{
-      m_robotContainer.led.off();
+      m_robotContainer.blinkin.off();
     }
   }
 

@@ -24,9 +24,9 @@ import frc.robot.commands.cmdShooter_TeleOp;
 import frc.robot.commands.cmdSwerve_TeleOp;
 import frc.robot.commands.cmdTurret_Stop;
 import frc.robot.commands.cmdTurret_TeleOp;
+import frc.robot.subsystems.subBlinkin;
 import frc.robot.subsystems.subClimb;
 import frc.robot.subsystems.subIntake;
-import frc.robot.subsystems.subLEDs;
 import frc.robot.subsystems.subLimeLight;
 import frc.robot.subsystems.subShooter;
 import frc.robot.subsystems.subSwerve;
@@ -44,7 +44,7 @@ public class RobotContainer {
   public final subLimeLight limeLight = new subLimeLight();
   public final subTurret turret = new subTurret();
   //public final subClimb climb = new subClimb();
-  public final subLEDs led = new subLEDs();
+  public final subBlinkin blinkin = new subBlinkin();
 
   private SendableChooser<Command> chooser = new SendableChooser<>();
 

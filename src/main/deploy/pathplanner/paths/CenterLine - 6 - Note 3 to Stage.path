@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3630649110037718,
-        "y": 1.6470332100328064
+        "x": 9.478271540812745,
+        "y": 4.060206185874023
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.363064911003776,
-        "y": 1.6470332100328064
+        "x": 7.63594766075707,
+        "y": 4.092527657453948
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 9.977652224212012,
-        "y": 0.6381175787561659
+        "x": 4.5734882285592615,
+        "y": 4.060206185874023
       },
       "prevControl": {
-        "x": 8.977652224212012,
-        "y": 0.6381175787561659
+        "x": 6.359031641365676,
+        "y": 4.059700666543492
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Source 1 Note Centerline Notes Paths",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

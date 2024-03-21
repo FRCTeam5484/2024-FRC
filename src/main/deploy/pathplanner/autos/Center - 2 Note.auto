@@ -50,7 +50,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Speaker to Center Note"
+                  "pathName": "2 Note Center - 1 - Speaker to Center Note"
                 }
               },
               {
@@ -65,7 +65,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Center Note to Speaker"
+            "pathName": "2 Note Center - 2 - Center Note to Speaker"
           }
         },
         {
@@ -113,16 +113,10 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Speaker to Center Note"
+                  "pathName": "2 Note Center - 3 - Centerline Note"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Drop To Right Centerline Note"
           }
         }
       ]

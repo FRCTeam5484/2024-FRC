@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 9.744198397487704,
-        "y": 5.970397395340245
+        "x": 5.0,
+        "y": 6.41
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.242270302722423,
-        "y": 5.681206271503451
+        "x": 3.2644686295723346,
+        "y": 6.944897524382249
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.014524210866603,
-        "y": 1.9123929156949226
+        "x": 1.3251803347768885,
+        "y": 5.5146724069706075
       },
       "prevControl": {
-        "x": 6.040686263190708,
-        "y": 1.6045442999976909
-      },
-      "nextControl": {
-        "x": 4.056697925645455,
-        "y": 2.199740801261271
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.803611425404669,
-        "y": 3.992703258133789
-      },
-      "prevControl": {
-        "x": 3.2793774678458405,
-        "y": 3.3583485348788886
+        "x": 1.6322343147861673,
+        "y": 6.629763176477989
       },
       "nextControl": null,
       "isLocked": false,
@@ -55,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -61.38954033403479,
+    "rotation": 1.060911690264313,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Centerline Note Paths",
+  "folder": "Amp 4 Note Auto Paths",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -1.374045178423249,
     "velocity": 0
   },
   "useDefaultConstraints": true

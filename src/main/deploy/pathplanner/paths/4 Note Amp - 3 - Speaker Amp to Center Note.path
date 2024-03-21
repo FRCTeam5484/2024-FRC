@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.3170999668819074,
+        "y": 5.466190199600722
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.682682141133701,
+        "y": 5.450029463810759
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.492684549609451,
+        "y": 5.466190199600722
+      },
+      "prevControl": {
+        "x": 3.8139336464310443,
+        "y": 5.466190199600722
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.8,
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Amp 4 Note Auto Paths",
+  "previewStartingState": {
+    "rotation": -0.9391909457355523,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

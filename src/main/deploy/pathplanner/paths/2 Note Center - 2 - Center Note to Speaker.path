@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.765872873427322,
-        "y": 4.46444742621149
+        "x": 4.28,
+        "y": 5.51
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7658728734273295,
-        "y": 4.46444742621149
+        "x": 5.280000000000004,
+        "y": 5.51
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.6015831638103353,
-        "y": 4.097305368134887
+        "x": 0.10501716888943703,
+        "y": 5.51
       },
       "prevControl": {
-        "x": 1.6015831638103353,
-        "y": 4.097305368134887
+        "x": -0.8949828311105636,
+        "y": 5.51
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Speaker Center 2 Note Paths",
   "previewStartingState": {
-    "rotation": -57.80426606528671,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true
