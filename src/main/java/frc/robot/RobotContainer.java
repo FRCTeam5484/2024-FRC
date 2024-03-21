@@ -26,6 +26,7 @@ import frc.robot.commands.cmdTurret_Stop;
 import frc.robot.commands.cmdTurret_TeleOp;
 import frc.robot.subsystems.subClimb;
 import frc.robot.subsystems.subIntake;
+import frc.robot.subsystems.subLEDs;
 import frc.robot.subsystems.subLimeLight;
 import frc.robot.subsystems.subShooter;
 import frc.robot.subsystems.subSwerve;
@@ -40,9 +41,10 @@ public class RobotContainer {
   public final subSwerve swerve = new subSwerve();
   public final subIntake intake = new subIntake();
   public final subShooter shooter = new subShooter();
-  private final subLimeLight limeLight = new subLimeLight();
+  public final subLimeLight limeLight = new subLimeLight();
   public final subTurret turret = new subTurret();
   //public final subClimb climb = new subClimb();
+  public final subLEDs led = new subLEDs();
 
   private SendableChooser<Command> chooser = new SendableChooser<>();
 
