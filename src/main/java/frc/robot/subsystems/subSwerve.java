@@ -21,10 +21,10 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.classes.swerveModule;
 
 public class subSwerve extends SubsystemBase {
-  public static final double kFrontLeftOffset = 0.93457;
-  public static final double kFrontRightOffset = 0.41943;
-  public static final double kRearLeftOffset = 0.52343;
-  public static final double kRearRightOffset = 0.68310;
+  public static final double kFrontLeftOffset = 0.93652;
+  public static final double kFrontRightOffset = 0.96337;
+  public static final double kRearLeftOffset = 0.50341;
+  public static final double kRearRightOffset = 0.68408;
 
   public static final int kFrontLeftDrivingCanId = 3;
   public static final int kFrontRightDrivingCanId = 7;
