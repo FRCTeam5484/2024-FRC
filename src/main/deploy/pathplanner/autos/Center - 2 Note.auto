@@ -18,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Shooter 60%"
+                  "name": "Shooter 80%"
                 }
               },
               {
@@ -75,7 +75,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Shooter 60%"
+                  "name": "Shooter 80%"
                 }
               },
               {
@@ -104,12 +104,6 @@
           "type": "parallel",
           "data": {
             "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Stop Intake"
-                }
-              },
               {
                 "type": "path",
                 "data": {

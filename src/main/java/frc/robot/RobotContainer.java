@@ -53,15 +53,16 @@ public class RobotContainer {
     configureDriverTwo();
 
     // Named Commands
-    NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(2));
-    NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(2));
+    NamedCommands.registerCommand("Shooter 60%", new cmdShooter_TeleOp(shooter, ()->0.6).withTimeout(1.5));
+    NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(1.5));
     NamedCommands.registerCommand("Shooter Reverse", new cmdShooter_TeleOp(shooter, ()->-0.1).withTimeout(0.5));
     NamedCommands.registerCommand("Stop Shooter", new cmdShooter_Stop(shooter));
     NamedCommands.registerCommand("Auto Intake", new cmdAuto_IntakeNote(intake));
-    NamedCommands.registerCommand("Feed Shooter", new cmdIntake_TeleOp(intake, ()->1).withTimeout(1));
+    NamedCommands.registerCommand("Feed Shooter", new cmdIntake_TeleOp(intake, ()->1).withTimeout(0.75));
     NamedCommands.registerCommand("Stop Intake", new cmdIntake_Stop(intake));
     NamedCommands.registerCommand("Gryo Amp Side", new cmdAuto_CorrectHeading(swerve, 59));
     NamedCommands.registerCommand("Gryo Amp Source", new cmdAuto_CorrectHeading(swerve, 55));
+    NamedCommands.registerCommand("Reset Gryo", new InstantCommand(()-> swerve.zeroHeading()));
    
     addAutoOptions();
   }
