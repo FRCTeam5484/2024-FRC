@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3413410705668505,
-        "y": 5.555074246445512
+        "x": 1.3576558062207034,
+        "y": 3.55425219941349
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.341341070566852,
-        "y": 5.555074246445512
+        "x": 2.3576558062207043,
+        "y": 3.55425219941349
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.298755720129907,
-        "y": 5.886369330139734
+        "x": 9.24044611725587,
+        "y": 1.19407947906805
       },
       "prevControl": {
-        "x": 3.5154668170792567,
-        "y": 5.264711470575726
-      },
-      "nextControl": {
-        "x": 5.825945252281321,
-        "y": 7.098424514386889
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 8.96920836342894,
-        "y": 7.599407323875713
-      },
-      "prevControl": {
-        "x": 9.469208363428951,
-        "y": 7.599407323875713
+        "x": 8.223612810861985,
+        "y": 1.1660932412773926
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.8,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 8.0,
+    "maxAcceleration": 8.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -59,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Amp 4 Note Auto Paths",
+  "folder": "Amp 4 Note",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

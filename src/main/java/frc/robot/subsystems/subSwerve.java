@@ -131,8 +131,16 @@ public class subSwerve extends SubsystemBase {
       },
       pose);
   }
-  public ChassisSpeeds getChassisSpeeds(){ return SwerveConstants.kDriveKinematics.toChassisSpeeds(frontLeftModule.getState(), frontRightModule.getState(), rearLeftModule.getState(), rearRightModule.getState());}
-  public void driveRobotRelative(ChassisSpeeds chassisSpeeds) { this.drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond); }
+  public ChassisSpeeds getChassisSpeeds(){ 
+    return SwerveConstants.kDriveKinematics.toChassisSpeeds(
+      frontLeftModule.getState(), 
+      frontRightModule.getState(), 
+      rearLeftModule.getState(), 
+      rearRightModule.getState());
+  }
+  public void driveRobotRelative(ChassisSpeeds chassisSpeeds) { 
+    this.drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond); 
+  }
 
   @Override
   public void periodic() {

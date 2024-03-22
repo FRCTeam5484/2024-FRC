@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 1.3251803347768885,
-        "y": 5.53083314276057
+        "x": 3.1,
+        "y": 6.8
       },
       "prevControl": {
-        "x": 2.9574146495630558,
-        "y": 5.627797557500342
+        "x": 4.732234314786153,
+        "y": 6.896964414739772
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.8,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 8.0,
+    "maxAcceleration": 8.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Amp 4 Note Auto Paths",
+  "folder": "Amp 4 Note",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

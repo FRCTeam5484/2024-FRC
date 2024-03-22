@@ -3,14 +3,14 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "Amp 4 Note Auto Paths",
-    "Source 1 Note Centerline Notes Paths",
-    "Speaker Center 2 Note Paths"
+    "Amp 4 Note",
+    "Centerline Note Paths",
+    "Center 2 Note"
   ],
   "autoFolders": [],
-  "defaultMaxVel": 4.8,
-  "defaultMaxAccel": 4.0,
+  "defaultMaxVel": 8.0,
+  "defaultMaxAccel": 8.0,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
-  "maxModuleSpeed": 6.0
+  "maxModuleSpeed": 8.0
 }

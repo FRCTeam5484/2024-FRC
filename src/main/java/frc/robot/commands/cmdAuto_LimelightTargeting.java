@@ -8,13 +8,10 @@ import frc.robot.subsystems.subTurret;
 public class cmdAuto_LimelightTargeting extends Command {
   subTurret turret;
   subLimeLight lime;
-  PIDController turretPID = new PIDController(0.02, 0, 0);
   public cmdAuto_LimelightTargeting(subTurret turret, subLimeLight lime) {
     this.turret = turret;
     this.lime = lime;
     addRequirements(turret, lime);
-
-    turretPID.setIntegratorRange(-0.2, 0.2);
   }
 
   @Override
@@ -23,7 +20,7 @@ public class cmdAuto_LimelightTargeting extends Command {
   @Override
   public void execute() {
     if(lime.hasTarget()){
-      turret.teleOp(-turretPID.calculate(lime.getX(), 0));
+      turret.teleOp(lime.pidCorrection());
     }
     else{
       turret.stop();
