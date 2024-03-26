@@ -12,257 +12,45 @@
     "data": {
       "commands": [
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter 80%"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.25
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Feed Shooter"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "pathName": "4 Note Amp - 1 - Speaker Amp to Amp Note"
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "4 Note Amp - 1 - Speaker Amp to Amp Note"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Auto Intake"
-                }
-              }
-            ]
+            "pathName": "4 Note Amp - 2 - Amp Note to Speaker"
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "4 Note Amp - 2 - Amp Note to Speaker"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter 80%"
-                }
-              }
-            ]
+            "pathName": "4 Note Amp - 3 - Speaker Amp to Center Note"
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter 80%"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.25
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Feed Shooter"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "pathName": "4 Note Amp - 4 - Center Note to Speaker"
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "4 Note Amp - 3 - Speaker Amp to Center Note"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Auto Intake"
-                }
-              }
-            ]
+            "pathName": "4 Note Amp - 5 - Speaker Source to Stage Note"
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "4 Note Amp - 4 - Center Note to Speaker"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter 80%"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter 80%"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.25
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Feed Shooter"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "4 Note Amp - 5 - Speaker Source to Stage Note"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Auto Intake"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "4 Note Amp - 6 - Stage Note to Speaker"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter 80%"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter 80%"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.25
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Feed Shooter"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "pathName": "4 Note Amp - 6 - Stage Note to Speaker"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "4 Note Amp - 7 - Speaker to Centerline Amp Note"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Reset Gryo"
           }
         }
       ]
