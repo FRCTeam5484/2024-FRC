@@ -28,24 +28,6 @@
           "data": {
             "pathName": "CenterLine - 3 - Stage to Note 4"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "CenterLine - 4 - Note 4 to Stage"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "CenterLine - 5 - Stage to Note 3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "CenterLine - 6 - Note 3 to Stage"
-          }
         }
       ]
     }

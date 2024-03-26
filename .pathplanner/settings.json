@@ -4,8 +4,8 @@
   "holonomicMode": true,
   "pathFolders": [
     "Amp 4 Note",
-    "Centerline Note Paths",
-    "Center 2 Note"
+    "Center 2 Note",
+    "Centerline Note Paths"
   ],
   "autoFolders": [],
   "defaultMaxVel": 8.0,
