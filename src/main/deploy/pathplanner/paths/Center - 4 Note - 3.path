@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.81,
-        "y": 6.98
+        "x": 0.0,
+        "y": 5.58
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.1001175329623383,
-        "y": 7.346215392430786
+        "x": 1.059656437632203,
+        "y": 6.217334787610753
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.28,
-        "y": 7.108504398826979
+        "x": 1.5,
+        "y": 8.5
       },
       "prevControl": {
-        "x": 0.8956972313944627,
-        "y": 7.21112060405939
+        "x": 0.43175817444071873,
+        "y": 8.407630260638673
       },
       "nextControl": {
-        "x": -0.3581844113977658,
-        "y": 7.002140330260684
+        "x": 2.603486678814144,
+        "y": 8.595417324497095
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": -0.8,
-        "y": 6.5
+        "x": 4.510536752165942,
+        "y": 8.5
       },
       "prevControl": {
-        "x": -0.3731498372087655,
-        "y": 6.660724594176462
+        "x": 3.829303120791116,
+        "y": 8.519293366317825
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,13 +46,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 2,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 2,
-      "rotationDegrees": 0,
+      "waypointRelativePos": 1,
+      "rotationDegrees": 48.81407483429029,
       "rotateFast": false
     }
   ],
@@ -66,13 +61,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -2.9496809476020447,
+    "rotation": 27.597295868643627,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Amp 4 Note",
+  "folder": "Center 4 Note",
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

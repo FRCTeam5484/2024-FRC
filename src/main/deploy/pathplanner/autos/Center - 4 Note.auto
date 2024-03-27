@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7952442380734501,
-      "y": 6.667299774671107
+      "x": 1.294079226813916,
+      "y": 5.579217208854585
     },
-    "rotation": 59.06150936415024
+    "rotation": -1.080924186660671
   },
   "command": {
     "type": "sequential",
@@ -44,7 +44,7 @@
                           {
                             "type": "path",
                             "data": {
-                              "pathName": "4 Note Amp - 1 - Speaker Amp to Amp Note"
+                              "pathName": "Center - 4 Note - 1"
                             }
                           },
                           {
@@ -59,7 +59,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "4 Note Amp - 2 - Amp Note to Speaker"
+                        "pathName": "Center - 4 Note - 2"
                       }
                     },
                     {
@@ -75,7 +75,7 @@
                           {
                             "type": "path",
                             "data": {
-                              "pathName": "4 Note Amp - 3 - Speaker Amp to Center Note"
+                              "pathName": "Center - 4 Note - 3"
                             }
                           },
                           {
@@ -90,7 +90,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "4 Note Amp - 4 - Center Note to Speaker"
+                        "pathName": "Center - 4 Note - 4"
                       }
                     },
                     {
@@ -106,7 +106,7 @@
                           {
                             "type": "path",
                             "data": {
-                              "pathName": "4 Note Amp - 5 - Speaker Source to Stage Note"
+                              "pathName": "Center - 4 Note - 5"
                             }
                           },
                           {
@@ -121,7 +121,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "4 Note Amp - 6 - Stage Note to Speaker"
+                        "pathName": "Center - 4 Note - 6"
                       }
                     },
                     {
@@ -133,7 +133,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "4 Note Amp - 7 - Speaker to Centerline Amp Note"
+                        "pathName": "Center - 4 Note - 7"
                       }
                     }
                   ]

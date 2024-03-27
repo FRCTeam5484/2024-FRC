@@ -3,7 +3,7 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "Amp 4 Note",
+    "Center 4 Note",
     "Center 2 Note",
     "Centerline Note Paths"
   ],
