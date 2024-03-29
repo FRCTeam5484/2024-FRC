@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": -0.4,
-        "y": 4.2
+        "x": 0.681831279628946,
+        "y": 4.406460577627038
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.6000000000000001,
-        "y": 4.2
+        "x": 1.1992239110528644,
+        "y": 3.7079805252047477
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.6763851774572966,
-        "y": 2.599365771182348
+        "x": 3.4153890156519813,
+        "y": 1.1900030522750114
       },
       "prevControl": {
-        "x": 0.6763851774572966,
-        "y": 2.599365771182348
+        "x": 2.4971778027807487,
+        "y": 1.5860941637096615
       },
       "nextControl": {
-        "x": 2.6763851774572958,
-        "y": 2.599365771182348
+        "x": 4.2949564890726375,
+        "y": 0.8105817892308045
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.8204947966246565,
-        "y": 2.599365771182348
+        "x": 11.93512101309917,
+        "y": 0.698480052422289
       },
       "prevControl": {
-        "x": 2.8633184284904076,
-        "y": 2.60798898170608
+        "x": 10.839973276585209,
+        "y": 0.689856841898557
       },
       "nextControl": null,
       "isLocked": false,
@@ -59,9 +59,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Center 4 Note",
+  "folder": "Source - 1 Note to Center Line",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -58.13402230639634,
     "velocity": 0
   },
   "useDefaultConstraints": true
