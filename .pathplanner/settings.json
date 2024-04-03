@@ -3,11 +3,10 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
+    "Amp Paths",
     "Center 2 Note",
     "Center 4 Note",
     "Centerline Note Paths",
-    "New Folder",
-    "Amp Paths",
     "Source - 1 Note to Center Line"
   ],
   "autoFolders": [],
