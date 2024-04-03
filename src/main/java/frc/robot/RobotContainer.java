@@ -51,6 +51,7 @@ public class RobotContainer {
   public RobotContainer() {
     configureDriverOne();
     configureDriverTwo();
+    //configureSingleDriver();
 
     // Named Commands
     NamedCommands.registerCommand("Shooter 70%", new cmdShooter_TeleOp(shooter, ()->0.7).withTimeout(14));
@@ -58,7 +59,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Shooter 80%", new cmdShooter_TeleOp(shooter, ()->0.8).withTimeout(1.5));
     NamedCommands.registerCommand("Shooter Reverse", new cmdShooter_TeleOp(shooter, ()->-0.1).withTimeout(0.5));
     NamedCommands.registerCommand("Stop Shooter", new cmdShooter_Stop(shooter));
-    NamedCommands.registerCommand("Auto Intake", new cmdAuto_IntakeNote(intake));
+    NamedCommands.registerCommand("Auto Intake", new cmdAuto_IntakeNote(intake).withTimeout(3));
     NamedCommands.registerCommand("Feed Shooter", new cmdIntake_TeleOp(intake, ()->1).withTimeout(0.75));
     NamedCommands.registerCommand("Stop Intake", new cmdIntake_Stop(intake));
     NamedCommands.registerCommand("Gryo Amp Side", new cmdAuto_CorrectHeading(swerve, 59));
@@ -131,6 +132,42 @@ public class RobotContainer {
 
     driverTwo.start().whileTrue(new cmdShooter_TeleOp(shooter, ()->0.45));
     driverTwo.back().onTrue(new cmdCancelCommands(intake, shooter, turret));
+  }
+  private void configureSingleDriver() {
+    swerve.setDefaultCommand(
+      new cmdSwerve_TeleOp(
+          swerve,
+          () -> MathUtil.applyDeadband(-driverOne.getLeftY(), 0.05),
+          () -> MathUtil.applyDeadband(-driverOne.getLeftX(), 0.05),
+          () -> MathUtil.applyDeadband(-driverOne.getRightX(), 0.05)));
+    
+    // Intake
+    driverOne.rightBumper().onTrue(new cmdAuto_IntakeNote(intake));
+    driverOne.rightBumper().onFalse(new cmdIntake_Stop(intake));
+
+    driverOne.rightTrigger().onTrue(new cmdIntake_TeleOp(intake, ()->1));
+    driverOne.rightTrigger().onFalse(new cmdIntake_Stop(intake));
+    driverOne.leftTrigger().onTrue(new cmdIntake_TeleOp(intake, ()->-1));
+    driverOne.leftTrigger().onFalse(new cmdIntake_Stop(intake));
+
+    // Reset Sensors
+    driverOne.start().onTrue(new InstantCommand(() -> swerve.zeroHeading()));
+    
+    // Shooter
+    driverOne.leftBumper().onTrue(new cmdShooter_TeleOp(shooter, ()->0.8));
+    driverOne.leftBumper().onFalse(new cmdShooter_Stop(shooter));
+
+    // Climb
+    driverOne.y().whileTrue(new cmdClimb_TeleOp(climb, ()->1, ()->1));
+    driverOne.y().onFalse(new cmdClimb_Stop(climb));
+    driverOne.a().whileTrue(new cmdClimb_TeleOp(climb, ()->-1, ()->-1));
+    driverOne.a().onFalse(new cmdClimb_Stop(climb));
+    
+    // Turret
+    driverOne.x().whileTrue(new cmdTurret_TeleOp(turret, () -> 1));
+    driverOne.x().onFalse(new cmdTurret_Stop(turret));
+    driverOne.b().whileTrue(new cmdTurret_TeleOp(turret, () -> -1));
+    driverOne.b().onFalse(new cmdTurret_Stop(turret));
   }
 
   private void addAutoOptions(){
