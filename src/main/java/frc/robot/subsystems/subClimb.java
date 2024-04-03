@@ -22,6 +22,7 @@ public class subClimb extends SubsystemBase {
     leftMotor.burnFlash();
     rightMotor.burnFlash();
     
+    /*
     leftMotor.setSoftLimit(SoftLimitDirection.kForward, 100);
     leftMotor.setSoftLimit(SoftLimitDirection.kReverse, -10);
     leftMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
@@ -30,6 +31,7 @@ public class subClimb extends SubsystemBase {
     rightMotor.setSoftLimit(SoftLimitDirection.kReverse, -10);
     rightMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     rightMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
+    */
   }
 
   public void resetEncoder(){
