@@ -43,7 +43,7 @@ public class RobotContainer {
   public final subShooter shooter = new subShooter();
   public final subLimeLight limeLight = new subLimeLight();
   public final subTurret turret = new subTurret();
-  //public final subClimb climb = new subClimb();
+  public final subClimb climb = new subClimb();
   public final subBlinkin blinkin = new subBlinkin();
 
   private SendableChooser<Command> chooser = new SendableChooser<>();
@@ -97,9 +97,9 @@ public class RobotContainer {
 
   private void configureDriverTwo(){
     // Climb
-    //new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getLeftY(), 0.01)) > 0.1 || Math.abs(MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)) > 0.1)
-    //  .whileTrue(new cmdClimb_TeleOp(climb, ()->-driverTwo.getLeftY(), ()->-driverTwo.getRightY()))
-    //  .onFalse(new cmdClimb_Stop(climb));
+    new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getLeftY(), 0.01)) > 0.1 || Math.abs(MathUtil.applyDeadband(driverTwo.getRightY(), 0.01)) > 0.1)
+      .whileTrue(new cmdClimb_TeleOp(climb, ()->-driverTwo.getLeftY(), ()->-driverTwo.getRightY()))
+      .onFalse(new cmdClimb_Stop(climb));
     
     // Turret
     new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getRightTriggerAxis(), 0.02)) > 0.1)
