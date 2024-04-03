@@ -29,6 +29,15 @@ public class subLimeLight extends SubsystemBase {
   public boolean readyToFire(){
     return Math.abs(pidCorrection()) < 1 ? true : false;
   }
+  public void setBluePipeline(){
+    LimelightHelpers.setPipelineIndex("limelight", 1);
+  }
+  public void setRedPipeline(){
+    LimelightHelpers.setPipelineIndex("limelight", 2);
+  }
+  public void setDriverPipeline(){
+    LimelightHelpers.setPipelineIndex("limelight", 0);
+  }
 
   @Override
   public void periodic() {

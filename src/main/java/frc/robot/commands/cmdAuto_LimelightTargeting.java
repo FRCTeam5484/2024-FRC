@@ -1,6 +1,8 @@
 package frc.robot.commands;
 
-import edu.wpi.first.math.controller.PIDController;
+import java.util.Optional;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.subLimeLight;
 import frc.robot.subsystems.subTurret;
@@ -19,6 +21,19 @@ public class cmdAuto_LimelightTargeting extends Command {
 
   @Override
   public void execute() {
+    if(DriverStation.getAlliance().isPresent()){
+      Optional<Alliance> ally = DriverStation.getAlliance();
+      if(ally.get() == Alliance.Blue){
+        lime.setBluePipeline();
+      }
+      else{
+        lime.setRedPipeline();
+      }
+    }
+    else{
+      lime.setDriverPipeline();
+    }
+
     if(lime.hasTarget()){
       turret.teleOp(lime.pidCorrection());
     }

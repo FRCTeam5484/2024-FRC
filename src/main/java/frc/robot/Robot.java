@@ -50,13 +50,16 @@ public class Robot extends TimedRobot {
       Optional<Alliance> ally = DriverStation.getAlliance();
       if(ally.get() == Alliance.Blue){
         m_robotContainer.blinkin.breathBlue();
+        m_robotContainer.limeLight.setBluePipeline();
       }
       else{
         m_robotContainer.blinkin.breathRed();
+        m_robotContainer.limeLight.setRedPipeline();
       }
     }
     else{
       m_robotContainer.blinkin.breathGray();
+      m_robotContainer.limeLight.setDriverPipeline();
     }
   }
 
@@ -67,6 +70,18 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    }
+    if(DriverStation.getAlliance().isPresent()){
+      Optional<Alliance> ally = DriverStation.getAlliance();
+      if(ally.get() == Alliance.Blue){
+        m_robotContainer.limeLight.setBluePipeline();
+      }
+      else{
+        m_robotContainer.limeLight.setRedPipeline();
+      }
+    }
+    else{
+      m_robotContainer.limeLight.setDriverPipeline();
     }
   }
 
