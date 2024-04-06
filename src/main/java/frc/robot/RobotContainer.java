@@ -117,10 +117,13 @@ public class RobotContainer {
     driverTwo.a().whileTrue(new cmdAuto_TurretPosition(turret, Constants.Turret.Rear));
     driverTwo.a().onFalse(new cmdTurret_Stop(turret));
 
-    driverTwo.x().whileTrue(new cmdAuto_TurretPosition(turret, Constants.Turret.Left));
-    driverTwo.x().onFalse(new cmdTurret_Stop(turret));
+    //driverTwo.x().whileTrue(new cmdAuto_TurretPosition(turret, Constants.Turret.Left));
+    //driverTwo.x().onFalse(new cmdTurret_Stop(turret));
 
-    driverTwo.b().whileTrue(new cmdAuto_TurretPosition(turret, Constants.Turret.Right));
+    //driverTwo.b().whileTrue(new cmdAuto_TurretPosition(turret, Constants.Turret.Right));
+    //driverTwo.b().onFalse(new cmdTurret_Stop(turret));
+
+    driverTwo.b().whileTrue(new cmdAuto_LimelightTargeting(turret, limeLight));
     driverTwo.b().onFalse(new cmdTurret_Stop(turret));
     
     // Shooter
