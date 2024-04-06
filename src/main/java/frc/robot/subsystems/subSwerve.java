@@ -23,7 +23,7 @@ import frc.robot.classes.swerveModule;
 public class subSwerve extends SubsystemBase {
   public static final double kFrontLeftOffset = 0.93652;
   public static final double kFrontRightOffset = 0.96337;
-  public static final double kRearLeftOffset = 0.50341;
+  public static final double kRearLeftOffset = 0.08569;//0.50341;
   public static final double kRearRightOffset = 0.61659;//0.68408;
 
   public static final int kFrontLeftDrivingCanId = 3;

@@ -104,11 +104,11 @@ public class RobotContainer {
     
     // Turret
     new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getRightTriggerAxis(), 0.02)) > 0.1)
-      .whileTrue(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getRightTriggerAxis()*.3, 0.01)))
+      .whileTrue(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(driverTwo.getRightTriggerAxis()*.5, 0.01)))
       .onFalse(new cmdTurret_Stop(turret));
 
     new Trigger(() -> Math.abs(MathUtil.applyDeadband(driverTwo.getLeftTriggerAxis(), 0.02)) > 0.1)
-      .whileTrue(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(-driverTwo.getLeftTriggerAxis()*.3, 0.01)))
+      .whileTrue(new cmdTurret_TeleOp(turret, () -> MathUtil.applyDeadband(-driverTwo.getLeftTriggerAxis()*.5, 0.01)))
       .onFalse(new cmdTurret_Stop(turret));
 
     driverTwo.y().whileTrue(new cmdAuto_TurretPosition(turret, Constants.Turret.Front));
