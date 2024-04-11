@@ -10,7 +10,7 @@ public class Constants {
       public static final int DriverTwo = 1;
     }
     public static final class DriveConstants {
-      public static final double kMaxSpeedMetersPerSecond = 9;
+      public static final double kMaxSpeedMetersPerSecond = 12;
       public static final double kMaxAngularSpeed = 3 * Math.PI;
     }
     public static final class SwerveConstants {
@@ -30,7 +30,7 @@ public class Constants {
         public static final double kDrivingMotorFreeSpeedRps = 5676 / 60;
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
-        public static final double kDrivingMotorReduction = 6.75; //4.714285714;
+        public static final double kDrivingMotorReduction = 5.14;//6.75; //4.714285714;
         public static final double kDriveWheelFreeSpeedRps = kDrivingMotorFreeSpeedRps / kDrivingMotorReduction;
 
         public static final double kDrivingEncoderPositionFactor = (kWheelDiameterMeters * Math.PI) / kDrivingMotorReduction; // meters
