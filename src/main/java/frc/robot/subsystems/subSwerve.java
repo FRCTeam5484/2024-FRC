@@ -21,6 +21,7 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.classes.swerveModule;
 
 public class subSwerve extends SubsystemBase {
+  // These are the offsets for the swerve modules
   public static final double kFrontLeftOffset = 0.93652;
   public static final double kFrontRightOffset = 0.42968;//0.96337;
   public static final double kRearLeftOffset = 0.04614;//0.08569;//0.50341;
