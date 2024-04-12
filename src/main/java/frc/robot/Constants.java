@@ -10,7 +10,7 @@ public class Constants {
       public static final int DriverTwo = 1;
     }
     public static final class DriveConstants {
-      public static final double kMaxSpeedMetersPerSecond = 12;
+      public static final double kMaxSpeedMetersPerSecond = 12;//9;
       public static final double kMaxAngularSpeed = 3 * Math.PI;
     }
     public static final class SwerveConstants {
@@ -42,7 +42,7 @@ public class Constants {
         public static final double kTurningEncoderPositionPIDMinInput = 0; // radians
         public static final double kTurningEncoderPositionPIDMaxInput = kTurningEncoderPositionFactor; // radians
 
-        public static final double kDrivingP = 0.04;
+        public static final double kDrivingP = 0.05;//0.04;
         public static final double kDrivingI = 0;
         public static final double kDrivingD = 0;
         public static final double kDrivingFF = 1 / kDriveWheelFreeSpeedRps;
