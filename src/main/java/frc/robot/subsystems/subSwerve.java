@@ -24,7 +24,7 @@ public class subSwerve extends SubsystemBase {
   public static final double kFrontLeftOffset = 0.93652;
   public static final double kFrontRightOffset = 0.42968;//0.96337;
   public static final double kRearLeftOffset = 0.04614;//0.08569;//0.50341;
-  public static final double kRearRightOffset = 0.61659;//0.68408;
+  public static final double kRearRightOffset = 0.68534;//0.61659;//0.68408;
 
   public static final int kFrontLeftDrivingCanId = 3;
   public static final int kFrontRightDrivingCanId = 7;
