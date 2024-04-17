@@ -3,10 +3,8 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "Amp Paths",
-    "Center 2 Note",
     "Center 4 Note",
-    "Source - 1 Note to Center Line"
+    "Others"
   ],
   "autoFolders": [],
   "defaultMaxVel": 8.0,
